@@ -1,0 +1,59 @@
+@use "../../scss/mixins";
+
+.root {
+  padding: 0 0 4rem 0;
+  margin: 4rem 0 0 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 3rem;
+}
+
+.title {
+  font-size: 3.2rem;
+  font-weight: 700;
+  letter-spacing: 0.32px;
+  color: #AE2D25;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(28rem, 1fr));
+  grid-auto-flow: row;
+  gap: 5rem 3.5rem;
+
+  width: 100%;
+}
+
+.preloader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-height: 912px;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.preloaderCircle {
+  width: 100px;
+  height: 100px;
+  border: 10px solid #1f1f1f;
+  border-top: 10px solid #AE2D25;
+  border-radius: 50%;
+
+  animation: spinner 4s linear infinite;
+}

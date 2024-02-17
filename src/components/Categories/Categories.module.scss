@@ -1,0 +1,47 @@
+@use "../../scss/mixins";
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.catButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  min-width: 13rem;
+  height: 5rem;
+  border-radius: 30px;
+  background: #313131;
+
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.24px;
+  color: #AE2D25;
+  text-align: center;
+
+  transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+
+  padding: 1.5rem 3rem;
+
+  &:hover {
+    background: #AE2D25;
+
+    color: #000;
+
+    transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+  }
+
+  &_active {
+    background: #AE2D25;
+
+    color: #000;
+
+    transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+  }
+}

@@ -1,0 +1,151 @@
+@use "../mixins";
+
+* {
+	box-sizing: border-box;
+	scroll-behavior: smooth;
+}
+
+:after,
+:before {
+	box-sizing: inherit;
+}
+
+html,
+body {
+	font-family: 'Roboto', system-ui, sans-serif;
+	font-size: calc(100vw / 1920 * 10);
+	color: #FFF;
+
+	@media (max-width: 1024px) {
+		font-size: calc(100vw / 768 * 10);
+	}
+
+	@media (max-width: 768px) {
+		font-size: calc(100vw / 500 * 10);
+	}
+
+	@media (max-width: 500px) {
+		font-size: calc(100vw / 320 * 10);
+	}
+}
+
+html {
+	-webkit-tap-highlight-color: transparent;
+	scrollbar-gutter: stable;
+}
+
+body {
+	width: 100%;
+	min-height: 100vh;
+	// background: #3e3e3e;
+	background: #2a2a2a;
+
+	padding: 0;
+	margin: 0;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+	-moz-appearance: textfield;
+}
+
+button {
+	background: none;
+	border: none;
+	cursor: pointer;
+
+	margin: 0;
+	padding: 0;
+}
+
+figure {
+	display: flex;
+
+	padding: 0;
+	margin: 0;
+}
+
+img {
+	vertical-align: top;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+
+	padding: 0;
+	margin: 0;
+}
+
+ul,
+ol {
+	list-style: none;
+
+	padding: 0;
+	margin: 0;
+}
+
+p {
+	padding: 0;
+	margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	padding: 0;
+	margin: 0;
+}
+
+input,
+textarea,
+select {
+	font-style: inherit;
+}
+
+.page-header {
+	flex-shrink: 0;
+}
+
+.page-content {
+	flex-grow: 1;
+
+	padding: 50px 0 0 0;
+}
+
+.page-footer {
+	flex-shrink: 0;
+}
+
+.base-container {
+	width: 95vw;
+	max-width: 192rem;
+
+	margin: 0 auto;
+}
+
+.visually-hidden {
+	position: absolute;
+
+	width: 1px;
+	height: 1px;
+	border: 0;
+	padding: 0;
+	clip-path: inset(100%);
+	clip: rect(0 0 0 0);
+	overflow: hidden;
+
+	white-space: nowrap;
+
+	margin: -1px;
+}

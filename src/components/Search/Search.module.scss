@@ -1,0 +1,65 @@
+@use "../../scss/mixins";
+
+.searchBlock {
+  position: relative;
+
+  color: #AE2D25;
+}
+
+.searchIcon {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+
+  width: 4rem;
+  height: 4rem;
+  user-select: none;
+
+  transform: translateY(-50%);
+}
+
+.searchInput {
+  width: 40rem;
+  height: 5rem;
+  background: #313131;
+  border: 1px solid rgb(174, 45, 37, 0.5);
+  border-radius: 30px;
+  outline: none;
+
+  font-family: "Roboto", system-ui, sans-serif;
+  font-size: 2rem;
+  font-weight: 400;
+  color: #AE2D25;
+
+  transition: border 0.1s ease-in-out;
+
+  padding: 1rem 6rem 1rem 6rem;
+
+  &:focus {
+    border: 1px solid rgb(174, 45, 37, 1);
+
+    transition: border 0.1s ease-in-out;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .searchInput {
+    width: 100%;
+    max-width: 20rem;
+    height: 4rem;
+
+    font-size: 1.4rem;
+
+    padding: 10px 20px;
+  }
+}
+
+.searchClean {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+
+  cursor: pointer;
+
+  transform: translateY(-50%);
+}

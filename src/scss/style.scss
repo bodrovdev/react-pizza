@@ -1,0 +1,7 @@
+//Миксины
+@use './mixins/font-face';
+@use './mixins/screens';
+
+//Глобальные стили
+@use './global/scaffolding';
+@use './global/fonts';
