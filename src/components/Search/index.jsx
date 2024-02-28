@@ -1,9 +1,9 @@
-import { useState, useRef, useCallback } from 'react';
+import debounce from 'lodash.debounce';
+import { useCallback, useRef, useState } from 'react';
 import '../../scss/style.scss';
 import styles from './Search.module.scss';
-import debounce from 'lodash.debounce';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setSearchValue } from '../../redux/slices/searchSlice';
 
 import Clean from '../Icons/Clean';
@@ -17,17 +17,17 @@ function Search() {
   const [localSearch, setLocalSearch] = useState('');
 
   const updateSearchValue = useCallback(
-    debounce((localSearchValue) => {
-      dispatch(setSearchValue(localSearchValue));
+    debounce((str) => {
+      dispatch(setSearchValue(str));
     }, 500), []
   )
 
   const onChangeInput = (e) => {
     setLocalSearch(e.target.value);
-    updateSearchValue(localSearch);
+    updateSearchValue(e.target.value);
   }
 
-  const onClean = () => {
+  const onCleanInput = () => {
     setLocalSearch('');
     dispatch(setSearchValue(''));
     inputRef.current.focus();
@@ -46,7 +46,7 @@ function Search() {
         ref={inputRef}
       />
 
-      {localSearch && <Clean className={styles.searchClean} onClickClean={() => { onClean() }} />}
+      {localSearch && <Clean className={styles.searchClean} onClickClean={() => { onCleanInput() }} />}
     </div>
   )
 }

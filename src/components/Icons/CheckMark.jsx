@@ -1,5 +1,3 @@
-import React from 'react'
-
 function CheckMark() {
   return (
     <svg

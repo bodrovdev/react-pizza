@@ -1,6 +1,5 @@
-import React from 'react';
-import styles from './PizzaBlock.module.scss';
 import '../../scss/style.scss';
+import styles from './PizzaBlock.module.scss';
 
 import Plus from '../Icons/Plus';
 

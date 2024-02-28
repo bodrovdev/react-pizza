@@ -1,14 +1,12 @@
-import React from 'react';
 import '../../scss/style.scss';
 import styles from './Sort.module.scss';
 
 import CheckMark from '../Icons/CheckMark';
 
 // * 6) REDUX. Импортируем useSelector, useDispatch
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
 // * 7) REDUX. Импортируем методы из слайсов
-import { setSortValue } from '../../redux/slices/sortSlice';
-import { setSortDir } from '../../redux/slices/sortSlice';
+import { setSortDir, setSortValue } from '../../redux/slices/sortSlice';
 
 function Sort() {
 

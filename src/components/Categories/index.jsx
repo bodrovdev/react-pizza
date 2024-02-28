@@ -1,9 +1,8 @@
-import React from 'react'
 import '../../scss/style.scss';
 import styles from './Categories.module.scss';
 
 // * 6) REDUX. Импортируем useSelector, useDispatch
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
 // * 7) REDUX. Импортируем методы из слайсов
 import { setCategoryValue } from '../../redux/slices/sortSlice';
 

@@ -1,5 +1,3 @@
-import React from 'react'
-
 function Clean({ className, onClickClean }) {
   return (
     <svg

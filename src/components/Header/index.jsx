@@ -1,11 +1,10 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../scss/style.scss';
 import styles from './Header.module.scss';
 
+import Cart from '../Icons/Cart';
 import Logo from '../Icons/Logo';
 import Search from '../Search/';
-import Cart from '../Icons/Cart';
 
 function Header() {
   return (
