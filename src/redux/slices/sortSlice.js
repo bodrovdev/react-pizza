@@ -22,9 +22,15 @@ export const sortSlice = createSlice({
     setSortDir: (state, action) => {
       state.sortDir = action.payload;
     },
+
+    setSorting: (state, action) => {
+      state.categoryValue = Number(action.payload.category);
+      state.sortValue = action.payload.sortStartValue;
+      state.sortDir = action.payload.order === 'desc' ? false : true;
+    }
   },
 })
 
-export const { setCategoryValue, setSortValue, setSortDir } = sortSlice.actions
+export const { setCategoryValue, setSortValue, setSortDir, setSorting } = sortSlice.actions
 
 export default sortSlice.reducer

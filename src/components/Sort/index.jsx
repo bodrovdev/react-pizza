@@ -1,25 +1,21 @@
+import { useState } from 'react';
 import '../../scss/style.scss';
 import styles from './Sort.module.scss';
 
-import CheckMark from '../Icons/CheckMark';
-
-// * 6) REDUX. Импортируем useSelector, useDispatch
 import { useDispatch, useSelector } from 'react-redux';
-// * 7) REDUX. Импортируем методы из слайсов
 import { setSortDir, setSortValue } from '../../redux/slices/sortSlice';
 
+export const sortTypes = [
+  { sortName: 'По цене', sortType: 'price' },
+  { sortName: 'По популярности', sortType: 'rating' },
+  { sortName: 'По алфавиту', sortType: 'name' },
+];
+
 function Sort() {
+  const [isVisibleSort, setVisibleSort] = useState(false);
 
-  // * 8) REDUX. Достаём значение из слайса
   const { sortValue, sortDir } = useSelector((state) => state.sort);
-  // * 9) REDUX. Получаем доступ к dispatch
   const dispatch = useDispatch();
-
-  let sortTypes = [
-    { sortName: 'По цене', sortType: 'price' },
-    { sortName: 'По популярности', sortType: 'rating' },
-    { sortName: 'По алфавиту', sortType: 'name' },
-  ];
 
   const sortItemClassName = (item) => {
     return sortValue.sortType === item.sortType ? styles.captionItem_active : styles.captionItem
@@ -28,6 +24,7 @@ function Sort() {
   const sortItemOnClick = (item) => {
     dispatch(setSortValue(item));
     item.sortName === sortValue.sortName ? dispatch(setSortDir(!sortDir)) : dispatch(setSortDir(false));
+    setVisibleSort(!isVisibleSort)
   }
 
   return (
@@ -36,19 +33,26 @@ function Sort() {
       <div className={`${styles.container} base-container`}>
         <div className={styles.caption}>
 
-          <span className={styles.captionInfo}>Сортировка по:</span>
-          <span className={styles.captionContent}>{sortValue.sortName}</span>
+          <div className={styles.captionContainer} onClick={() => { setVisibleSort(!isVisibleSort) }}>
+            <span className={styles.captionInfo}>Сортировка по:</span>
+            <span className={styles.captionContent}>{sortValue.sortName}</span>
+          </div>
 
-          <ul className={styles.captionList}>
+          {isVisibleSort && <ul className={styles.captionList}>
 
             {sortTypes.map((item, index) => (
               <li className={sortItemClassName(item)} onClick={() => { sortItemOnClick(item) }} key={index}>
                 {item.sortName}
-                <CheckMark />
+
+                {/* ВАЖНО */}
+                <img className={`${styles.sortArrow} ${!sortDir && styles.sortArrow_down}`} src="assets/img/arrow.svg" />
+                {/* ВАЖНО */}
+
               </li>
             ))}
 
-          </ul>
+          </ul>}
+
         </div>
       </div>
     </section>

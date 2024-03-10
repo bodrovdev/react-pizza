@@ -16,7 +16,7 @@ body {
 	font-size: calc(100vw / 1920 * 10);
 	color: #FFF;
 
-	@media (max-width: 1024px) {
+	@media (max-width: 1200px) {
 		font-size: calc(100vw / 768 * 10);
 	}
 
@@ -114,6 +114,11 @@ select {
 	font-style: inherit;
 }
 
+#root {
+	display: flex;
+	flex-direction: column;
+}
+
 .page-header {
 	flex-shrink: 0;
 }
@@ -121,7 +126,7 @@ select {
 .page-content {
 	flex-grow: 1;
 
-	padding: 50px 0 0 0;
+	padding: 90px 0 0 0;
 }
 
 .page-footer {

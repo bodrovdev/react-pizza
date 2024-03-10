@@ -4,6 +4,22 @@
   position: relative;
 
   color: #AE2D25;
+
+  @include mixins.respond-to(mobileOnly) {
+    position: absolute;
+    top: calc(100% + 20px);
+
+    width: 95vw;
+    overflow: hidden;
+  }
+}
+
+@media (min-width: 500px) and (max-width: 768px) {
+  .searchBlock {
+    order: 2;
+
+    margin: 0;
+  }
 }
 
 .searchIcon {
@@ -11,46 +27,50 @@
   top: 50%;
   left: 10px;
 
-  width: 4rem;
-  height: 4rem;
+  width: 40px;
+  height: 40px;
   user-select: none;
 
   transform: translateY(-50%);
 }
 
 .searchInput {
-  width: 40rem;
-  height: 5rem;
+  width: 400px;
+  height: 50px;
   background: #313131;
   border: 1px solid rgb(174, 45, 37, 0.5);
   border-radius: 30px;
   outline: none;
 
   font-family: "Roboto", system-ui, sans-serif;
-  font-size: 2rem;
+  font-size: 20px;
   font-weight: 400;
   color: #AE2D25;
 
   transition: border 0.1s ease-in-out;
 
-  padding: 1rem 6rem 1rem 6rem;
+  padding: 10px 60px;
+
+  @include mixins.respond-to(mobileOnly) {
+    width: 100%;
+
+    font-size: 1.4rem;
+  }
+
+  @include mixins.respond-to(tabletOnly) {
+    width: 100%;
+    max-width: 200px;
+    height: 40px;
+
+    font-size: 14px;
+
+    padding: 10px 20px;
+  }
 
   &:focus {
     border: 1px solid rgb(174, 45, 37, 1);
 
     transition: border 0.1s ease-in-out;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1024px) {
-  .searchInput {
-    width: 100%;
-    max-width: 20rem;
-    height: 4rem;
-
-    font-size: 1.4rem;
-
-    padding: 10px 20px;
   }
 }
 

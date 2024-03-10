@@ -1,15 +1,22 @@
 import axios from 'axios';
+import qs from 'qs';
 import { useEffect, useState } from 'react';
 import '../../scss/style.scss';
 import styles from './Home.module.scss';
 
 import Categories from '../../components/Categories';
 import PizzaBlock from '../../components/PizzaBlock';
-import Sort from '../../components/Sort';
+import Sort, { sortTypes } from '../../components/Sort';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
+import { setSorting } from '../../redux/slices/sortSlice';
 
 function Home() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
+
   const { categoryValue, sortValue, sortDir } = useSelector((state) => state.sort);
   const searchValue = useSelector((state) => state.search.value);
 
@@ -17,17 +24,30 @@ function Home() {
   const [pizzasItems, setPizzasItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // * url
-  const getCategory = categoryValue === 0 ? `` : `category=${categoryValue}`;
-  const getSort = `&sortBy=${sortValue.sortType}&order=${sortDir === false ? 'desc' : 'asc'}`;
-  const getSearch = searchValue && `&search=${searchValue}`;
+  useEffect(() => {
+    if (window.location.search) {
+      const params = qs.parse(window.location.search.substring(1));
+      const sortStartValue = sortTypes.find(obj => obj.sortType === params.sort)
+
+      dispatch(setSorting({
+        ...params, sortStartValue,
+      }));
+    }
+  }, [])
 
   useEffect(() => {
-
     setLoading(true);
-    let url = `https://653e4e07f52310ee6a9acea3.mockapi.io/items?${getCategory}${getSearch}${getSort}`;
 
-    axios.get(url)
+    // * url
+    let url = `https://653e4e07f52310ee6a9acea3.mockapi.io/items`;
+    axios.get(url, {
+      params: {
+        category: categoryValue ? categoryValue : '',
+        sortBy: sortValue.sortType,
+        order: sortDir === false ? 'desc' : 'asc',
+        search: searchValue,
+      }
+    })
       .then((res) => {
         setPizzasItems(res.data);
       })
@@ -38,7 +58,18 @@ function Home() {
       .finally(() => {
         setLoading(false);
       })
-  }, [categoryValue, sortValue, searchValue]);
+
+  }, [categoryValue, sortValue, sortDir, searchValue]);
+
+  useEffect(() => {
+    const queryString = qs.stringify({
+      category: categoryValue,
+      sort: sortValue.sortType,
+      order: sortDir === false ? 'desc' : 'asc',
+    })
+
+    navigate(`?${queryString}`);
+  }, [categoryValue, sortValue, sortDir])
 
   return (
     <>
