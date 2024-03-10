@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/static/css/main.5f9f0cdb.css",
-    "main.js": "/static/js/main.b948a199.js",
-    "static/media/Roboto-normal-500.woff": "/static/media/Roboto-normal-500.b14ca2d2b289afceb0b0.woff",
-    "static/media/Roboto-normal-900.woff": "/static/media/Roboto-normal-900.88d7f1b3ca9a9494d8e3.woff",
-    "static/media/Roboto-normal-700.woff": "/static/media/Roboto-normal-700.3f2cbde6b72e8d05669f.woff",
-    "static/media/Roboto-normal-400.woff": "/static/media/Roboto-normal-400.31012f9b3e3da44f87e8.woff",
-    "static/media/Roboto-normal-300.woff": "/static/media/Roboto-normal-300.df0f59d80526acc6d0cd.woff",
-    "static/media/Roboto-normal-100.woff": "/static/media/Roboto-normal-100.674b1d2bd9d781457c17.woff",
-    "static/media/Roboto-normal-500.woff2": "/static/media/Roboto-normal-500.fc0337b9cf1cce2e6e1e.woff2",
-    "static/media/Roboto-normal-900.woff2": "/static/media/Roboto-normal-900.ae0c1d409f7d45d81c29.woff2",
-    "static/media/Roboto-normal-700.woff2": "/static/media/Roboto-normal-700.6cd35edfbc0d7a417131.woff2",
-    "static/media/Roboto-normal-400.woff2": "/static/media/Roboto-normal-400.a25806274237d06e00a6.woff2",
-    "static/media/Roboto-normal-300.woff2": "/static/media/Roboto-normal-300.d537674e9e217fa53a13.woff2",
-    "static/media/Roboto-normal-100.woff2": "/static/media/Roboto-normal-100.0b33782009e32497dba2.woff2",
-    "index.html": "/index.html",
-    "main.5f9f0cdb.css.map": "/static/css/main.5f9f0cdb.css.map",
-    "main.b948a199.js.map": "/static/js/main.b948a199.js.map"
+    "main.css": "/cursed-pizza/static/css/main.9bbbf462.css",
+    "main.js": "/cursed-pizza/static/js/main.b948a199.js",
+    "static/media/Roboto-normal-500.woff": "/cursed-pizza/static/media/Roboto-normal-500.b14ca2d2b289afceb0b0.woff",
+    "static/media/Roboto-normal-900.woff": "/cursed-pizza/static/media/Roboto-normal-900.88d7f1b3ca9a9494d8e3.woff",
+    "static/media/Roboto-normal-700.woff": "/cursed-pizza/static/media/Roboto-normal-700.3f2cbde6b72e8d05669f.woff",
+    "static/media/Roboto-normal-400.woff": "/cursed-pizza/static/media/Roboto-normal-400.31012f9b3e3da44f87e8.woff",
+    "static/media/Roboto-normal-300.woff": "/cursed-pizza/static/media/Roboto-normal-300.df0f59d80526acc6d0cd.woff",
+    "static/media/Roboto-normal-100.woff": "/cursed-pizza/static/media/Roboto-normal-100.674b1d2bd9d781457c17.woff",
+    "static/media/Roboto-normal-500.woff2": "/cursed-pizza/static/media/Roboto-normal-500.fc0337b9cf1cce2e6e1e.woff2",
+    "static/media/Roboto-normal-900.woff2": "/cursed-pizza/static/media/Roboto-normal-900.ae0c1d409f7d45d81c29.woff2",
+    "static/media/Roboto-normal-700.woff2": "/cursed-pizza/static/media/Roboto-normal-700.6cd35edfbc0d7a417131.woff2",
+    "static/media/Roboto-normal-400.woff2": "/cursed-pizza/static/media/Roboto-normal-400.a25806274237d06e00a6.woff2",
+    "static/media/Roboto-normal-300.woff2": "/cursed-pizza/static/media/Roboto-normal-300.d537674e9e217fa53a13.woff2",
+    "static/media/Roboto-normal-100.woff2": "/cursed-pizza/static/media/Roboto-normal-100.0b33782009e32497dba2.woff2",
+    "index.html": "/cursed-pizza/index.html",
+    "main.9bbbf462.css.map": "/cursed-pizza/static/css/main.9bbbf462.css.map",
+    "main.b948a199.js.map": "/cursed-pizza/static/js/main.b948a199.js.map"
   },
   "entrypoints": [
-    "static/css/main.5f9f0cdb.css",
+    "static/css/main.9bbbf462.css",
     "static/js/main.b948a199.js"
   ]
 }
