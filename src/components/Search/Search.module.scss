@@ -27,8 +27,7 @@
   top: 50%;
   left: 10px;
 
-  width: 40px;
-  height: 40px;
+  width: 30px;
   user-select: none;
 
   transform: translateY(-50%);
@@ -49,7 +48,7 @@
 
   transition: border 0.1s ease-in-out;
 
-  padding: 10px 60px;
+  padding: 10px 50px;
 
   @include mixins.respond-to(mobileOnly) {
     width: 100%;

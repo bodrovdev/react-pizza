@@ -1,16 +1,11 @@
 import '../../scss/style.scss';
 import styles from './Categories.module.scss';
 
-// * 6) REDUX. Импортируем useSelector, useDispatch
 import { useDispatch, useSelector } from 'react-redux';
-// * 7) REDUX. Импортируем методы из слайсов
 import { setCategoryValue } from '../../redux/slices/sortSlice';
 
 function Categories() {
-
-  // * 8) REDUX. Достаём значение из слайса
   const categoryValue = useSelector((state) => state.sort.categoryValue);
-  // * 9) REDUX. Получаем доступ к dispatch
   const dispatch = useDispatch();
 
   const pizzaCategories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];

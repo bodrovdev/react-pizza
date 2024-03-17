@@ -8,29 +8,29 @@ const pizzaTypes = ['Тонкая', 'Традиционная'];
 function PizzaBlock({ imageUrl, name, types, sizes, price }) {
   return (
     <div className={styles.root}>
-      <figure className={styles.root__image}>
-        <img className={styles.root__img} src={imageUrl} alt="#" />
+      <figure className={styles.image}>
+        <img className={styles.img} src={imageUrl} alt="#" />
       </figure>
-      <div className={styles.root__desc}>
-        <h2 className={styles.root__descTitle}>{name}</h2>
-        <div className={styles.root__descOptions}>
-          <ul className={styles.root__descOptionsList}>
+      <div className={styles.desc}>
+        <h2 className={styles.descTitle}>{name}</h2>
+        <div className={styles.descOptions}>
+          <ul className={styles.descOptionsList}>
             {types.map((item, index) => (
-              <li className={styles.root__descOptionsItem} key={index}>{pizzaTypes[item]}</li>
+              <li className={styles.descOptionsItem} key={index}>{pizzaTypes[item]}</li>
             ))}
           </ul>
-          <ul className={styles.root__descOptionsList}>
+          <ul className={styles.descOptionsList}>
             {sizes.map((item, index) => (
-              <li className={styles.root__descOptionsItem} key={index}>{item} см.</li>
+              <li className={styles.descOptionsItem} key={index}>{item} см.</li>
             ))}
           </ul>
         </div>
-        <div className={styles.root__descInfo}>
-          <span className={styles.root__descInfoPrice}>от {price} ₽</span>
-          <button className={styles.root__descInfoButton}>
+        <div className={styles.descInfo}>
+          <span className={styles.descInfoPrice}>от {price} ₽</span>
+          <button className={styles.descInfoButton}>
             <Plus />
             Добавить
-            <span className={styles.root__descInfoButtonNum}>0</span>
+            <span className={styles.descInfoButtonNum}>0</span>
           </button>
         </div>
       </div>

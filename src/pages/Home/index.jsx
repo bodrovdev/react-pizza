@@ -6,7 +6,8 @@ import styles from './Home.module.scss';
 
 import Categories from '../../components/Categories';
 import PizzaBlock from '../../components/PizzaBlock';
-import Sort, { sortTypes } from '../../components/Sort';
+import Sort from '../../components/Sort';
+import { sortTypes } from '../../components/Sort';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';

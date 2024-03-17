@@ -10,7 +10,7 @@ import Clean from '../Icons/Clean';
 import SearchIcon from '../Icons/SearchIcon';
 
 function Search() {
-  const inputRef = useRef();
+  const inputRef = useRef(null);
 
   const dispatch = useDispatch();
 
