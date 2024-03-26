@@ -5,7 +5,7 @@
 
   padding: 40px 0;
 
-  @include mixins.respond-to(mobileOnly) {
+  @include mixins.respond-to(notDesktop) {
     position: relative;
 
     padding: 20px 0;
@@ -18,7 +18,7 @@
   justify-content: flex-end;
   gap: 40px;
 
-  @include mixins.respond-to(mobileOnly) {
+  @include mixins.respond-to(notDesktop) {
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 10px;
@@ -40,13 +40,13 @@
 
   margin: 0 auto 0 0;
 
-  @include mixins.respond-to(mobileOnly) {
+  @include mixins.respond-to(notDesktop) {
     margin: 0;
   }
 
-  @include mixins.respond-to(desktopS) {
+  @include mixins.respond-to(desktopD) {
     &:hover {
-      & .logoImg {
+      & .svg {
         transform: scale(1.1);
         transition: 0.3s ease-in-out;
       }
@@ -56,8 +56,8 @@
   & svg {
     width: 100px;
 
-    @include mixins.respond-to(mobileOnly) {
-      width: 4rem;
+    @include mixins.respond-to(notDesktop) {
+      width: 35px;
     }
   }
 
@@ -69,26 +69,14 @@
   }
 }
 
-.logoImg {
-  flex-shrink: 0;
-
-  width: 100px;
-
-  transition: 0.3s ease-in-out;
-
-  @include mixins.respond-to(mobileOnly) {
-    width: 3.5rem;
-  }
-}
-
 .logoTitle {
   font-size: 28px;
   font-weight: 800;
   color: #AE2D25;
   text-transform: uppercase;
 
-  @include mixins.respond-to(mobileOnly) {
-    font-size: 1.4rem;
+  @include mixins.respond-to(notDesktop) {
+    font-size: 14px;
   }
 }
 
@@ -97,7 +85,7 @@
   font-weight: 400;
   color: #AE2D25;
 
-  @include mixins.respond-to(mobileOnly) {
+  @include mixins.respond-to(notDesktop) {
     display: none;
   }
 }
@@ -124,7 +112,7 @@
 
   padding: 20px;
 
-  @include mixins.respond-to(mobileOnly) {
+  @include mixins.respond-to(notDesktop) {
     gap: 10px;
     order: 2;
 
@@ -140,8 +128,8 @@
     & svg {
       width: 20px;
 
-      @include mixins.respond-to(mobileOnly) {
-        width: 1.5rem;
+      @include mixins.respond-to(notDesktop) {
+        width: 15px;
       }
     }
   }
@@ -154,8 +142,8 @@
   font-weight: 700;
   color: #000;
 
-  @include mixins.respond-to(mobileOnly) {
-    font-size: 1.2rem;
+  @include mixins.respond-to(notDesktop) {
+    font-size: 12px;
   }
 }
 
@@ -166,7 +154,7 @@
 
   padding: 0 20px 0 0;
 
-  @include mixins.respond-to(mobileOnly) {
+  @include mixins.respond-to(notDesktop) {
     padding: 0 10px 0 0;
   }
 
@@ -182,16 +170,16 @@
   }
 }
 
-@media (min-width: 320px) and (max-width: 374px) {
-  .cartBlock {
-    gap: 5px;
+// @media (min-width: 320px) and (max-width: 374px) {
+//   .cartBlock {
+//     gap: 5px;
 
-    & div {
-      gap: 5px;
-    }
-  }
+//     & div {
+//       gap: 5px;
+//     }
+//   }
 
-  .cartPrice {
-    padding: 0 5px 0 0;
-  }
-}
+//   .cartPrice {
+//     padding: 0 5px 0 0;
+//   }
+// }

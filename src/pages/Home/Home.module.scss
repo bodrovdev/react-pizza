@@ -3,6 +3,10 @@
 .root {
   padding: 0 0 40px 0;
   margin: 30px 0 0 0;
+
+  @include mixins.respond-to(mobileOnly) {
+    margin: 0;
+  }
 }
 
 .container {
@@ -11,10 +15,6 @@
   align-items: flex-start;
   justify-content: flex-start;
   gap: 40px;
-
-  @include mixins.respond-to(mobileOnly) {
-    gap: 20px;
-  }
 }
 
 .title {
@@ -24,7 +24,7 @@
   color: #AE2D25;
 
   @include mixins.respond-to(mobileOnly) {
-    font-size: 2.5rem;
+    font-size: 28px;
   }
 }
 

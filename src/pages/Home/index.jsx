@@ -1,45 +1,31 @@
 import axios from 'axios';
 import qs from 'qs';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import '../../scss/style.scss';
 import styles from './Home.module.scss';
 
-import Categories from '../../components/Categories';
-import PizzaBlock from '../../components/PizzaBlock';
-import Sort from '../../components/Sort';
-import { sortTypes } from '../../components/Sort';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
 import { setSorting } from '../../redux/slices/sortSlice';
+
+import Categories from '../../components/Categories';
+import PizzaBlock from '../../components/PizzaBlock';
+import Sort, { sortTypes } from '../../components/Sort';
 
 function Home() {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const isFiltered = useRef(false);
+  const isMounted = useRef(false);
 
   const { categoryValue, sortValue, sortDir } = useSelector((state) => state.sort);
   const searchValue = useSelector((state) => state.search.value);
 
-  //* pizza items
   const [pizzasItems, setPizzasItems] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    if (window.location.search) {
-      const params = qs.parse(window.location.search.substring(1));
-      const sortStartValue = sortTypes.find(obj => obj.sortType === params.sort)
-
-      dispatch(setSorting({
-        ...params, sortStartValue,
-      }));
-    }
-  }, [])
-
-  useEffect(() => {
+  const fetchPizzas = () => {
     setLoading(true);
-
-    // * url
     let url = `https://653e4e07f52310ee6a9acea3.mockapi.io/items`;
     axios.get(url, {
       params: {
@@ -59,22 +45,43 @@ function Home() {
       .finally(() => {
         setLoading(false);
       })
+  }
 
-  }, [categoryValue, sortValue, sortDir, searchValue]);
-
+  // & 1 - проверка на первый рендер, записываем параметры из редакса в URL
   useEffect(() => {
-    const queryString = qs.stringify({
-      category: categoryValue,
-      sort: sortValue.sortType,
-      order: sortDir === false ? 'desc' : 'asc',
-    })
+    if (isMounted.current) {
+      const queryString = qs.stringify({
+        category: categoryValue,
+        sort: sortValue.sortType,
+        order: sortDir === false ? 'desc' : 'asc',
+      })
+      navigate(`?${queryString}`);
+    }
+    isMounted.current = true;
 
-    navigate(`?${queryString}`);
   }, [categoryValue, sortValue, sortDir])
+
+  // & 2 - проверка на наличие параметров в URL, записываем полученные параметры в редакс
+  useEffect(() => {
+    if (window.location.search) {
+      const params = qs.parse(window.location.search.substring(1));
+      const sortStartValue = sortTypes.find(obj => obj.sortType === params.sort)
+
+      dispatch(setSorting({ ...params, sortStartValue }));
+      isFiltered.current = true;
+    }
+  }, [])
+
+  // & 3 - получаем все айтемы, если параметров в URL нет
+  useEffect(() => {
+    if (!isFiltered.current) {
+      fetchPizzas();
+    }
+    isFiltered.current = false;
+  }, [categoryValue, sortValue, sortDir, searchValue]);
 
   return (
     <>
-
       <Categories />
 
       <Sort />
@@ -84,18 +91,16 @@ function Home() {
           <h1 className={styles.title}>Все пиццы</h1>
 
           {loading ?
-
             <div className={styles.preloader}>
               <div className={styles.preloaderCircle}></div>
             </div>
-
             :
-
             <div className={styles.wrapper}>
               {pizzasItems.map((item, index) => (
                 <PizzaBlock imageUrl={item.imageUrl} name={item.name} types={item.types} sizes={item.sizes} price={item.price} key={index} />
               ))}
-            </div>}
+            </div>
+          }
         </div>
       </div>
     </>

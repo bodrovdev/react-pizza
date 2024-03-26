@@ -14,12 +14,12 @@ function PizzaBlock({ imageUrl, name, types, sizes, price }) {
       <div className={styles.desc}>
         <h2 className={styles.descTitle}>{name}</h2>
         <div className={styles.descOptions}>
-          <ul className={styles.descOptionsList}>
+          <ul className={`${styles.descOptionsList} ${styles.descOptionsList__feature}`}>
             {types.map((item, index) => (
               <li className={styles.descOptionsItem} key={index}>{pizzaTypes[item]}</li>
             ))}
           </ul>
-          <ul className={styles.descOptionsList}>
+          <ul className={`${styles.descOptionsList} ${styles.descOptionsList__price}`}>
             {sizes.map((item, index) => (
               <li className={styles.descOptionsItem} key={index}>{item} см.</li>
             ))}

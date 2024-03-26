@@ -1,8 +1,8 @@
 @use "../../scss/mixins";
 
 .root {
-  @include mixins.respond-to(mobileOnly) {
-    margin: 0 0 10px 0;
+  @include mixins.respond-to(notDesktop) {
+    margin: 0 0 20px 0;
   }
 }
 
@@ -13,12 +13,12 @@
   justify-content: flex-start;
   gap: 1rem;
 
-  @include mixins.respond-to(mobileOnly) {
+  @include mixins.respond-to(notDesktop) {
     flex-wrap: nowrap;
 
     overflow-x: auto;
 
-    padding: 0 0 10px 0;
+    padding: 0 0 20px 0;
   }
 }
 
@@ -28,7 +28,6 @@
   justify-content: center;
   flex-shrink: 0;
 
-  min-width: 130px;
   height: 50px;
   border-radius: 30px;
   background: #313131;
@@ -43,11 +42,10 @@
 
   padding: 15px 30px;
 
-  @include mixins.respond-to(mobileOnly) {
-    min-width: 10rem;
-    height: 3.5rem;
+  @include mixins.respond-to(notDesktop) {
+    height: 35px;
 
-    font-size: 1.4rem;
+    font-size: 14px;
   }
 
   &:hover {

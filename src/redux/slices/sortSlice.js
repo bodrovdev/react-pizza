@@ -27,10 +27,12 @@ export const sortSlice = createSlice({
       state.categoryValue = Number(action.payload.category);
       state.sortValue = action.payload.sortStartValue;
       state.sortDir = action.payload.order === 'desc' ? false : true;
-    }
+    },
+
+    resetSorting: () => initialState,
   },
 })
 
-export const { setCategoryValue, setSortValue, setSortDir, setSorting } = sortSlice.actions
+export const { setCategoryValue, setSortValue, setSortDir, setSorting, resetSorting } = sortSlice.actions;
 
-export default sortSlice.reducer
+export default sortSlice.reducer;

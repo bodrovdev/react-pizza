@@ -1,4 +1,4 @@
-function Cart() {
+function CartIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -13,4 +13,4 @@ function Cart() {
   )
 }
 
-export default Cart
+export default CartIcon

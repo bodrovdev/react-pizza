@@ -5,7 +5,7 @@
 
   color: #AE2D25;
 
-  @include mixins.respond-to(mobileOnly) {
+  @include mixins.respond-to(notDesktop) {
     position: absolute;
     top: calc(100% + 20px);
 
@@ -31,6 +31,10 @@
   user-select: none;
 
   transform: translateY(-50%);
+
+  @include mixins.respond-to(notDesktop) {
+    width: 15px;
+  }
 }
 
 .searchInput {
@@ -50,26 +54,36 @@
 
   padding: 10px 50px;
 
-  @include mixins.respond-to(mobileOnly) {
-    width: 100%;
-
-    font-size: 1.4rem;
-  }
-
-  @include mixins.respond-to(tabletOnly) {
-    width: 100%;
-    max-width: 200px;
-    height: 40px;
+  @include mixins.respond-to(notDesktop) {
+    height: 35px;
 
     font-size: 14px;
-
-    padding: 10px 20px;
   }
 
   &:focus {
     border: 1px solid rgb(174, 45, 37, 1);
 
     transition: border 0.1s ease-in-out;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 449px) {
+  .searchInput {
+    width: 100%;
+
+    padding: 5px 35px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .searchInput {
+    width: 100%;
+    max-width: 400px;
+    height: 40px;
+
+    font-size: 14px;
+
+    padding: 10px 40px;
   }
 }
 

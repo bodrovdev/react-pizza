@@ -3,7 +3,7 @@
 .root {
   margin: 30px 0 0 0;
 
-  @include mixins.respond-to(mobileOnly) {
+  @include mixins.respond-to(notDesktop) {
     margin: 0;
   }
 }
@@ -17,7 +17,7 @@
 
   padding: 10px 0;
 
-  @include mixins.respond-to(mobileOnly) {
+  @include mixins.respond-to(notDesktop) {
     padding: 0 0 10px 0;
   }
 
@@ -47,8 +47,8 @@
   color: #a53e37;
   letter-spacing: 0.21px;
 
-  @include mixins.respond-to(mobileOnly) {
-    font-size: 1.6rem;
+  @include mixins.respond-to(notDesktop) {
+    font-size: 14px;
   }
 }
 
@@ -85,6 +85,11 @@
 
   z-index: 10;
 
+  @include mixins.respond-to(notDesktop) {
+    width: 100%;
+    min-width: auto;
+  }
+
   & li {
     display: flex;
     align-items: center;
@@ -104,8 +109,10 @@
 
     padding: 10px 15px;
 
-    @include mixins.respond-to(mobileOnly) {
-      font-size: 1.6rem;
+    @include mixins.respond-to(notDesktop) {
+      font-size: 14px;
+
+      padding: 5px 10px;
     }
 
     &:hover {
@@ -115,7 +122,7 @@
 
       transition: background 0.2s ease-in-out, 0.2s ease-in-out;
 
-      @include mixins.respond-to(desktopS) {
+      @include mixins.respond-to(desktopD) {
         & .sortArrow {
           color: #000;
 
@@ -136,6 +143,10 @@
   color: #AE2D25;
 
   transition: color 0.2s ease-in-out;
+
+  @include mixins.respond-to(notDesktop) {
+    width: 10px;
+  }
 
   &_down {
     transform: rotate(180deg);

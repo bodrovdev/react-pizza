@@ -47,22 +47,16 @@ function Sort() {
           <div className={styles.captionContainer} >
             <span className={styles.captionInfo}>Сортировка по:</span>
             <span className={styles.captionContent}>{sortValue.sortName}</span>
-
             <Arrow arrowClassName={`${styles.sortArrow} ${!sortDir && styles.sortArrow_down}`} />
-
           </div>
 
           {isVisibleSort && <ul className={styles.captionList}>
-
             {sortTypes.map((item, index) => (
               <li className={sortItemClassName(item)} onClick={() => { onSortSelecting(item) }} key={index}>
                 {item.sortName}
-
                 <Arrow arrowClassName={`${styles.sortArrow} ${!sortDir && styles.sortArrow_down}`} />
-
               </li>
             ))}
-
           </ul>}
 
         </div>
