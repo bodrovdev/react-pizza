@@ -1,0 +1,48 @@
+@use "../../../scss/mixins";
+
+.root {}
+
+.controls {
+  :global {
+    .base-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+}
+
+.controlHeading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+  color: #3876bf;
+
+  & svg {
+    width: 50px;
+  }
+}
+
+.controlTitle {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 0.32px;
+  color: #3876bf;
+
+  transition: color 0.2s ease-in-out;
+}
+
+.controlClear {
+  font-size: 20px;
+  font-weight: 700;
+  color: #a8a8a8;
+  letter-spacing: 0.21px;
+
+  &:hover {
+    color: #0754B0;
+
+    transition: color 0.2s ease-in-out;
+  }
+}

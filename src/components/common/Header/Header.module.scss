@@ -1,8 +1,6 @@
-@use "../../scss/mixins";
+@use "../../../scss/mixins";
 
 .root {
-  background: #1f1f1f;
-
   padding: 40px 0;
 
   @include mixins.respond-to(notDesktop) {
@@ -72,7 +70,7 @@
 .logoTitle {
   font-size: 28px;
   font-weight: 800;
-  color: #AE2D25;
+  color: #0754B0;
   text-transform: uppercase;
 
   @include mixins.respond-to(notDesktop) {
@@ -83,7 +81,7 @@
 .logoSubtitle {
   font-size: 20px;
   font-weight: 400;
-  color: #AE2D25;
+  color: #0754B0;
 
   @include mixins.respond-to(notDesktop) {
     display: none;
@@ -108,7 +106,9 @@
   flex-shrink: 0;
 
   border-radius: 30px;
-  background: #AE2D25;
+  background: #a8a8a8;
+
+  transition: background 0.2s ease-in-out;
 
   padding: 20px;
 
@@ -125,6 +125,10 @@
     justify-content: center;
     gap: 10px;
 
+    color: #0754B0;
+
+    transition: color 0.2s ease-in-out;
+
     & svg {
       width: 20px;
 
@@ -140,7 +144,9 @@
   flex-shrink: 0;
   font-size: 16px;
   font-weight: 700;
-  color: #000;
+  color: #0754B0;
+
+  transition: color 0.2s ease-in-out;
 
   @include mixins.respond-to(notDesktop) {
     font-size: 12px;
@@ -166,20 +172,37 @@
 
     width: 0.1rem;
     height: 100%;
-    background: #000;
+    background: #0754B0;
+
+    transition: background 0.2s ease-in-out;
   }
 }
 
-// @media (min-width: 320px) and (max-width: 374px) {
-//   .cartBlock {
-//     gap: 5px;
+@media (min-width: 1200px) {
+  .cartBlock {
+    &:hover {
+      background: #0754B0;
 
-//     & div {
-//       gap: 5px;
-//     }
-//   }
+      transition: background 0.2s ease-in-out;
 
-//   .cartPrice {
-//     padding: 0 5px 0 0;
-//   }
-// }
+      & div {
+        color: #a8a8a8;
+
+        transition: color 0.2s ease-in-out;
+      }
+
+      & .cartPrice::after {
+        background: #a8a8a8;
+
+        transition: background 0.2s ease-in-out;
+      }
+
+      & .cartPrice,
+      .cartPizzas {
+        color: #a8a8a8;
+
+        transition: color 0.2s ease-in-out;
+      }
+    }
+  }
+}

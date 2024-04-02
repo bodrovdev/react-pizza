@@ -1,13 +1,13 @@
 import debounce from 'lodash.debounce';
 import { useCallback, useRef, useState } from 'react';
-import '../../scss/style.scss';
+import '../../../scss/style.scss';
 import styles from './Search.module.scss';
 
 import { useDispatch } from 'react-redux';
-import { setSearchValue } from '../../redux/slices/searchSlice';
+import { setSearchValue } from '../../../redux/slices/searchSlice';
 
-import Clean from '../Icons/Clean';
-import SearchIcon from '../Icons/SearchIcon';
+import Clean from '../../icons/Clean';
+import SearchIcon from '../../icons/SearchIcon';
 
 function Search() {
   const inputRef = useRef(null);

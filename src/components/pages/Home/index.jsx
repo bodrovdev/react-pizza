@@ -1,20 +1,22 @@
 import axios from 'axios';
 import qs from 'qs';
 import { useEffect, useState, useRef } from 'react';
-import '../../scss/style.scss';
+import '../../../scss/style.scss';
 import styles from './Home.module.scss';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setSorting } from '../../redux/slices/sortSlice';
 
-import Categories from '../../components/Categories';
-import PizzaBlock from '../../components/PizzaBlock';
-import Sort, { sortTypes } from '../../components/Sort';
+import { setSorting } from '../../../redux/slices/sortSlice';
+
+import Categories from './Categories';
+import PizzaBlock from './PizzaBlock';
+import Sort, { sortTypes } from './Sort';
 
 function Home() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const isFiltered = useRef(false);
   const isMounted = useRef(false);
 
@@ -47,7 +49,28 @@ function Home() {
       })
   }
 
-  // & 1 - проверка на первый рендер, записываем параметры из редакса в URL
+  // & проверка на наличие параметров в URL, записываем полученные параметры в редакс
+  useEffect(() => {
+    if (window.location.search) {
+      const params = qs.parse(window.location.search.substring(1));
+      const sortStartValue = sortTypes.find(obj => obj.sortType === params.sort)
+
+      dispatch(setSorting({ ...params, sortStartValue }));
+
+      isFiltered.current = true;
+    }
+  }, [])
+
+  // & получаем все айтемы, если параметров в URL нет
+  useEffect(() => {
+    if (!isFiltered.current) {
+      fetchPizzas();
+    }
+    isFiltered.current = false;
+
+  }, [categoryValue, sortValue, sortDir, searchValue]);
+
+  // & проверка на первый рендер, записываем параметры из редакса в URL
   useEffect(() => {
     if (isMounted.current) {
       const queryString = qs.stringify({
@@ -61,25 +84,6 @@ function Home() {
 
   }, [categoryValue, sortValue, sortDir])
 
-  // & 2 - проверка на наличие параметров в URL, записываем полученные параметры в редакс
-  useEffect(() => {
-    if (window.location.search) {
-      const params = qs.parse(window.location.search.substring(1));
-      const sortStartValue = sortTypes.find(obj => obj.sortType === params.sort)
-
-      dispatch(setSorting({ ...params, sortStartValue }));
-      isFiltered.current = true;
-    }
-  }, [])
-
-  // & 3 - получаем все айтемы, если параметров в URL нет
-  useEffect(() => {
-    if (!isFiltered.current) {
-      fetchPizzas();
-    }
-    isFiltered.current = false;
-  }, [categoryValue, sortValue, sortDir, searchValue]);
-
   return (
     <>
       <Categories />
@@ -89,7 +93,6 @@ function Home() {
       <div className={styles.root}>
         <div className={`${styles.container} base-container`}>
           <h1 className={styles.title}>Все пиццы</h1>
-
           {loading ?
             <div className={styles.preloader}>
               <div className={styles.preloaderCircle}></div>

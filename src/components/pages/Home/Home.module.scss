@@ -1,4 +1,4 @@
-@use "../../scss/mixins";
+@use "../../../scss/mixins";
 
 .root {
   padding: 0 0 40px 0;
@@ -21,7 +21,7 @@
   font-size: 32px;
   font-weight: 700;
   letter-spacing: 0.32px;
-  color: #AE2D25;
+  color: #0754B0;
 
   @include mixins.respond-to(mobileOnly) {
     font-size: 28px;
@@ -60,7 +60,7 @@
   width: 100px;
   height: 100px;
   border: 10px solid #1f1f1f;
-  border-top: 10px solid #AE2D25;
+  border-top: 10px solid #3876bf;
   border-radius: 50%;
 
   animation: spinner 4s linear infinite;

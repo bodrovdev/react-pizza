@@ -1,4 +1,4 @@
-@use "../../scss/mixins";
+@use "../../../../scss/mixins";
 
 .root {
   @include mixins.respond-to(notDesktop) {
@@ -30,12 +30,12 @@
 
   height: 50px;
   border-radius: 30px;
-  background: #313131;
+  background: #a8a8a8;
 
   font-size: 16px;
   font-weight: 700;
   letter-spacing: 0.24px;
-  color: #AE2D25;
+  color: #0754B0;
   text-align: center;
 
   transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
@@ -49,17 +49,17 @@
   }
 
   &:hover {
-    background: #AE2D25;
+    background: #0754B0;
 
-    color: #000;
+    color: #a8a8a8;
 
     transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
   }
 
   &_active {
-    background: #AE2D25;
+    background: #0754B0;
 
-    color: #000;
+    color: #a8a8a8;
 
     transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
   }

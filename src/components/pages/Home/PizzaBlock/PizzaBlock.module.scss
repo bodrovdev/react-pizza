@@ -1,11 +1,15 @@
-@use "../../scss/mixins";
+@use "../../../../scss/mixins";
 
 .root {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 20px;
+
+  background: rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  border-radius: 10px;
 
   @include mixins.respond-to(notDesktop) {
     flex-direction: row;
@@ -15,12 +19,22 @@
   }
 }
 
+.heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+  width: 100%;
+}
+
 .image {
   display: flex;
   align-items: center;
   justify-content: center;
 
-  background: #7f7f7f;
+  background: #404040;
   overflow: hidden;
 
   transition: background 0.2s ease-in-out;
@@ -33,30 +47,16 @@
 
   @include mixins.respond-to(desktopD) {
     width: 100%;
-
-    &:hover {
-      background: #999999;
-
-      transition: background 0.2s ease-in-out;
-
-      & .img {
-        filter: contrast(10) grayscale(1) brightness(0.6);
-
-        transition: filter 0.2s ease-in-out;
-      }
-    }
   }
-
 }
 
 .img {
-  width: 280px;
-  height: 260px;
+  image-rendering: pixelated;
+  width: 200px;
+  height: 200px;
   object-fit: contain;
-  filter: contrast(10) grayscale(1) brightness(0.5);
+  filter: invert(75%);
   user-select: none;
-
-  transition: filter 0.2s ease-in-out;
 
   @include mixins.respond-to(notDesktop) {
     width: 100%;
@@ -68,7 +68,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 40px;
 
   width: 100%;
 
@@ -82,10 +82,10 @@
 }
 
 .descTitle {
-  font-size: 2.5rem;
+  font-size: 25px;
   font-weight: 800;
   letter-spacing: 0.2px;
-  color: #a53e37;
+  color: #3876bf;
   text-align: center;
 
   @include mixins.respond-to(notDesktop) {
@@ -99,13 +99,9 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: 0.7rem;
+  gap: 7px;
 
   width: 100%;
-  border-radius: 10px;
-  background: #1f1f1f;
-
-  padding: 7px 5px;
 
   @include mixins.respond-to(notDesktop) {
     background: none;
@@ -118,7 +114,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: 0.5rem;
+  gap: 5px;
 
   width: 100%;
 
@@ -140,15 +136,15 @@
 
   width: 100%;
   border-radius: 5px;
-  background: #313131;
+  background: #a8a8a8;
   box-shadow: 0 0.2rem 0.4rem 0 rgba(0, 0, 0, 0.04);
   cursor: pointer;
 
   text-align: center;
-  font-size: 1.4rem;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.21px;
-  color: #AE2D25;
+  color: #0754B0;
 
   transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
 
@@ -156,7 +152,6 @@
 
   @include mixins.respond-to(notDesktop) {
     height: 35px;
-    background: #3d3d3d;
 
     font-size: 12px;
 
@@ -164,15 +159,15 @@
   }
 
   &:hover {
-    background: #AE2D25;
+    background: #0754B0;
 
-    color: #000;
+    color: #a8a8a8;
 
     transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
   }
 
   &_active {
-    background: #AE2D25;
+    background: #a8a8a8;
 
     color: #000;
 
@@ -201,7 +196,7 @@
   font-size: 20px;
   font-weight: 700;
   letter-spacing: 0.33px;
-  color: #a53e37;
+  color: #3876bf;
 }
 
 .descInfoButton {
@@ -210,18 +205,18 @@
   justify-content: flex-start;
   gap: 10px;
 
-  background: #313131;
-  border: 1px solid #AE2D25;
+  background: #a8a8a8;
+  border: 1px solid #0754B0;
   border-radius: 30px;
 
   font-family: 'Roboto', system-ui, sans-serif;
   font-size: 1.6rem;
   font-weight: 700;
-  color: #AE2D25;
+  color: #0754B0;
 
   transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
 
-  padding: 15px 20px;
+  padding: 15px 40px;
 
   @include mixins.respond-to(notDesktop) {
     font-size: 12px;
@@ -230,40 +225,10 @@
   }
 
   &:hover {
-    background: #AE2D25;
+    background: #0754B0;
 
-    color: #000;
+    color: #a8a8a8;
 
     transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
-
-    & .descInfoButtonNum {
-      background: #000;
-
-      color: #AE2D25;
-
-      transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
-    }
   }
-
-  & svg {
-    flex-shrink: 0;
-  }
-}
-
-.descInfoButtonNum {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-
-  min-width: 2.2rem;
-  min-height: 2.2rem;
-  background: #AE2D25;
-  border-radius: 50%;
-
-  color: #000;
-
-  transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
-
-  margin: 0 0 0 auto;
 }

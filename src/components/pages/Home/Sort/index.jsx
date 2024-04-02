@@ -1,13 +1,12 @@
-import { useState, useRef } from 'react';
-import '../../scss/style.scss';
+import { useRef, useState } from 'react';
+import { useOnClickOutside } from 'usehooks-ts';
+import '../../../../scss/style.scss';
 import styles from './Sort.module.scss';
 
-import { useOnClickOutside } from 'usehooks-ts';
-
-import Arrow from '../Icons/Arrow';
+import Arrow from '../../../icons/Arrow';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { setSortDir, setSortValue } from '../../redux/slices/sortSlice';
+import { setSortDir, setSortValue } from '../../../../redux/slices/sortSlice';
 
 export const sortTypes = [
   { sortName: 'По цене', sortType: 'price' },
@@ -26,10 +25,10 @@ function Sort() {
     return sortValue.sortType === item.sortType ? styles.captionItem_active : styles.captionItem
   }
 
-  const onSortSelecting = (item) => {
+  const sortChangeHandler = (item) => {
     dispatch(setSortValue(item));
     item.sortName === sortValue.sortName ? dispatch(setSortDir(!sortDir)) : dispatch(setSortDir(false));
-    setVisibleSort(!isVisibleSort)
+    setVisibleSort(!isVisibleSort);
   }
 
   useOnClickOutside(sortRef, () => {
@@ -52,7 +51,7 @@ function Sort() {
 
           {isVisibleSort && <ul className={styles.captionList}>
             {sortTypes.map((item, index) => (
-              <li className={sortItemClassName(item)} onClick={() => { onSortSelecting(item) }} key={index}>
+              <li className={sortItemClassName(item)} onClick={() => { sortChangeHandler(item) }} key={index}>
                 {item.sortName}
                 <Arrow arrowClassName={`${styles.sortArrow} ${!sortDir && styles.sortArrow_down}`} />
               </li>
