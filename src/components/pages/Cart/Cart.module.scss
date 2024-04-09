@@ -1,14 +1,37 @@
 @use "../../../scss/mixins";
 
-.root {}
-
-.controls {
+.root {
   :global {
     .base-container {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
     }
+  }
+}
+
+.controls {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+
+  width: 100%;
+
+  padding: 0 0 40px 0;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: #a8a8a8;
+    opacity: 0.2;
   }
 }
 
@@ -39,6 +62,129 @@
   font-weight: 700;
   color: #a8a8a8;
   letter-spacing: 0.21px;
+
+  &:hover {
+    color: #0754B0;
+
+    transition: color 0.2s ease-in-out;
+  }
+}
+
+.cartBody {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 50px;
+
+  width: 100%;
+
+  padding: 40px 0 0 0;
+}
+
+.cartPizzas {
+  width: 70%;
+}
+
+.cartPizzas {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 40px;
+}
+
+.cartPayment {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 60px;
+
+  width: 30%;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: -40px;
+    left: -25px;
+
+    width: 1px;
+    height: calc(100% + 40px);
+    background: #a8a8a8;
+    opacity: 0.2;
+  }
+
+  & div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 40px;
+  }
+
+  & span {
+    font-size: 25px;
+    letter-spacing: 0.2px;
+  }
+}
+
+.cartPrice,
+.cartTotal {
+  font-weight: 700;
+  color: #3876bf;
+}
+
+.cartPaySubmit {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+
+  background: #a8a8a8;
+  border: 1px solid #0754B0;
+  border-radius: 30px;
+
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #0754B0;
+
+  transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+
+  padding: 15px 40px;
+
+  @include mixins.respond-to(notDesktop) {
+    font-size: 12px;
+
+    padding: 10px;
+  }
+
+  &:hover {
+    background: #0754B0;
+
+    color: #a8a8a8;
+
+    transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+  }
+}
+
+.cartReturn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  font-size: 20px;
+  letter-spacing: 0.21px;
+
+  transition: color 0.2s ease-in-out;
+
+  & svg {
+    width: 20px;
+
+    transform: rotate(-90deg);
+  }
 
   &:hover {
     color: #0754B0;

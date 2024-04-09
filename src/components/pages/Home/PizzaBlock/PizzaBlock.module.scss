@@ -51,7 +51,6 @@
 }
 
 .img {
-  image-rendering: pixelated;
   width: 200px;
   height: 200px;
   object-fit: contain;
@@ -166,10 +165,10 @@
     transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
   }
 
-  &_active {
-    background: #a8a8a8;
+  &__active {
+    background: #0754B0;
 
-    color: #000;
+    color: #a8a8a8;
 
     transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
   }

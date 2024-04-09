@@ -1,6 +1,6 @@
 import axios from 'axios';
 import qs from 'qs';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import '../../../scss/style.scss';
 import styles from './Home.module.scss';
 
@@ -84,6 +84,11 @@ function Home() {
 
   }, [categoryValue, sortValue, sortDir])
 
+  const pizzasCart = useSelector((state) => state.cart.items);
+  useEffect(() => {
+    console.log(pizzasCart);
+  }, [pizzasCart]);
+
   return (
     <>
       <Categories />
@@ -100,7 +105,7 @@ function Home() {
             :
             <div className={styles.wrapper}>
               {pizzasItems.map((item, index) => (
-                <PizzaBlock imageUrl={item.imageUrl} name={item.name} types={item.types} sizes={item.sizes} price={item.price} key={index} />
+                <PizzaBlock id={item.id} imageUrl={item.imageUrl} name={item.name} types={item.types} sizes={item.sizes} price={item.price} key={index} />
               ))}
             </div>
           }

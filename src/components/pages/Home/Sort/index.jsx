@@ -15,17 +15,17 @@ export const sortTypes = [
 ];
 
 function Sort() {
+  const dispatch = useDispatch();
+  const { sortValue, sortDir } = useSelector((state) => state.sort);
+
   const [isVisibleSort, setVisibleSort] = useState(false);
   const sortRef = useRef(null);
 
-  const { sortValue, sortDir } = useSelector((state) => state.sort);
-  const dispatch = useDispatch();
-
-  const sortItemClassName = (item) => {
+  const handleSortItemClassName = (item) => {
     return sortValue.sortType === item.sortType ? styles.captionItem_active : styles.captionItem
   }
 
-  const sortChangeHandler = (item) => {
+  const handleSortChange = (item) => {
     dispatch(setSortValue(item));
     item.sortName === sortValue.sortName ? dispatch(setSortDir(!sortDir)) : dispatch(setSortDir(false));
     setVisibleSort(!isVisibleSort);
@@ -51,7 +51,7 @@ function Sort() {
 
           {isVisibleSort && <ul className={styles.captionList}>
             {sortTypes.map((item, index) => (
-              <li className={sortItemClassName(item)} onClick={() => { sortChangeHandler(item) }} key={index}>
+              <li className={handleSortItemClassName(item)} onClick={() => { handleSortChange(item) }} key={index}>
                 {item.sortName}
                 <Arrow arrowClassName={`${styles.sortArrow} ${!sortDir && styles.sortArrow_down}`} />
               </li>

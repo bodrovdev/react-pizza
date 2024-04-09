@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import '../../../scss/style.scss';
 import styles from './Header.module.scss';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { resetSorting } from '../../../redux/slices/sortSlice';
 
 import CartIcon from '../../icons/CartIcon';
@@ -11,6 +11,8 @@ import Search from '../Search';
 
 function Header() {
   const dispatch = useDispatch();
+
+  const { items, totalPrice, totalAmount } = useSelector((state) => state.cart);
 
   return (
     <header className={`${styles.root} page-header`}>
@@ -27,10 +29,10 @@ function Header() {
         <Search />
 
         <Link className={styles.cartBlock} to={{ pathname: '/cart', search: '' }}>
-          <span className={styles.cartPrice}>10000 ₽</span>
+          <span className={styles.cartPrice}>{totalPrice} ₽</span>
           <div>
             <CartIcon />
-            <span className={styles.cartPizzas}>10000</span>
+            <span className={styles.cartPizzas}>{totalAmount}</span>
           </div>
         </Link>
       </div>

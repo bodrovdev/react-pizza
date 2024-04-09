@@ -4,6 +4,7 @@ import '../../../scss/style.scss';
 import styles from './Search.module.scss';
 
 import { useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { setSearchValue } from '../../../redux/slices/searchSlice';
 
 import Clean from '../../icons/Clean';
@@ -11,9 +12,8 @@ import SearchIcon from '../../icons/SearchIcon';
 
 function Search() {
   const inputRef = useRef(null);
-
   const dispatch = useDispatch();
-
+  const location = useLocation();
   const [localSearch, setLocalSearch] = useState('');
 
   const updateSearchValue = useCallback(
@@ -34,20 +34,20 @@ function Search() {
   }
 
   return (
-    <div className={styles.searchBlock}>
-      <SearchIcon className={styles.searchIcon} />
-
-      <input
-        className={styles.searchInput}
-        type="text"
-        placeholder="Поиск"
-        value={localSearch}
-        onChange={(e) => { onChangeInput(e) }}
-        ref={inputRef}
-      />
-
-      {localSearch && <Clean className={styles.searchClean} onClickClean={() => { onCleanInput() }} />}
-    </div>
+    <>
+      {location.pathname.substring(1) !== 'cart' && <div className={styles.searchBlock}>
+        <SearchIcon className={styles.searchIcon} />
+        <input
+          className={styles.searchInput}
+          type="text"
+          placeholder="Поиск"
+          value={localSearch}
+          onChange={(e) => { onChangeInput(e) }}
+          ref={inputRef}
+        />
+        {localSearch && <Clean className={styles.searchClean} onClickClean={() => { onCleanInput() }} />}
+      </div>}
+    </>
   )
 }
 

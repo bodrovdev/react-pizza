@@ -14,7 +14,8 @@ html,
 body {
 	font-family: 'Roboto', system-ui, sans-serif;
 	font-size: calc(100vw / 1920 * 10);
-	color: #FFF;
+	color: #a8a8a8;
+	;
 
 	@media (max-width: 1200px) {
 		font-size: calc(100vw / 768 * 10);
