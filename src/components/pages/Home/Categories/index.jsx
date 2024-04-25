@@ -20,7 +20,7 @@ function Categories() {
 
   return (
     <section className={styles.root}>
-      <div className={`${styles.container} base-container`}>
+      <div className="base-container">
 
         {pizzaCategories.map((item, index) => (
           <button className={buttonClassName(index)} onClick={() => { categoryChangeHandler(index) }} key={index}>

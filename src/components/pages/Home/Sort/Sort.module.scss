@@ -1,15 +1,12 @@
 @use "../../../../scss/mixins";
 
-.root {
-  margin: 30px 0 0 0;
-
-  @include mixins.respond-to(notDesktop) {
-    margin: 0;
-  }
-}
-
 .caption {
   position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
 
   width: fit-content;
   cursor: pointer;
@@ -23,27 +20,20 @@
 
   &:hover {
     .captionContent {
-      border-bottom: 1px dashed #0754B0;
+      border-bottom: 1px dashed #FE5F1E;
 
-      color: #0754B0;
+      color: #FE5F1E;
 
       transition: border-bottom 0.2s ease-in-out, color 0.2s ease-in-out;
     }
   }
 }
 
-.captionContainer {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 10px;
-}
-
 .captionInfo,
 .captionContent {
   display: inline-block;
 
-  font-size: 20px;
+  font-size: 16px;
   letter-spacing: 0.21px;
 
   @include mixins.respond-to(notDesktop) {
@@ -52,14 +42,11 @@
 }
 
 .captionInfo {
-  font-weight: 700;
-  color: #3876bf;
+  font-weight: 600;
 }
 
 .captionContent {
-  border-bottom: 1px dashed #3876bf;
-  font-weight: 400;
-  color: #a8a8a8;
+  border-bottom: 1px dashed #FE5F1E;
 
   transition: border-bottom 0.2s ease-in-out, color 0.2s ease-in-out;
 
@@ -77,9 +64,9 @@
   justify-content: flex-start;
   gap: 10px;
 
-  min-width: 30rem;
+  min-width: 355px;
   border-radius: 1rem;
-  background: #a8a8a8;
+  background: #FFF;
   box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.09);
 
   padding: 1.3rem 0;
@@ -90,46 +77,54 @@
     width: 100%;
     min-width: auto;
   }
+}
 
-  & li {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
+.captionItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
 
-    width: 100%;
-    min-height: 40px;
-    background: #a8a8a8;
+  width: 100%;
+  min-height: 40px;
 
-    font-size: 1.8rem;
-    font-weight: 700;
-    letter-spacing: 0.21px;
-    color: #0754B0;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.21px;
+
+  transition: background 0.2s ease-in-out, 0.2s ease-in-out;
+
+  padding: 10px 20px;
+
+  @include mixins.respond-to(notDesktop) {
+    font-size: 14px;
+
+    padding: 5px 10px;
+  }
+
+  &:hover {
+    background: #FE5F1E;
+
+    color: #FFF;
 
     transition: background 0.2s ease-in-out, 0.2s ease-in-out;
 
-    padding: 10px 15px;
+    @include mixins.respond-to(desktopD) {
+      & .sortArrow {
+        color: #FFF;
 
-    @include mixins.respond-to(notDesktop) {
-      font-size: 14px;
-
-      padding: 5px 10px;
-    }
-
-    &:hover {
-      background: #0754B0;
-
-      color: #a8a8a8;
-
-      transition: background 0.2s ease-in-out, 0.2s ease-in-out;
-
-      @include mixins.respond-to(desktopD) {
-        & .sortArrow {
-          color: #a8a8a8;
-
-          transition: color 0.2s ease-in-out;
-        }
+        transition: color 0.2s ease-in-out;
       }
+    }
+  }
+
+  & .sortArrow {
+    display: none;
+  }
+
+  &_active {
+    & .sortArrow {
+      display: block;
     }
   }
 }
@@ -141,7 +136,7 @@
 
   width: 20px;
 
-  color: #0754B0;
+  color: #FE5F1E;
 
   transition: color 0.2s ease-in-out;
 
@@ -151,15 +146,5 @@
 
   &_down {
     transform: rotate(180deg);
-  }
-}
-
-.captionItem {
-  & .sortArrow {
-    display: none;
-  }
-
-  &_active {
-    display: block;
   }
 }

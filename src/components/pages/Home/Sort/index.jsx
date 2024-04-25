@@ -3,7 +3,7 @@ import { useOnClickOutside } from 'usehooks-ts';
 import '../../../../scss/style.scss';
 import styles from './Sort.module.scss';
 
-import Arrow from '../../../icons/Arrow';
+import Arrow from '../../../Icons/Arrow';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { setSortDir, setSortValue } from '../../../../redux/slices/sortSlice';
@@ -22,7 +22,11 @@ function Sort() {
   const sortRef = useRef(null);
 
   const handleSortItemClassName = (item) => {
-    return sortValue.sortType === item.sortType ? styles.captionItem_active : styles.captionItem
+    return sortValue.sortType === item.sortType ? `${styles.captionItem} ${styles.captionItem_active}` : styles.captionItem;
+  }
+
+  const handleSortListClassName = () => {
+    return isVisibleSort ? `${styles.captionList} ${styles.captionList_active}` : styles.captionList;
   }
 
   const handleSortChange = (item) => {
@@ -38,16 +42,12 @@ function Sort() {
   return (
     <section className={styles.root}>
 
-      <div className={`${styles.container} base-container`}>
-        <div className={styles.caption} ref={sortRef} onClick={() => {
-          setVisibleSort(!isVisibleSort);
-        }}>
+      <div className="base-container">
+        <div className={styles.caption} ref={sortRef} onClick={() => { setVisibleSort(!isVisibleSort) }}>
 
-          <div className={styles.captionContainer} >
-            <span className={styles.captionInfo}>Сортировка по:</span>
-            <span className={styles.captionContent}>{sortValue.sortName}</span>
-            <Arrow arrowClassName={`${styles.sortArrow} ${!sortDir && styles.sortArrow_down}`} />
-          </div>
+          <span className={styles.captionInfo}>Сортировка по:</span>
+          <span className={styles.captionContent}>{sortValue.sortName}</span>
+          <Arrow arrowClassName={`${styles.sortArrow} ${!sortDir && styles.sortArrow_down}`} />
 
           {isVisibleSort && <ul className={styles.captionList}>
             {sortTypes.map((item, index) => (

@@ -7,16 +7,8 @@
   justify-content: space-between;
   gap: 20px;
 
-  background: rgba(0, 0, 0, 0.2);
-  padding: 10px;
+  width: 25%;
   border-radius: 10px;
-
-  @include mixins.respond-to(notDesktop) {
-    flex-direction: row;
-    align-items: stretch;
-    justify-content: flex-start;
-    gap: 10px;
-  }
 }
 
 .heading {
@@ -29,37 +21,10 @@
   width: 100%;
 }
 
-.image {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background: #404040;
-  overflow: hidden;
-
-  transition: background 0.2s ease-in-out;
-
-  @include mixins.respond-to(notDesktop) {
-    flex-grow: 1;
-
-    overflow: visible;
-  }
-
-  @include mixins.respond-to(desktopD) {
-    width: 100%;
-  }
-}
-
 .img {
-  width: 200px;
-  height: 200px;
+  width: 150px;
   object-fit: contain;
-  filter: invert(75%);
   user-select: none;
-
-  @include mixins.respond-to(notDesktop) {
-    width: 100%;
-  }
 }
 
 .desc {
@@ -67,24 +32,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 40px;
-
-  width: 100%;
-
-  @include mixins.respond-to(notDesktop) {
-    align-items: flex-start;
-    justify-content: space-between;
-    flex-grow: 1;
-
-    max-width: 250px;
-  }
+  gap: 20px;
 }
 
-.descTitle {
-  font-size: 25px;
-  font-weight: 800;
+.title {
+  font-size: 18px;
+  font-weight: 500;
   letter-spacing: 0.2px;
-  color: #3876bf;
   text-align: center;
 
   @include mixins.respond-to(notDesktop) {
@@ -98,9 +52,13 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: 7px;
+  gap: 5px;
 
   width: 100%;
+  background: #dadada;
+  border-radius: 10px;
+
+  padding: 5px;
 
   @include mixins.respond-to(notDesktop) {
     background: none;
@@ -134,16 +92,13 @@
   justify-content: center;
 
   width: 100%;
-  border-radius: 5px;
-  background: #a8a8a8;
-  box-shadow: 0 0.2rem 0.4rem 0 rgba(0, 0, 0, 0.04);
+  border-radius: 10px;
+  background: #dadada;
   cursor: pointer;
 
   text-align: center;
-  font-size: 14px;
-  font-weight: 700;
+  font-size: 13px;
   letter-spacing: 0.21px;
-  color: #0754B0;
 
   transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
 
@@ -158,17 +113,17 @@
   }
 
   &:hover {
-    background: #0754B0;
+    background: #FE5F1E;
 
-    color: #a8a8a8;
+    color: #FFF;
 
     transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
   }
 
   &__active {
-    background: #0754B0;
+    background: #FE5F1E;
 
-    color: #a8a8a8;
+    color: #FFF;
 
     transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
   }
@@ -192,10 +147,14 @@
 .descInfoPrice {
   flex-shrink: 0;
 
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 13px;
   letter-spacing: 0.33px;
-  color: #3876bf;
+
+  & span {
+    font-size: 16px;
+    font-weight: 600;
+    color: #FE5F1E;
+  }
 }
 
 .descInfoButton {
@@ -204,18 +163,18 @@
   justify-content: flex-start;
   gap: 10px;
 
-  background: #a8a8a8;
-  border: 1px solid #0754B0;
+  background: #FFF;
+  border: 1px solid #FE5F1E;
   border-radius: 30px;
 
   font-family: 'Roboto', system-ui, sans-serif;
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: #0754B0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #FE5F1E;
 
   transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
 
-  padding: 15px 40px;
+  padding: 10px 15px;
 
   @include mixins.respond-to(notDesktop) {
     font-size: 12px;
@@ -224,9 +183,9 @@
   }
 
   &:hover {
-    background: #0754B0;
+    background: #FE5F1E;
 
-    color: #a8a8a8;
+    color: #FFF;
 
     transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
   }

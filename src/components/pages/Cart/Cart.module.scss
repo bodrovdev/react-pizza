@@ -5,66 +5,53 @@
     .base-container {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 20px;
+
+      background: #FFF;
+      border-radius: 20px;
+
+      padding: 20px;
     }
   }
 }
 
-.controls {
-  position: relative;
-
+.cartEmpty {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 50px;
+  flex-direction: column;
+  gap: 20px;
 
   width: 100%;
 
-  padding: 0 0 40px 0;
-
-  &::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
+  & img {
     width: 100%;
-    height: 1px;
-    background: #a8a8a8;
-    opacity: 0.2;
+    max-width: 500px;
+
+    margin: 0 auto;
   }
 }
 
-.controlHeading {
+.cartHeading {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 40px;
 
-  color: #3876bf;
-
-  & svg {
-    width: 50px;
-  }
+  width: 100%;
 }
 
-.controlTitle {
-  font-size: 32px;
-  font-weight: 700;
-  letter-spacing: 0.32px;
-  color: #3876bf;
+.cartClear {
+  border-bottom: 1px dashed #FE5F1E;
 
-  transition: color 0.2s ease-in-out;
-}
-
-.controlClear {
-  font-size: 20px;
-  font-weight: 700;
-  color: #a8a8a8;
+  font-size: 16px;
+  font-weight: 600;
   letter-spacing: 0.21px;
 
+  transition: color 0.2s ease-in-out;
+
   &:hover {
-    color: #0754B0;
+    color: #FE5F1E;
 
     transition: color 0.2s ease-in-out;
   }
@@ -72,17 +59,12 @@
 
 .cartBody {
   display: flex;
+  flex-direction: column;
   align-items: stretch;
   justify-content: space-between;
-  gap: 50px;
+  gap: 20px;
 
   width: 100%;
-
-  padding: 40px 0 0 0;
-}
-
-.cartPizzas {
-  width: 70%;
 }
 
 .cartPizzas {
@@ -94,45 +76,27 @@
 }
 
 .cartPayment {
-  position: relative;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  gap: 60px;
-
-  width: 30%;
-
-  &:before {
-    content: "";
-    position: absolute;
-    top: -40px;
-    left: -25px;
-
-    width: 1px;
-    height: calc(100% + 40px);
-    background: #a8a8a8;
-    opacity: 0.2;
-  }
 
   & div {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: 40px;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
   }
 
   & span {
-    font-size: 25px;
+    font-size: 18px;
     letter-spacing: 0.2px;
   }
 }
 
 .cartPrice,
 .cartTotal {
-  font-weight: 700;
-  color: #3876bf;
+  font-weight: 600;
+  color: #FE5F1E;
 }
 
 .cartPaySubmit {
@@ -141,18 +105,18 @@
   justify-content: flex-start;
   gap: 10px;
 
-  background: #a8a8a8;
-  border: 1px solid #0754B0;
+  background: #FFF;
+  border: 1px solid #FE5F1E;
   border-radius: 30px;
 
   font-family: 'Roboto', system-ui, sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  color: #0754B0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #FE5F1E;
 
   transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
 
-  padding: 15px 40px;
+  padding: 10px 15px;
 
   @include mixins.respond-to(notDesktop) {
     font-size: 12px;
@@ -161,9 +125,9 @@
   }
 
   &:hover {
-    background: #0754B0;
+    background: #FE5F1E;
 
-    color: #a8a8a8;
+    color: #FFF;
 
     transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
   }
@@ -173,22 +137,25 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 5px;
 
-  font-size: 20px;
+  border-bottom: 1px dashed #FE5F1E;
+
+  font-size: 16px;
+  font-weight: 600;
   letter-spacing: 0.21px;
 
   transition: color 0.2s ease-in-out;
 
-  & svg {
-    width: 20px;
-
-    transform: rotate(-90deg);
-  }
-
   &:hover {
-    color: #0754B0;
+    color: #FE5F1E;
 
     transition: color 0.2s ease-in-out;
+  }
+
+  & svg {
+    width: 10px;
+
+    transform: rotate(-90deg);
   }
 }

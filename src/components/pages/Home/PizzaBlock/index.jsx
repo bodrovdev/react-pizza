@@ -9,11 +9,12 @@ import Counter from '../../../common/Counter';
 const pizzaTypes = ['Тонкая', 'Традиционная'];
 
 function PizzaBlock({ id, imageUrl, name, types, sizes, price }) {
-  const dispatch = useDispatch();
+  const selectedTypes = pizzaTypes.filter((_, index) => types.includes(index));
 
+  const dispatch = useDispatch();
   const pizzasCart = useSelector((state) => state.cart.items);
 
-  const [activeType, setActiveType] = useState(pizzaTypes[0]);
+  const [activeType, setActiveType] = useState(selectedTypes[0]);
   const [activeSize, setActiveSize] = useState(sizes[0]);
 
   const pizzaObj = {
@@ -32,21 +33,19 @@ function PizzaBlock({ id, imageUrl, name, types, sizes, price }) {
     return state === item ? `${styles.descOptionsItem} ${styles.descOptionsItem__active}` : styles.descOptionsItem;
   }
 
-  const handleItemAddToCart = (obj) => {
+  const handleAddToCart = (obj) => {
     dispatch(addItem(obj));
   }
 
-  const handleItemRemoveFromCart = (obj) => {
+  const handleRemoveFromCart = (obj) => {
     dispatch(removeItem(obj));
   };
 
   return (
     <div className={styles.root}>
       <div className={styles.heading}>
-        <figure className={styles.image}>
-          <img className={styles.img} src={imageUrl} alt="#" />
-        </figure>
-        <h2 className={styles.descTitle}>{name}</h2>
+        <img className={styles.img} src={imageUrl} alt="#" />
+        <h2 className={styles.title}>{name}</h2>
       </div>
       <div className={styles.desc}>
         <div className={styles.descOptions}>
@@ -65,19 +64,19 @@ function PizzaBlock({ id, imageUrl, name, types, sizes, price }) {
 
         </div>
         <div className={styles.descInfo}>
-          <span className={styles.descInfoPrice}>от {price} ₽</span>
+          <span className={styles.descInfoPrice}>от <span>{price}</span> ₽</span>
 
           {existedInCartPizza ?
 
             <Counter
+              minusClick={() => { handleRemoveFromCart(pizzaObj) }}
               count={existedInCartPizza.count}
-              onPlusClick={() => { handleItemAddToCart(pizzaObj) }}
-              onMinusClick={() => { handleItemRemoveFromCart(pizzaObj) }}
+              plusClick={() => { handleAddToCart(pizzaObj) }}
             />
 
             :
 
-            <button className={styles.descInfoButton} onClick={() => { handleItemAddToCart(pizzaObj) }}>Добавить</button>}
+            <button className={styles.descInfoButton} onClick={() => { handleAddToCart(pizzaObj) }}>Добавить</button>}
 
         </div>
       </div>

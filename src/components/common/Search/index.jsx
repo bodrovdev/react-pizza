@@ -7,8 +7,8 @@ import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { setSearchValue } from '../../../redux/slices/searchSlice';
 
-import Clean from '../../icons/Clean';
-import SearchIcon from '../../icons/SearchIcon';
+import Clean from '../../Icons/Clean';
+import SearchIcon from '../../Icons/SearchIcon';
 
 function Search() {
   const inputRef = useRef(null);

@@ -16,41 +16,49 @@ const updateInfo = (state) => {
   }, 0);
 }
 
+const existedItem = (state, action) => {
+  return state.items.find(obj => obj.keyword === action.payload.keyword);
+}
+
 export const cartSlice = createSlice({
   name: 'cart',
   initialState: initialState,
 
   reducers: {
     addItem: (state, action) => {
-      const existedItem = state.items.find(obj => obj.keyword === action.payload.keyword);
 
-      if (existedItem) {
-        existedItem.count++;
+      if (existedItem(state, action)) {
+        existedItem(state, action).count++;
       }
       else {
         state.items.push({ ...action.payload, count: 1, });
       }
+
       updateInfo(state);
     },
 
     removeItem: (state, action) => {
-      const existedItem = state.items.find(obj => obj.keyword === action.payload.keyword);
-
-      if (existedItem.count === 1) {
+      if (existedItem(state, action).count === 1) {
         state.items.splice(state.items.indexOf(existedItem), 1);
       }
       else {
-        existedItem.count--;
+        existedItem(state, action).count--;
       }
       updateInfo(state);
     },
 
+    removeStack: (state, action) => {
+      state.items.splice(state.items.indexOf(existedItem(state, action)), 1);
+      updateInfo(state);
+    },
+
     clearItems: (state) => {
-      state.items = []
+      state.items = [];
+      updateInfo(state);
     },
   },
 })
 
-export const { addItem, removeItem, clearItems } = cartSlice.actions;
+export const { addItem, removeItem, removeStack, clearItems } = cartSlice.actions;
 
 export default cartSlice.reducer;

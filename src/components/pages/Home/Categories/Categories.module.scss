@@ -4,63 +4,47 @@
   @include mixins.respond-to(notDesktop) {
     margin: 0 0 20px 0;
   }
-}
 
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 1rem;
+  :global {
+    .base-container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 20px;
 
-  @include mixins.respond-to(notDesktop) {
-    flex-wrap: nowrap;
+      @include mixins.respond-to(notDesktop) {
+        flex-wrap: nowrap;
 
-    overflow-x: auto;
+        overflow-x: auto;
 
-    padding: 0 0 20px 0;
+        padding: 0 0 20px 0;
+      }
+    }
   }
 }
 
 .catButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   flex-shrink: 0;
 
-  height: 50px;
-  border-radius: 30px;
-  background: #a8a8a8;
-
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.24px;
-  color: #0754B0;
-  text-align: center;
+  color: #2C2C2C;
 
-  transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out;
 
-  padding: 15px 30px;
-
-  @include mixins.respond-to(notDesktop) {
-    height: 35px;
-
-    font-size: 14px;
-  }
+  padding: 10px 0;
 
   &:hover {
-    background: #0754B0;
+    color: #FE5F1E;
 
-    color: #a8a8a8;
-
-    transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+    transition: color 0.2s ease-in-out;
   }
 
   &_active {
-    background: #0754B0;
+    color: #FE5F1E;
 
-    color: #a8a8a8;
-
-    transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+    transition: color 0.2s ease-in-out;
   }
 }

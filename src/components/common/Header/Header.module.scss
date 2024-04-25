@@ -8,13 +8,22 @@
 
     padding: 20px 0;
   }
+
+  & :global {
+    .base-container {
+      background: #FFF;
+      border-radius: 20px;
+
+      padding: 20px;
+    }
+  }
 }
 
 .container {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 40px;
+  gap: 10px;
 
   @include mixins.respond-to(notDesktop) {
     flex-wrap: wrap;
@@ -68,9 +77,8 @@
 }
 
 .logoTitle {
-  font-size: 28px;
-  font-weight: 800;
-  color: #a8a8a8;
+  font-size: 30px;
+  font-weight: 500;
   text-transform: uppercase;
 
   @include mixins.respond-to(notDesktop) {
@@ -79,14 +87,47 @@
 }
 
 .logoSubtitle {
-  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  font-size: 16px;
   font-weight: 400;
-  color: #0754B0;
-  color: #a8a8a8;
 
   @include mixins.respond-to(notDesktop) {
     display: none;
   }
+}
+
+@keyframes soonAnim {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.logoSoon {
+  display: inline-block;
+
+  background: red;
+  background: -webkit-linear-gradient(left, cyan, blue, violet);
+  background: -o-linear-gradient(right, cyan, blue, violet);
+  background: -moz-linear-gradient(right, cyan, blue, violet);
+  background: linear-gradient(to right, cyan, blue, violet);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  font-size: 16px;
+
+  animation: soonAnim 1s linear infinite;
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
@@ -102,108 +143,46 @@
 .cartBlock {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 20px;
-  flex-shrink: 0;
+  justify-content: space-between;
+  gap: 10px;
 
-  border-radius: 30px;
-  background: #a8a8a8;
+  min-width: 175px;
+  height: 40px;
+  background: #dadada;
+  border-radius: 20px;
 
-  transition: background 0.2s ease-in-out;
+  transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
 
-  padding: 20px;
+  padding: 10px 20px;
 
-  @include mixins.respond-to(notDesktop) {
-    gap: 10px;
-    order: 2;
-
-    padding: 10px;
-  }
-
-  & div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-
-    color: #0754B0;
-
-    transition: color 0.2s ease-in-out;
-
-    & svg {
-      width: 20px;
-
-      @include mixins.respond-to(notDesktop) {
-        width: 15px;
-      }
-    }
-  }
-}
-
-.cartPrice,
-.cartPizzas {
-  flex-shrink: 0;
-  font-size: 16px;
-  font-weight: 700;
-  color: #0754B0;
-
-  transition: color 0.2s ease-in-out;
-
-  @include mixins.respond-to(notDesktop) {
-    font-size: 12px;
-  }
-}
-
-.cartPrice {
-  position: relative;
-
-  display: inline-block;
-
-  padding: 0 20px 0 0;
-
-  @include mixins.respond-to(notDesktop) {
-    padding: 0 10px 0 0;
-  }
-
-  &::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: calc(100% - 1px);
-
-    width: 0.1rem;
-    height: 100%;
-    background: #0754B0;
+  &:hover {
+    background: #FE5F1E;
 
     transition: background 0.2s ease-in-out;
+
+    & .cartValue {
+      color: #FFF;
+
+      transition: color 0.2s ease-in-out;
+    }
   }
 }
 
-@media (min-width: 1200px) {
-  .cartBlock {
-    &:hover {
-      background: #0754B0;
+.cartAmount svg {
+  width: 15px;
+}
 
-      transition: background 0.2s ease-in-out;
+.cartAmount,
+.cartPrice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
 
-      & div {
-        color: #a8a8a8;
+.cartValue {
+  font-weight: 500;
+  color: #FE5F1E;
 
-        transition: color 0.2s ease-in-out;
-      }
-
-      & .cartPrice::after {
-        background: #a8a8a8;
-
-        transition: background 0.2s ease-in-out;
-      }
-
-      & .cartPrice,
-      .cartPizzas {
-        color: #a8a8a8;
-
-        transition: color 0.2s ease-in-out;
-      }
-    }
-  }
+  transition: color 0.2s ease-in-out;
 }

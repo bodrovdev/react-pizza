@@ -2,37 +2,32 @@
 
 .root {
   padding: 0 0 40px 0;
-  margin: 30px 0 0 0;
+  margin: 40px 0 0 0;
 
   @include mixins.respond-to(mobileOnly) {
     margin: 0;
   }
-}
 
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 40px;
-}
+  :global {
+    .base-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 20px;
 
-.title {
-  font-size: 32px;
-  font-weight: 700;
-  letter-spacing: 0.32px;
-  color: #0754B0;
+      background: #FFF;
+      border-radius: 20px;
 
-  @include mixins.respond-to(mobileOnly) {
-    font-size: 28px;
+      padding: 20px;
+    }
   }
 }
 
 .wrapper {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(28rem, 1fr));
-  grid-auto-flow: row;
-  gap: 5rem 3.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 0;
 
   width: 100%;
 }

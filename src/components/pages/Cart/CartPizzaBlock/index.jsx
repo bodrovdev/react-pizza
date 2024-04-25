@@ -1,20 +1,24 @@
 import styles from './CartPizzaBlock.module.scss';
+import { useDispatch } from 'react-redux';
+import { addItem, removeItem, removeStack } from '../../../../redux/slices/cartSlice';
 
 import Counter from '../../../common/Counter';
 
-const deleteItemHandler = () => {
-  console.log('1');
-}
+function CartPizzaBlock({ name, type, size, price, keyword, count }) {
+  const dispatch = useDispatch();
 
-const minusCounterHandler = () => {
-  console.log('2');
-}
+  const plusCounterHandler = () => {
+    dispatch(addItem({ keyword }));
+  }
 
-const plusCounterHandler = () => {
-  console.log('3');
-}
+  const minusCounterHandler = () => {
+    dispatch(removeItem({ keyword }));
+  }
 
-function CartPizzaBlock() {
+  const removeStackHandler = () => {
+    dispatch(removeStack({ keyword }));
+  }
+
   return (
     <div className={styles.root}>
       <div className={styles.itemInfo}>
@@ -22,14 +26,14 @@ function CartPizzaBlock() {
           <img className={styles.itemImg} src="https://i.imgur.com/a9I9WHm.jpeg" />
         </figure>
         <div>
-          <h2 className={styles.itemTitle}>Сырный цыпленок</h2>
-          <span className={styles.itemDescription}>тонкое тесто, 26 см.</span>
+          <h2 className={styles.itemTitle}>{name}</h2>
+          <span className={styles.itemDescription}>{type}, {size} см.</span>
         </div>
       </div>
       <div className={styles.itemResult}>
-        <Counter onMinusClick={minusCounterHandler} onPlusClick={plusCounterHandler} count={1} />
-        <span className={styles.itemPrice}>770 ₽</span>
-        <button className={styles.itemDelete} type="button" onClick={() => { deleteItemHandler() }}></button>
+        <Counter minusClick={minusCounterHandler} count={count} plusClick={plusCounterHandler} />
+        <span className={styles.itemPrice}>{price} ₽</span>
+        <button className={styles.itemDelete} type="button" onClick={removeStackHandler}></button>
       </div>
     </div>
   )

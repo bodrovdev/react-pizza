@@ -26,10 +26,9 @@ function Home() {
   const [pizzasItems, setPizzasItems] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const fetchPizzas = () => {
+  const fetchPizzas = async () => {
     setLoading(true);
-    let url = `https://653e4e07f52310ee6a9acea3.mockapi.io/items`;
-    axios.get(url, {
+    const res = await axios.get('https://653e4e07f52310ee6a9acea3.mockapi.io/items', {
       params: {
         category: categoryValue ? categoryValue : '',
         sortBy: sortValue.sortType,
@@ -37,16 +36,8 @@ function Home() {
         search: searchValue,
       }
     })
-      .then((res) => {
-        setPizzasItems(res.data);
-      })
-      .catch((error) => {
-        setPizzasItems([]);
-        console.log(error);
-      })
-      .finally(() => {
-        setLoading(false);
-      })
+    setPizzasItems(res.data);
+    setLoading(false);
   }
 
   // & проверка на наличие параметров в URL, записываем полученные параметры в редакс
@@ -91,13 +82,15 @@ function Home() {
 
   return (
     <>
-      <Categories />
+      <div>
+        <Categories />
 
-      <Sort />
+        <Sort />
+      </div>
 
       <div className={styles.root}>
-        <div className={`${styles.container} base-container`}>
-          <h1 className={styles.title}>Все пиццы</h1>
+        <div className="base-container">
+          <h2 className="section-title">Все пиццы</h2>
           {loading ?
             <div className={styles.preloader}>
               <div className={styles.preloaderCircle}></div>
@@ -114,4 +107,4 @@ function Home() {
     </>
   )
 }
-export default Home   
+export default Home
