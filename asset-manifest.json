@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/cursed-pizza/static/css/main.a3a62a30.css",
-    "main.js": "/cursed-pizza/static/js/main.1e6fdd41.js",
+    "main.css": "/cursed-pizza/static/css/main.22c4b40b.css",
+    "main.js": "/cursed-pizza/static/js/main.294342e0.js",
     "static/media/Roboto-normal-500.woff": "/cursed-pizza/static/media/Roboto-normal-500.b14ca2d2b289afceb0b0.woff",
     "static/media/Roboto-normal-900.woff": "/cursed-pizza/static/media/Roboto-normal-900.88d7f1b3ca9a9494d8e3.woff",
     "static/media/Roboto-normal-700.woff": "/cursed-pizza/static/media/Roboto-normal-700.3f2cbde6b72e8d05669f.woff",
@@ -15,11 +15,11 @@
     "static/media/Roboto-normal-300.woff2": "/cursed-pizza/static/media/Roboto-normal-300.d537674e9e217fa53a13.woff2",
     "static/media/Roboto-normal-100.woff2": "/cursed-pizza/static/media/Roboto-normal-100.0b33782009e32497dba2.woff2",
     "index.html": "/cursed-pizza/index.html",
-    "main.a3a62a30.css.map": "/cursed-pizza/static/css/main.a3a62a30.css.map",
-    "main.1e6fdd41.js.map": "/cursed-pizza/static/js/main.1e6fdd41.js.map"
+    "main.22c4b40b.css.map": "/cursed-pizza/static/css/main.22c4b40b.css.map",
+    "main.294342e0.js.map": "/cursed-pizza/static/js/main.294342e0.js.map"
   },
   "entrypoints": [
-    "static/css/main.a3a62a30.css",
-    "static/js/main.1e6fdd41.js"
+    "static/css/main.22c4b40b.css",
+    "static/js/main.294342e0.js"
   ]
 }
