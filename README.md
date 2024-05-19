@@ -1,2 +1,3 @@
-# cursed-pizza
-🍕 the most cursed pizza in the universe
+# react-pizza
+🍕 you're a big pizza
+🍕 for you
