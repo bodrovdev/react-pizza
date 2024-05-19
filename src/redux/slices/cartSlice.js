@@ -39,7 +39,7 @@ export const cartSlice = createSlice({
 
     removeItem: (state, action) => {
       if (existedItem(state, action).count === 1) {
-        state.items.splice(state.items.indexOf(existedItem), 1);
+        state.itemsInCart.splice(state.itemsInCart.indexOf(existedItem), 1);
       }
       else {
         existedItem(state, action).count--;
@@ -48,12 +48,12 @@ export const cartSlice = createSlice({
     },
 
     removeStack: (state, action) => {
-      state.items.splice(state.items.indexOf(existedItem(state, action)), 1);
+      state.itemsInCart.splice(state.itemsInCart.indexOf(existedItem(state, action)), 1);
       updateInfo(state);
     },
 
     clearItems: (state) => {
-      state.items = [];
+      state.itemsInCart = [];
       updateInfo(state);
     },
   },
