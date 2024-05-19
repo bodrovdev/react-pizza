@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/cursed-pizza/static/css/main.37e69bcf.css",
-    "main.js": "/cursed-pizza/static/js/main.ba9ce912.js",
-    "static/media/Roboto-normal-500.woff": "/cursed-pizza/static/media/Roboto-normal-500.b14ca2d2b289afceb0b0.woff",
-    "static/media/Roboto-normal-900.woff": "/cursed-pizza/static/media/Roboto-normal-900.88d7f1b3ca9a9494d8e3.woff",
-    "static/media/Roboto-normal-700.woff": "/cursed-pizza/static/media/Roboto-normal-700.3f2cbde6b72e8d05669f.woff",
-    "static/media/Roboto-normal-400.woff": "/cursed-pizza/static/media/Roboto-normal-400.31012f9b3e3da44f87e8.woff",
-    "static/media/Roboto-normal-300.woff": "/cursed-pizza/static/media/Roboto-normal-300.df0f59d80526acc6d0cd.woff",
-    "static/media/Roboto-normal-100.woff": "/cursed-pizza/static/media/Roboto-normal-100.674b1d2bd9d781457c17.woff",
-    "static/media/Roboto-normal-500.woff2": "/cursed-pizza/static/media/Roboto-normal-500.fc0337b9cf1cce2e6e1e.woff2",
-    "static/media/Roboto-normal-900.woff2": "/cursed-pizza/static/media/Roboto-normal-900.ae0c1d409f7d45d81c29.woff2",
-    "static/media/Roboto-normal-700.woff2": "/cursed-pizza/static/media/Roboto-normal-700.6cd35edfbc0d7a417131.woff2",
-    "static/media/Roboto-normal-400.woff2": "/cursed-pizza/static/media/Roboto-normal-400.a25806274237d06e00a6.woff2",
-    "static/media/Roboto-normal-300.woff2": "/cursed-pizza/static/media/Roboto-normal-300.d537674e9e217fa53a13.woff2",
-    "static/media/Roboto-normal-100.woff2": "/cursed-pizza/static/media/Roboto-normal-100.0b33782009e32497dba2.woff2",
-    "index.html": "/cursed-pizza/index.html",
-    "main.37e69bcf.css.map": "/cursed-pizza/static/css/main.37e69bcf.css.map",
-    "main.ba9ce912.js.map": "/cursed-pizza/static/js/main.ba9ce912.js.map"
+    "main.css": "/react-pizza/static/css/main.b2d5778d.css",
+    "main.js": "/react-pizza/static/js/main.85cf6ff4.js",
+    "static/media/Roboto-normal-500.woff": "/react-pizza/static/media/Roboto-normal-500.b14ca2d2b289afceb0b0.woff",
+    "static/media/Roboto-normal-900.woff": "/react-pizza/static/media/Roboto-normal-900.88d7f1b3ca9a9494d8e3.woff",
+    "static/media/Roboto-normal-700.woff": "/react-pizza/static/media/Roboto-normal-700.3f2cbde6b72e8d05669f.woff",
+    "static/media/Roboto-normal-400.woff": "/react-pizza/static/media/Roboto-normal-400.31012f9b3e3da44f87e8.woff",
+    "static/media/Roboto-normal-300.woff": "/react-pizza/static/media/Roboto-normal-300.df0f59d80526acc6d0cd.woff",
+    "static/media/Roboto-normal-100.woff": "/react-pizza/static/media/Roboto-normal-100.674b1d2bd9d781457c17.woff",
+    "static/media/Roboto-normal-500.woff2": "/react-pizza/static/media/Roboto-normal-500.fc0337b9cf1cce2e6e1e.woff2",
+    "static/media/Roboto-normal-900.woff2": "/react-pizza/static/media/Roboto-normal-900.ae0c1d409f7d45d81c29.woff2",
+    "static/media/Roboto-normal-700.woff2": "/react-pizza/static/media/Roboto-normal-700.6cd35edfbc0d7a417131.woff2",
+    "static/media/Roboto-normal-400.woff2": "/react-pizza/static/media/Roboto-normal-400.a25806274237d06e00a6.woff2",
+    "static/media/Roboto-normal-300.woff2": "/react-pizza/static/media/Roboto-normal-300.d537674e9e217fa53a13.woff2",
+    "static/media/Roboto-normal-100.woff2": "/react-pizza/static/media/Roboto-normal-100.0b33782009e32497dba2.woff2",
+    "index.html": "/react-pizza/index.html",
+    "main.b2d5778d.css.map": "/react-pizza/static/css/main.b2d5778d.css.map",
+    "main.85cf6ff4.js.map": "/react-pizza/static/js/main.85cf6ff4.js.map"
   },
   "entrypoints": [
-    "static/css/main.37e69bcf.css",
-    "static/js/main.ba9ce912.js"
+    "static/css/main.b2d5778d.css",
+    "static/js/main.85cf6ff4.js"
   ]
 }
