@@ -1,4 +1,4 @@
-function SearchIcon({ className }) {
+function SearchIcon({ className }: { className: string }) {
   return (
     <svg
       className={className}

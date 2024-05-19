@@ -1,15 +1,6 @@
 @use "../../../scss/mixins";
 
-.root {
-  padding: 0 0 40px 0;
-  margin: 40px 0 0 0;
-
-  @include mixins.respond-to(mobileOnly) {
-    margin: 0;
-  }
-}
-
-.homeContainer {
+.singlePizzaContainer {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -28,4 +19,8 @@
   gap: 20px 0;
 
   width: 100%;
+
+  & a {
+    width: 25%;
+  }
 }

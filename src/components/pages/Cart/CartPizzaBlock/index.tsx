@@ -4,18 +4,27 @@ import { addItem, removeItem, removeStack } from '../../../../redux/slices/cartS
 
 import Counter from '../../../common/Counter';
 
-function CartPizzaBlock({ name, type, size, price, keyword, count }) {
+type CartPizzaBlockType = {
+  name: string,
+  type: string,
+  size: number,
+  price: number,
+  keyword: string,
+  count: number,
+}
+
+function CartPizzaBlock({ name, type, size, price, keyword, count }: CartPizzaBlockType) {
   const dispatch = useDispatch();
 
-  const plusCounterHandler = () => {
+  const plusCounterHandler: () => void = () => {
     dispatch(addItem({ keyword }));
   }
 
-  const minusCounterHandler = () => {
+  const minusCounterHandler: () => void = () => {
     dispatch(removeItem({ keyword }));
   }
 
-  const removeStackHandler = () => {
+  const removeStackHandler: () => void = () => {
     dispatch(removeStack({ keyword }));
   }
 

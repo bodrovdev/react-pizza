@@ -3,21 +3,21 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   totalPrice: 0,
   totalAmount: 0,
-  items: [],
+  itemsInCart: [],
 }
 
 const updateInfo = (state) => {
-  state.totalPrice = state.items.reduce((sum, obj) => {
+  state.totalPrice = state.itemsInCart.reduce((sum, obj) => {
     return sum + obj.price * obj.count;
   }, 0);
 
-  state.totalAmount = state.items.reduce((sum, obj) => {
+  state.totalAmount = state.itemsInCart.reduce((sum, obj) => {
     return sum + obj.count;
   }, 0);
 }
 
 const existedItem = (state, action) => {
-  return state.items.find(obj => obj.keyword === action.payload.keyword);
+  return state.itemsInCart.find(obj => obj.keyword === action.payload.keyword);
 }
 
 export const cartSlice = createSlice({
@@ -31,7 +31,7 @@ export const cartSlice = createSlice({
         existedItem(state, action).count++;
       }
       else {
-        state.items.push({ ...action.payload, count: 1, });
+        state.itemsInCart.push({ ...action.payload, count: 1, });
       }
 
       updateInfo(state);
@@ -58,6 +58,8 @@ export const cartSlice = createSlice({
     },
   },
 })
+
+export const selectCart = (state) => state.cart;
 
 export const { addItem, removeItem, removeStack, clearItems } = cartSlice.actions;
 

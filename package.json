@@ -41,6 +41,7 @@
   },
   "devDependencies": {
     "@reduxjs/toolkit": "^2.1.0",
+    "@types/lodash.debounce": "^4.0.9",
     "axios": "^1.6.7",
     "git-cz": "^4.9.0",
     "lodash.debounce": "^4.0.8",

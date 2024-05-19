@@ -2,19 +2,20 @@ import '../../../../scss/style.scss';
 import styles from './Categories.module.scss';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { setCategoryValue } from '../../../../redux/slices/sortSlice';
+import { selectSort, setCategoryValue } from '../../../../redux/slices/sortSlice';
 
 function Categories() {
-  const categoryValue = useSelector((state) => state.sort.categoryValue);
+
+  const { categoryValue } = useSelector(selectSort);
   const dispatch = useDispatch();
 
-  const pizzaCategories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
+  const pizzaCategories: string[] = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
-  const buttonClassName = (index) => {
+  const buttonClassName: (index: number) => string = (index) => {
     return categoryValue === index ? `${styles.catButton} ${styles.catButton_active}` : styles.catButton;
   }
 
-  const categoryChangeHandler = (index) => {
+  const categoryChangeHandler: (index: number) => void = (index) => {
     dispatch(setCategoryValue(index));
   }
 
@@ -22,7 +23,7 @@ function Categories() {
     <section className={styles.root}>
       <div className="base-container">
 
-        {pizzaCategories.map((item, index) => (
+        {pizzaCategories.map((item: string, index: number) => (
           <button className={buttonClassName(index)} onClick={() => { categoryChangeHandler(index) }} key={index}>
             {item}
           </button>

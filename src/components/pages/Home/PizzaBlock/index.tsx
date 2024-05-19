@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem, removeItem } from '../../../../redux/slices/cartSlice';
+import { Link } from 'react-router-dom';
+import { addItem, removeItem, selectCart } from '../../../../redux/slices/cartSlice';
 import '../../../../scss/style.scss';
 import styles from './PizzaBlock.module.scss';
 
@@ -8,16 +9,34 @@ import Counter from '../../../common/Counter';
 
 const pizzaTypes = ['Тонкая', 'Традиционная'];
 
-function PizzaBlock({ id, imageUrl, name, types, sizes, price }) {
+type pizzaBlockType = {
+  id: number,
+  imageUrl: string,
+  name: string,
+  price: number,
+}
+
+type pizzaPropsType = pizzaBlockType & {
+  types: number[],
+  sizes: number[],
+}
+
+function PizzaBlock({ id, imageUrl, name, types, sizes, price }: pizzaPropsType) {
   const selectedTypes = pizzaTypes.filter((_, index) => types.includes(index));
 
   const dispatch = useDispatch();
-  const pizzasCart = useSelector((state) => state.cart.items);
+  const { itemsInCart } = useSelector(selectCart);
 
   const [activeType, setActiveType] = useState(selectedTypes[0]);
   const [activeSize, setActiveSize] = useState(sizes[0]);
 
-  const pizzaObj = {
+  type pizzaObjType = pizzaBlockType & {
+    type: string,
+    size: number,
+    keyword: string,
+  }
+
+  const pizzaObj: pizzaObjType = {
     id,
     imageUrl,
     name,
@@ -27,26 +46,26 @@ function PizzaBlock({ id, imageUrl, name, types, sizes, price }) {
     keyword: `${name.split('').filter(item => !['-', ' '].includes(item)).join('')}${activeType}${activeSize}`,
   };
 
-  const existedInCartPizza = pizzasCart.find(item => item.keyword === pizzaObj.keyword);
+  const itemInCart: pizzaObjType & { count: number } = itemsInCart.find((item: pizzaObjType) => item.keyword === pizzaObj.keyword);
 
-  const handleActiveOptions = (state, item) => {
+  const handleActiveOptions: (state: string | number, item: string | number) => string = (state, item) => {
     return state === item ? `${styles.descOptionsItem} ${styles.descOptionsItem__active}` : styles.descOptionsItem;
-  }
+  };
 
-  const handleAddToCart = (obj) => {
+  const handleAddToCart: (obj: pizzaObjType) => void = (obj) => {
     dispatch(addItem(obj));
-  }
+  };
 
-  const handleRemoveFromCart = (obj) => {
+  const handleRemoveFromCart: (obj: pizzaObjType) => void = (obj) => {
     dispatch(removeItem(obj));
   };
 
   return (
     <div className={styles.root}>
-      <div className={styles.heading}>
+      <Link className={styles.heading} to={`/pizza/${id}`} >
         <img className={styles.img} src={imageUrl} alt="#" />
         <h2 className={styles.title}>{name}</h2>
-      </div>
+      </Link>
       <div className={styles.desc}>
         <div className={styles.descOptions}>
 
@@ -66,11 +85,11 @@ function PizzaBlock({ id, imageUrl, name, types, sizes, price }) {
         <div className={styles.descInfo}>
           <span className={styles.descInfoPrice}>от <span>{price}</span> ₽</span>
 
-          {existedInCartPizza ?
+          {itemInCart ?
 
             <Counter
               minusClick={() => { handleRemoveFromCart(pizzaObj) }}
-              count={existedInCartPizza.count}
+              count={itemInCart.count}
               plusClick={() => { handleAddToCart(pizzaObj) }}
             />
 

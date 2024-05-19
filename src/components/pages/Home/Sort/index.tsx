@@ -6,9 +6,14 @@ import styles from './Sort.module.scss';
 import Arrow from '../../../Icons/Arrow';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { setSortDir, setSortValue } from '../../../../redux/slices/sortSlice';
+import { setSortDir, setSortValue, selectSort } from '../../../../redux/slices/sortSlice';
 
-export const sortTypes = [
+type sortType = {
+  sortName: string,
+  sortType: string,
+}
+
+export const sortTypes: sortType[] = [
   { sortName: 'По цене', sortType: 'price' },
   { sortName: 'По популярности', sortType: 'rating' },
   { sortName: 'По алфавиту', sortType: 'name' },
@@ -16,20 +21,20 @@ export const sortTypes = [
 
 function Sort() {
   const dispatch = useDispatch();
-  const { sortValue, sortDir } = useSelector((state) => state.sort);
+  const { sortValue, sortDir } = useSelector(selectSort);
 
-  const [isVisibleSort, setVisibleSort] = useState(false);
-  const sortRef = useRef(null);
+  const [isVisibleSort, setVisibleSort] = useState<boolean>(false);
+  const sortRef = useRef<HTMLDivElement>(null);
 
-  const handleSortItemClassName = (item) => {
+  const handleSortItemClassName: (item: sortType) => string = (item) => {
     return sortValue.sortType === item.sortType ? `${styles.captionItem} ${styles.captionItem_active}` : styles.captionItem;
   }
 
-  const handleSortListClassName = () => {
+  const handleSortListClassName: () => string = () => {
     return isVisibleSort ? `${styles.captionList} ${styles.captionList_active}` : styles.captionList;
   }
 
-  const handleSortChange = (item) => {
+  const handleSortChange: (item: sortType) => void = (item) => {
     dispatch(setSortValue(item));
     item.sortName === sortValue.sortName ? dispatch(setSortDir(!sortDir)) : dispatch(setSortDir(false));
     setVisibleSort(!isVisibleSort);
@@ -49,14 +54,14 @@ function Sort() {
           <span className={styles.captionContent}>{sortValue.sortName}</span>
           <Arrow arrowClassName={`${styles.sortArrow} ${!sortDir && styles.sortArrow_down}`} />
 
-          {isVisibleSort && <ul className={styles.captionList}>
+          <ul className={handleSortListClassName()}>
             {sortTypes.map((item, index) => (
               <li className={handleSortItemClassName(item)} onClick={() => { handleSortChange(item) }} key={index}>
                 {item.sortName}
                 <Arrow arrowClassName={`${styles.sortArrow} ${!sortDir && styles.sortArrow_down}`} />
               </li>
             ))}
-          </ul>}
+          </ul>
 
         </div>
       </div>

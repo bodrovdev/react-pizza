@@ -1,6 +1,4 @@
-import React from 'react'
-
-function Arrow({ arrowClassName }) {
+function Arrow({ arrowClassName }: { arrowClassName: string }) {
   return (
     <svg
       className={arrowClassName}

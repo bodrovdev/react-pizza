@@ -1,6 +1,12 @@
 import styles from './Counter.module.scss';
 
-function Counter({ minusClick, count, plusClick }) {
+type CounterType = {
+  minusClick: () => void,
+  count: number,
+  plusClick: () => void,
+}
+
+function Counter({ minusClick, count, plusClick }: CounterType) {
   return (
     <div className={styles.root}>
       <button className={`${styles.counterButton} ${styles.counterButton__minus}`} type="button" onClick={minusClick}></button>
@@ -10,4 +16,4 @@ function Counter({ minusClick, count, plusClick }) {
   )
 }
 
-export default Counter
+export default Counter;

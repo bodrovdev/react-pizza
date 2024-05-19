@@ -1,20 +1,16 @@
 @use "../../../scss/mixins";
 
-.root {
-  :global {
-    .base-container {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: flex-start;
-      gap: 20px;
+.cartContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 20px;
 
-      background: #FFF;
-      border-radius: 20px;
+  background: #FFF;
+  border-radius: 20px;
 
-      padding: 20px;
-    }
-  }
+  padding: 20px;
 }
 
 .cartEmpty {

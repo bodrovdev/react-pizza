@@ -4,6 +4,8 @@ const initialState = {
   categoryValue: 0,
   sortValue: { sortName: 'По цене', sortType: 'price' },
   sortDir: false,
+  searchValue: '',
+  localSearchValue: '',
 }
 
 export const sortSlice = createSlice({
@@ -23,6 +25,14 @@ export const sortSlice = createSlice({
       state.sortDir = action.payload;
     },
 
+    setSearchValue: (state, action) => {
+      state.searchValue = action.payload;
+    },
+
+    setLocalSearchValue: (state, action) => {
+      state.localSearchValue = action.payload;
+    },
+
     setSorting: (state, action) => {
       state.categoryValue = Number(action.payload.category);
       state.sortValue = action.payload.sortStartValue;
@@ -33,6 +43,8 @@ export const sortSlice = createSlice({
   },
 })
 
-export const { setCategoryValue, setSortValue, setSortDir, setSorting, resetSorting } = sortSlice.actions;
+export const selectSort = (state) => state.sort;
+
+export const { setCategoryValue, setSortValue, setSortDir, setSearchValue, setLocalSearchValue, setSorting, resetSorting } = sortSlice.actions;
 
 export default sortSlice.reducer;
