@@ -9,7 +9,7 @@ import CartPizzaBlock from './CartPizzaBlock';
 
 function Cart() {
   const dispatch = useDispatch();
-  const { items, totalPrice, totalAmount } = useSelector(selectCart);
+  const { itemsInCart, totalPrice, totalAmount } = useSelector(selectCart);
 
   type CartItem = {
     name: string,
@@ -20,7 +20,7 @@ function Cart() {
     keyword: string,
   }
 
-  if (Boolean(!items.length)) {
+  if (Boolean(!itemsInCart.length)) {
     return (
       <div className={`${styles.cartContainer} base-container`}>
         <div className={styles.cartEmpty}>
@@ -40,7 +40,7 @@ function Cart() {
         </div>
         <section className={styles.cartBody}>
           <div className={styles.cartPizzas}>
-            {items.map((item: CartItem, index: number) => (<CartPizzaBlock name={item.name} type={item.type} size={item.size} price={item.price} count={item.count} keyword={item.keyword} key={index} />))}
+            {itemsInCart.map((item: CartItem, index: number) => (<CartPizzaBlock name={item.name} type={item.type} size={item.size} price={item.price} count={item.count} keyword={item.keyword} key={index} />))}
           </div>
           <div className={styles.cartPayment}>
             <div>
