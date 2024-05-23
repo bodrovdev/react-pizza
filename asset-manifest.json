@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/react-pizza/static/css/main.b2d5778d.css",
-    "main.js": "/react-pizza/static/js/main.cbbcac4a.js",
+    "main.js": "/react-pizza/static/js/main.a1e8d5fc.js",
     "static/media/Roboto-normal-500.woff": "/react-pizza/static/media/Roboto-normal-500.b14ca2d2b289afceb0b0.woff",
     "static/media/Roboto-normal-900.woff": "/react-pizza/static/media/Roboto-normal-900.88d7f1b3ca9a9494d8e3.woff",
     "static/media/Roboto-normal-700.woff": "/react-pizza/static/media/Roboto-normal-700.3f2cbde6b72e8d05669f.woff",
@@ -16,10 +16,10 @@
     "static/media/Roboto-normal-100.woff2": "/react-pizza/static/media/Roboto-normal-100.0b33782009e32497dba2.woff2",
     "index.html": "/react-pizza/index.html",
     "main.b2d5778d.css.map": "/react-pizza/static/css/main.b2d5778d.css.map",
-    "main.cbbcac4a.js.map": "/react-pizza/static/js/main.cbbcac4a.js.map"
+    "main.a1e8d5fc.js.map": "/react-pizza/static/js/main.a1e8d5fc.js.map"
   },
   "entrypoints": [
     "static/css/main.b2d5778d.css",
-    "static/js/main.cbbcac4a.js"
+    "static/js/main.a1e8d5fc.js"
   ]
 }
