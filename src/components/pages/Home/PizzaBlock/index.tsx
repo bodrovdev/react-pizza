@@ -9,19 +9,19 @@ import Counter from '../../../common/Counter';
 
 const pizzaTypes = ['Тонкая', 'Традиционная'];
 
-type pizzaBlockType = {
+type PizzaBlock = {
   id: number,
   imageUrl: string,
   name: string,
   price: number,
 }
 
-type pizzaPropsType = pizzaBlockType & {
+type PizzaBlockProps = PizzaBlock & {
   types: number[],
   sizes: number[],
 }
 
-function PizzaBlock({ id, imageUrl, name, types, sizes, price }: pizzaPropsType) {
+function PizzaBlock({ id, imageUrl, name, types, sizes, price }: PizzaBlockProps) {
   const selectedTypes = pizzaTypes.filter((_, index) => types.includes(index));
 
   const dispatch = useDispatch();
@@ -30,13 +30,13 @@ function PizzaBlock({ id, imageUrl, name, types, sizes, price }: pizzaPropsType)
   const [activeType, setActiveType] = useState(selectedTypes[0]);
   const [activeSize, setActiveSize] = useState(sizes[0]);
 
-  type pizzaObjType = pizzaBlockType & {
+  type PizzaObj = PizzaBlock & {
     type: string,
     size: number,
     keyword: string,
   }
 
-  const pizzaObj: pizzaObjType = {
+  const pizzaObj: PizzaObj = {
     id,
     imageUrl,
     name,
@@ -46,17 +46,17 @@ function PizzaBlock({ id, imageUrl, name, types, sizes, price }: pizzaPropsType)
     keyword: `${name.split('').filter(item => !['-', ' '].includes(item)).join('')}${activeType}${activeSize}`,
   };
 
-  const itemInCart: pizzaObjType & { count: number } = itemsInCart.find((item: pizzaObjType) => item.keyword === pizzaObj.keyword);
+  const itemInCart: PizzaObj & { count: number } = itemsInCart.find((item: PizzaObj) => item.keyword === pizzaObj.keyword);
 
   const handleActiveOptions: (state: string | number, item: string | number) => string = (state, item) => {
     return state === item ? `${styles.descOptionsItem} ${styles.descOptionsItem__active}` : styles.descOptionsItem;
   };
 
-  const handleAddToCart: (obj: pizzaObjType) => void = (obj) => {
+  const handleAddToCart: (obj: PizzaObj) => void = (obj) => {
     dispatch(addItem(obj));
   };
 
-  const handleRemoveFromCart: (obj: pizzaObjType) => void = (obj) => {
+  const handleRemoveFromCart: (obj: PizzaObj) => void = (obj) => {
     dispatch(removeItem(obj));
   };
 

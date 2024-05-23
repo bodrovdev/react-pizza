@@ -15,26 +15,24 @@ function Search() {
   const location = useLocation();
   const { localSearchValue } = useSelector(selectSort);
 
-  const updateSearchValue = useCallback(
+  const handleUpdateSearchValue = useCallback(
     debounce((str) => {
       dispatch(setSearchValue(str))
     }, 500), []
   );
 
-  const onChangeInput: (e: ChangeEvent) => void = (e) => {
+  const handleInputChange: (e: ChangeEvent) => void = (e) => {
     dispatch(setLocalSearchValue((e.target as HTMLInputElement)?.value));
-    updateSearchValue((e.target as HTMLInputElement)?.value);
+    handleUpdateSearchValue((e.target as HTMLInputElement)?.value);
   }
 
-  const onCleanInput: () => void = () => {
-    if (inputRef.current) {
-      dispatch(setLocalSearchValue(''))
-      dispatch(setSearchValue(''));
-      inputRef.current.focus();
-    }
+  const handleInputClean: () => void = () => {
+    dispatch(setLocalSearchValue(''))
+    dispatch(setSearchValue(''));
+    inputRef.current?.focus();
   }
 
-  if (location.pathname === '/cart') {
+  if (location.pathname !== '/') {
     return null;
   }
 
@@ -46,10 +44,10 @@ function Search() {
         type="text"
         placeholder="Поиск"
         value={localSearchValue}
-        onChange={(e) => { onChangeInput(e) }}
+        onChange={(e) => { handleInputChange(e) }}
         ref={inputRef}
       />
-      {Boolean(localSearchValue) && <Clean className={styles.searchClean} onClickClean={() => { onCleanInput() }} />}
+      {Boolean(localSearchValue) && <Clean className={styles.searchClean} onClickClean={() => { handleInputClean() }} />}
     </div>
   )
 }

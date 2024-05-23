@@ -1,12 +1,12 @@
 import styles from './Counter.module.scss';
 
-type CounterType = {
+type CounterPropsType = {
   minusClick: () => void,
   count: number,
   plusClick: () => void,
 }
 
-function Counter({ minusClick, count, plusClick }: CounterType) {
+function Counter({ minusClick, count, plusClick }: CounterPropsType) {
   return (
     <div className={styles.root}>
       <button className={`${styles.counterButton} ${styles.counterButton__minus}`} type="button" onClick={minusClick}></button>

@@ -40,7 +40,9 @@ function Cart() {
         </div>
         <section className={styles.cartBody}>
           <div className={styles.cartPizzas}>
-            {itemsInCart.map((item: CartItem, index: number) => (<CartPizzaBlock name={item.name} type={item.type} size={item.size} price={item.price} count={item.count} keyword={item.keyword} key={index} />))}
+            {itemsInCart.map((item: CartItem, index: number) => (
+              <CartPizzaBlock name={item.name} type={item.type} size={item.size} price={item.price} count={item.count} keyword={item.keyword} key={index} />
+            ))}
           </div>
           <div className={styles.cartPayment}>
             <div>

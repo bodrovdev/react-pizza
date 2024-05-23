@@ -4,7 +4,7 @@ import { addItem, removeItem, removeStack } from '../../../../redux/slices/cartS
 
 import Counter from '../../../common/Counter';
 
-type CartPizzaBlockType = {
+type CartPizzaBlockProps = {
   name: string,
   type: string,
   size: number,
@@ -13,18 +13,18 @@ type CartPizzaBlockType = {
   count: number,
 }
 
-function CartPizzaBlock({ name, type, size, price, keyword, count }: CartPizzaBlockType) {
+function CartPizzaBlock({ name, type, size, price, keyword, count }: CartPizzaBlockProps) {
   const dispatch = useDispatch();
 
-  const plusCounterHandler: () => void = () => {
+  const handlePlusCounter: () => void = () => {
     dispatch(addItem({ keyword }));
   }
 
-  const minusCounterHandler: () => void = () => {
+  const handleMinusCounter: () => void = () => {
     dispatch(removeItem({ keyword }));
   }
 
-  const removeStackHandler: () => void = () => {
+  const handleRemoveStack: () => void = () => {
     dispatch(removeStack({ keyword }));
   }
 
@@ -40,9 +40,9 @@ function CartPizzaBlock({ name, type, size, price, keyword, count }: CartPizzaBl
         </div>
       </div>
       <div className={styles.itemResult}>
-        <Counter minusClick={minusCounterHandler} count={count} plusClick={plusCounterHandler} />
+        <Counter minusClick={handleMinusCounter} count={count} plusClick={handlePlusCounter} />
         <span className={styles.itemPrice}>{price} ₽</span>
-        <button className={styles.itemDelete} type="button" onClick={removeStackHandler}></button>
+        <button className={styles.itemDelete} type="button" onClick={handleRemoveStack}></button>
       </div>
     </div>
   )

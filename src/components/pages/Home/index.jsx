@@ -68,10 +68,6 @@ function Home() {
 
   }, [categoryValue, sortValue, sortDir, searchValue])
 
-  useEffect(() => {
-    console.log(items);
-  }, [])
-
   if (status === 'error') {
     return (
       <div className={`${styles.homeContainer} base-container`}>

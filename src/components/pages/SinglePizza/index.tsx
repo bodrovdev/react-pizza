@@ -5,7 +5,7 @@ import styles from "./SinglePizza.module.scss";
 
 import Preloader from "../../common/Preloader";
 
-interface singlePizzaState {
+type SinglePizzaState = {
   name: string,
   imageUrl: string,
   description: string,
@@ -13,7 +13,7 @@ interface singlePizzaState {
 
 function SinglePizza() {
   const { id } = useParams();
-  const [singlePizza, setSinglePizza] = useState<singlePizzaState>();
+  const [singlePizza, setSinglePizza] = useState<SinglePizzaState>();
 
   const textBreak: string = "<br/><br/>";
 

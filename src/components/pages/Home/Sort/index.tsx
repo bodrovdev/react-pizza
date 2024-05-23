@@ -8,12 +8,12 @@ import Arrow from '../../../Icons/Arrow';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSortDir, setSortValue, selectSort } from '../../../../redux/slices/sortSlice';
 
-type sortType = {
+type SortType = {
   sortName: string,
   sortType: string,
 }
 
-export const sortTypes: sortType[] = [
+export const sortTypes: SortType[] = [
   { sortName: 'По цене', sortType: 'price' },
   { sortName: 'По популярности', sortType: 'rating' },
   { sortName: 'По алфавиту', sortType: 'name' },
@@ -26,7 +26,7 @@ function Sort() {
   const [isVisibleSort, setVisibleSort] = useState<boolean>(false);
   const sortRef = useRef<HTMLDivElement>(null);
 
-  const handleSortItemClassName: (item: sortType) => string = (item) => {
+  const handleSortItemClassName: (item: SortType) => string = (item) => {
     return sortValue.sortType === item.sortType ? `${styles.captionItem} ${styles.captionItem_active}` : styles.captionItem;
   }
 
@@ -34,7 +34,7 @@ function Sort() {
     return isVisibleSort ? `${styles.captionList} ${styles.captionList_active}` : styles.captionList;
   }
 
-  const handleSortChange: (item: sortType) => void = (item) => {
+  const handleSortChange: (item: SortType) => void = (item) => {
     dispatch(setSortValue(item));
     item.sortName === sortValue.sortName ? dispatch(setSortDir(!sortDir)) : dispatch(setSortDir(false));
     setVisibleSort(!isVisibleSort);

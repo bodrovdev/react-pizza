@@ -8,14 +8,13 @@ function Categories() {
 
   const { categoryValue } = useSelector(selectSort);
   const dispatch = useDispatch();
-
   const pizzaCategories: string[] = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
   const buttonClassName: (index: number) => string = (index) => {
     return categoryValue === index ? `${styles.catButton} ${styles.catButton_active}` : styles.catButton;
   }
 
-  const categoryChangeHandler: (index: number) => void = (index) => {
+  const handleChangeCategory: (index: number) => void = (index) => {
     dispatch(setCategoryValue(index));
   }
 
@@ -24,7 +23,7 @@ function Categories() {
       <div className="base-container">
 
         {pizzaCategories.map((item: string, index: number) => (
-          <button className={buttonClassName(index)} onClick={() => { categoryChangeHandler(index) }} key={index}>
+          <button className={buttonClassName(index)} onClick={() => { handleChangeCategory(index) }} key={index}>
             {item}
           </button>
         ))}
