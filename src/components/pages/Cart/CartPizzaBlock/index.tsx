@@ -16,15 +16,15 @@ type CartPizzaBlockProps = {
 function CartPizzaBlock({ name, type, size, price, keyword, count }: CartPizzaBlockProps) {
   const dispatch = useDispatch();
 
-  const handlePlusCounter: () => void = () => {
+  const handlePlusCounter = (): void => {
     dispatch(addItem({ keyword }));
   }
 
-  const handleMinusCounter: () => void = () => {
+  const handleMinusCounter = (): void => {
     dispatch(removeItem({ keyword }));
   }
 
-  const handleRemoveStack: () => void = () => {
+  const handleRemoveStack = (): void => {
     dispatch(removeStack({ keyword }));
   }
 

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { useOnClickOutside } from 'usehooks-ts';
 import '../../../../scss/style.scss';
 import styles from './Sort.module.scss';
@@ -26,23 +26,35 @@ function Sort() {
   const [isVisibleSort, setVisibleSort] = useState<boolean>(false);
   const sortRef = useRef<HTMLDivElement>(null);
 
-  const handleSortItemClassName: (item: SortType) => string = (item) => {
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent): void => {
+      if (sortRef.current && !e.composedPath().includes(sortRef.current)) {
+        setVisibleSort(false);
+      }
+    }
+
+    document.body.addEventListener('click', handleClickOutside);
+
+    return () => document.body.removeEventListener('click', handleClickOutside)
+  }, [])
+
+  const handleSortItemClassName = (item: SortType): string => {
     return sortValue.sortType === item.sortType ? `${styles.captionItem} ${styles.captionItem_active}` : styles.captionItem;
   }
 
-  const handleSortListClassName: () => string = () => {
+  const handleSortListClassName = (): string => {
     return isVisibleSort ? `${styles.captionList} ${styles.captionList_active}` : styles.captionList;
   }
 
-  const handleSortChange: (item: SortType) => void = (item) => {
+  const handleSortChange = (item: SortType): void => {
     dispatch(setSortValue(item));
     item.sortName === sortValue.sortName ? dispatch(setSortDir(!sortDir)) : dispatch(setSortDir(false));
     setVisibleSort(!isVisibleSort);
   }
 
-  useOnClickOutside(sortRef, () => {
-    setVisibleSort(false);
-  })
+  // useOnClickOutside(sortRef, () => {
+  //   setVisibleSort(false);
+  // })
 
   return (
     <section className={styles.root}>

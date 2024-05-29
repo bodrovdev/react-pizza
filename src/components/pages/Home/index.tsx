@@ -22,7 +22,8 @@ function Home() {
   const { categoryValue, sortValue, sortDir, searchValue } = useSelector(selectSort);
   const { items, status } = useSelector(selectPizzas);
 
-  const getPizzas = () => {
+  const getPizzas = (): void => {
+    // @ts-ignore
     dispatch(fetchPizzas({
       category: categoryValue ? categoryValue : '',
       sortBy: sortValue.sortType,
@@ -93,7 +94,7 @@ function Home() {
             <Preloader />
             :
             <div className={styles.wrapper}>
-              {items.map((item, index) => (
+              {items.map((item: any, index: any) => (
                 <PizzaBlock id={item.id} imageUrl={item.imageUrl} name={item.name} types={item.types} sizes={item.sizes} price={item.price} key={index} />
               ))}
             </div>

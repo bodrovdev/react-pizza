@@ -10,11 +10,11 @@ function Categories() {
   const dispatch = useDispatch();
   const pizzaCategories: string[] = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
-  const buttonClassName: (index: number) => string = (index) => {
+  const buttonClassName = (index: number): string => {
     return categoryValue === index ? `${styles.catButton} ${styles.catButton_active}` : styles.catButton;
   }
 
-  const handleChangeCategory: (index: number) => void = (index) => {
+  const handleChangeCategory = (index: number): void => {
     dispatch(setCategoryValue(index));
   }
 

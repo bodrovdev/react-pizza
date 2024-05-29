@@ -1,5 +1,5 @@
 import debounce from 'lodash.debounce';
-import { ChangeEvent, useCallback, useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { setSearchValue, setLocalSearchValue, selectSort } from '../../../redux/slices/sortSlice';
@@ -21,12 +21,12 @@ function Search() {
     }, 500), []
   );
 
-  const handleInputChange: (e: ChangeEvent) => void = (e) => {
-    dispatch(setLocalSearchValue((e.target as HTMLInputElement)?.value));
-    handleUpdateSearchValue((e.target as HTMLInputElement)?.value);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    dispatch(setLocalSearchValue(e.target.value));
+    handleUpdateSearchValue(e.target.value);
   }
 
-  const handleInputClean: () => void = () => {
+  const handleInputClean = (): void => {
     dispatch(setLocalSearchValue(''))
     dispatch(setSearchValue(''));
     inputRef.current?.focus();

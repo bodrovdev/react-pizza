@@ -7,7 +7,7 @@ import styles from './PizzaBlock.module.scss';
 
 import Counter from '../../../common/Counter';
 
-const pizzaTypes = ['Тонкая', 'Традиционная'];
+const pizzaTypes: string[] = ['Тонкая', 'Традиционная'];
 
 type PizzaBlock = {
   id: number,
@@ -48,15 +48,15 @@ function PizzaBlock({ id, imageUrl, name, types, sizes, price }: PizzaBlockProps
 
   const itemInCart: PizzaObj & { count: number } = itemsInCart.find((item: PizzaObj) => item.keyword === pizzaObj.keyword);
 
-  const handleActiveOptions: (state: string | number, item: string | number) => string = (state, item) => {
+  const handleActiveOptions = (state: string | number, item: string | number): string => {
     return state === item ? `${styles.descOptionsItem} ${styles.descOptionsItem__active}` : styles.descOptionsItem;
   };
 
-  const handleAddToCart: (obj: PizzaObj) => void = (obj) => {
+  const handleAddToCart = (obj: PizzaObj): void => {
     dispatch(addItem(obj));
   };
 
-  const handleRemoveFromCart: (obj: PizzaObj) => void = (obj) => {
+  const handleRemoveFromCart = (obj: PizzaObj): void => {
     dispatch(removeItem(obj));
   };
 
