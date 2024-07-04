@@ -1,63 +1,57 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { addItem } from '../../../../redux/slices/cartSlice';
 import { Link } from 'react-router-dom';
-import { addItem, removeItem, selectCart } from '../../../../redux/slices/cartSlice';
-import '../../../../scss/style.scss';
+import { FetchedPizzaItem, ToCartPizzaItem } from '../../../common/Types/PizzaItem.type';
 import styles from './PizzaBlock.module.scss';
-
+import Preloader from '../../../common/Preloader';
 import Counter from '../../../common/Counter';
+import '../../../../scss/style.scss';
 
 const pizzaTypes: string[] = ['Тонкая', 'Традиционная'];
 
-type PizzaBlock = {
-  id: number,
-  imageUrl: string,
-  name: string,
-  price: number,
-}
+type PizzaBlockProps = Omit<FetchedPizzaItem, 'rating'>
 
-type PizzaBlockProps = PizzaBlock & {
-  types: number[],
-  sizes: number[],
-}
+function PizzaBlock({ category, id, imageUrl, name, price, sizes, types }: PizzaBlockProps) {
 
-function PizzaBlock({ id, imageUrl, name, types, sizes, price }: PizzaBlockProps) {
   const selectedTypes = pizzaTypes.filter((_, index) => types.includes(index));
 
   const dispatch = useDispatch();
-  const { itemsInCart } = useSelector(selectCart);
-
-  const [activeType, setActiveType] = useState(selectedTypes[0]);
   const [activeSize, setActiveSize] = useState(sizes[0]);
+  const [activeType, setActiveType] = useState(selectedTypes[0]);
+  const [currentCount, setCurrentCount] = useState<number>(1);
+  const [isVisiblePreload, setPreloadVisibility] = useState<boolean>(false);
 
-  type PizzaObj = PizzaBlock & {
-    type: string,
-    size: number,
-    keyword: string,
-  }
-
-  const pizzaObj: PizzaObj = {
+  const pizzaObj: ToCartPizzaItem = {
+    category,
+    count: currentCount,
     id,
     imageUrl,
-    name,
-    type: activeType,
-    size: activeSize,
-    price,
     keyword: `${name.split('').filter(item => !['-', ' '].includes(item)).join('')}${activeType}${activeSize}`,
+    name,
+    price,
+    size: activeSize,
+    type: activeType,
   };
-
-  const itemInCart: PizzaObj & { count: number } = itemsInCart.find((item: PizzaObj) => item.keyword === pizzaObj.keyword);
 
   const handleActiveOptions = (state: string | number, item: string | number): string => {
     return state === item ? `${styles.descOptionsItem} ${styles.descOptionsItem__active}` : styles.descOptionsItem;
   };
 
-  const handleAddToCart = (obj: PizzaObj): void => {
-    dispatch(addItem(obj));
-  };
+  const handleIncreaseAddingNumber = (): void => {
+    setCurrentCount(currentCount + 1);
+  }
 
-  const handleRemoveFromCart = (obj: PizzaObj): void => {
-    dispatch(removeItem(obj));
+  const handleDecreaseAddingNumber = (): void => {
+    if (currentCount > 1) {
+      setCurrentCount(currentCount - 1);
+    }
+  }
+
+  const handleAddToCart = (obj: ToCartPizzaItem): void => {
+    dispatch(addItem(obj));
+    setPreloadVisibility(true);
+    setTimeout(() => { setPreloadVisibility(false) }, 500);
   };
 
   return (
@@ -83,20 +77,19 @@ function PizzaBlock({ id, imageUrl, name, types, sizes, price }: PizzaBlockProps
 
         </div>
         <div className={styles.descInfo}>
-          <span className={styles.descInfoPrice}>от <span>{price}</span> ₽</span>
-
-          {itemInCart ?
-
+          <div className={styles.descInfoWrapper}>
+            <span className={styles.descInfoPrice}>{price * pizzaObj.count} ₽</span>
             <Counter
-              minusClick={() => { handleRemoveFromCart(pizzaObj) }}
-              count={itemInCart.count}
-              plusClick={() => { handleAddToCart(pizzaObj) }}
+              minusClick={() => { handleDecreaseAddingNumber() }}
+              count={pizzaObj.count}
+              plusClick={() => { handleIncreaseAddingNumber() }}
             />
+          </div>
+          <button className={styles.descInfoButton} onClick={() => { handleAddToCart(pizzaObj) }}>
 
-            :
+            {isVisiblePreload ? <Preloader width={20} height={20} /> : 'В корзину'}
 
-            <button className={styles.descInfoButton} onClick={() => { handleAddToCart(pizzaObj) }}>Добавить</button>}
-
+          </button>
         </div>
       </div>
     </div>

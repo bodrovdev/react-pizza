@@ -20,44 +20,46 @@ function Cart() {
     keyword: string,
   }
 
-  if (Boolean(!itemsInCart.length)) {
-    return (
-      <div className={`${styles.cartContainer} base-container`}>
-        <div className={styles.cartEmpty}>
-          <h2 className="section-title">Ничего не найдено! 😵</h2>
-          <img className={styles.cartEmptyImg} src='./empty.png' />
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className={styles.root}>
       <div className={`${styles.cartContainer} base-container`}>
         <div className={styles.cartHeading}>
           <h1 className="section-title">Корзина</h1>
-          <button className={styles.cartClear} type="button" onClick={() => { dispatch(clearItems()) }}>Очистить корзину</button>
+          <button className={styles.cartClear} type="button" onClick={() => { dispatch(clearItems()) }}>Очистить</button>
         </div>
-        <section className={styles.cartBody}>
-          <div className={styles.cartPizzas}>
-            {itemsInCart.map((item: CartItem, index: number) => (
-              <CartPizzaBlock name={item.name} type={item.type} size={item.size} price={item.price} count={item.count} keyword={item.keyword} key={index} />
-            ))}
+
+        {Boolean(!itemsInCart.length) ?
+
+          <div className={styles.cartEmpty}>
+            <h2 className="section-title">Пусто 😵</h2>
+            <img className={styles.cartEmptyImg} src='./empty.png' />
           </div>
-          <div className={styles.cartPayment}>
-            <div>
-              <span>Сумма заказа: <span className={styles.cartPrice}>{totalPrice} ₽</span></span>
-              <span>Всего пицц: <span className={styles.cartTotal}>{totalAmount} шт</span></span>
+
+          :
+
+          <section className={styles.cartBody}>
+            <div className={styles.cartPizzas}>
+              {itemsInCart.map((item: CartItem, index: number) => (
+                <CartPizzaBlock name={item.name} type={item.type} size={item.size} price={item.price} count={item.count} keyword={item.keyword} key={index} />
+              ))}
             </div>
-            <div>
-              <Link className={styles.cartReturn} to={{ pathname: '/', search: '' }}>
-                <Arrow arrowClassName={styles.sortArrow} />
-                Вернуться
-              </Link>
-              <button className={styles.cartPaySubmit} type="button">Оплатить</button>
+
+            <div className={styles.cartPayment}>
+              <div>
+                <span>Сумма заказа: <span className={styles.cartPrice}>{totalPrice} ₽</span></span>
+                <span>Всего пицц: <span className={styles.cartTotal}>{totalAmount} шт</span></span>
+              </div>
+              <div>
+                <Link className={styles.cartReturn} to={{ pathname: '/', search: '' }}>
+                  <Arrow arrowClassName={styles.sortArrow} />
+                  Вернуться
+                </Link>
+                <button className={styles.cartPaySubmit} type="button">Оплатить</button>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        }
+
       </div>
     </div>
   )

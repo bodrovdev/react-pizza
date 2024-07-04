@@ -4,7 +4,7 @@ import '../../../scss/style.scss';
 import styles from './Header.module.scss';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { resetSorting } from '../../../redux/slices/sortSlice';
+import { resetSorting } from '../../../redux/slices/filterSlice';
 
 import CartIcon from '../../Icons/CartIcon';
 import Logo from '../../Icons/Logo';

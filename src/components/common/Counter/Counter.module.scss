@@ -3,94 +3,103 @@
 .root {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 10px;
+  justify-content: center;
+  gap: 15px;
 
-  min-width: 92px;
-  height: 37px;
+  background: #dadada;
+  border-radius: 10px;
+
+  padding: 10px;
 }
 
 .counterButton {
   position: relative;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-shrink: 0;
 
   width: 20px;
   height: 20px;
-  background: #dadada;
+  background: #FFF;
   border-radius: 50%;
 
-  transition: background 0.2s ease-in-out;
+  @include mixins.respond-to(mobileOnly) {
+    transition: background 0.1s linear;
 
-  &:hover {
-    background: #FE5F1E;
+    &:active {
+      background: #FE5F1E;
 
+      transition: background 0.1s linear;
+
+      &::before {
+        background: #FFF;
+
+        transition: background 0.1s linear;
+      }
+
+      &::after {
+        background: #FFF;
+
+        transition: background 0.1s linear;
+      }
+    }
+  }
+
+  @include mixins.respond-to(desktopS) {
     transition: background 0.2s ease-in-out;
 
-    &::before {
-      background: white;
+    &:hover {
+      background: #FE5F1E;
 
       transition: background 0.2s ease-in-out;
-    }
 
-    &::after {
-      background: white;
+      &::before {
+        background: #FFF;
 
-      transition: background 0.2s ease-in-out;
+        transition: background 0.2s ease-in-out;
+      }
+
+      &::after {
+        background: #FFF;
+
+        transition: background 0.2s ease-in-out;
+      }
     }
   }
 
-  &__minus {
-    &::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
+  &:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 
-      width: 10px;
-      height: 1px;
-      background: #FE5F1E;
-
-      transform: translate(-50%, -50%);
-      transition: background 0.2s ease-in-out;
-    }
+    width: 60%;
+    height: 2px;
+    background: #FE5F1E;
+    border-radius: 10px;
   }
 
-  &__plus {
-    &::before {
+  &_plus {
+    &:after {
       content: "";
       position: absolute;
       top: 50%;
       left: 50%;
-
-      width: 10px;
-      height: 1px;
-      background: #FE5F1E;
-
       transform: translate(-50%, -50%);
-      transition: background 0.2s ease-in-out;
-    }
 
-    &::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-
-      width: 1px;
-      height: 10px;
+      width: 2px;
+      height: 60%;
       background: #FE5F1E;
-
-      transform: translate(-50%, -50%);
-      transition: background 0.2s ease-in-out;
+      border-radius: 10px;
     }
   }
 }
 
 .counterNumber {
+  display: inline-block;
+
+  min-width: 20px;
+
   font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 0.2px;
+  font-weight: 500;
+  text-align: center;
 }

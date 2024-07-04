@@ -2,9 +2,10 @@ import qs from 'qs';
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { selectFilter, setSorting } from '../../../redux/slices/filterSlice';
 import { fetchPizzas, selectPizzas } from '../../../redux/slices/pizzasSlice';
-import { setSorting, selectSort } from '../../../redux/slices/sortSlice';
 import '../../../scss/style.scss';
+import { pizzaCategories } from './Categories';
 import styles from './Home.module.scss';
 
 import Preloader from '../../common/Preloader';
@@ -19,10 +20,10 @@ function Home() {
   const isFiltered = useRef(false);
   const isMounted = useRef(false);
 
-  const { categoryValue, sortValue, sortDir, searchValue } = useSelector(selectSort);
+  const { categoryValue, sortValue, sortDir, searchValue } = useSelector(selectFilter);
   const { items, status } = useSelector(selectPizzas);
 
-  const getPizzas = (): void => {
+  const getPizzas = () => {
     // @ts-ignore
     dispatch(fetchPizzas({
       category: categoryValue ? categoryValue : '',
@@ -89,13 +90,15 @@ function Home() {
 
       <div className={styles.root}>
         <div className={`${styles.homeContainer} base-container`}>
-          <h2 className='section-title'>Все пиццы</h2>
+          <h2 className='section-title'>{pizzaCategories[categoryValue]}</h2>
           {status === 'loading' ?
-            <Preloader />
+            <div className={styles.preloaderWrapper}>
+              <Preloader width={100} height={100} />
+            </div>
             :
             <div className={styles.wrapper}>
               {items.map((item: any, index: any) => (
-                <PizzaBlock id={item.id} imageUrl={item.imageUrl} name={item.name} types={item.types} sizes={item.sizes} price={item.price} key={index} />
+                <PizzaBlock category={item.category} id={item.id} imageUrl={item.imageUrl} key={index} name={item.name} price={item.price} sizes={item.sizes} types={item.types} />
               ))}
             </div>
           }

@@ -6,7 +6,7 @@ import styles from './Sort.module.scss';
 import Arrow from '../../../Icons/Arrow';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { setSortDir, setSortValue, selectSort } from '../../../../redux/slices/sortSlice';
+import { setSortDir, setSortValue, selectFilter } from '../../../../redux/slices/filterSlice';
 
 type SortType = {
   sortName: string,
@@ -21,7 +21,7 @@ export const sortTypes: SortType[] = [
 
 function Sort() {
   const dispatch = useDispatch();
-  const { sortValue, sortDir } = useSelector(selectSort);
+  const { sortValue, sortDir } = useSelector(selectFilter);
 
   const [isVisibleSort, setVisibleSort] = useState<boolean>(false);
   const sortRef = useRef<HTMLDivElement>(null);

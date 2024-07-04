@@ -1,14 +1,5 @@
 @use "../../../scss/mixins";
 
-.root {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-
-  width: 100%;
-  min-height: 912px;
-}
-
 @keyframes spinner {
   0% {
     transform: rotate(0deg);
@@ -19,11 +10,9 @@
   }
 }
 
-.preloaderCircle {
-  width: 100px;
-  height: 100px;
-  border: 10px solid #dadada;
-  border-top: 10px solid #FE5F1E;
+.root {
+  border: 5px solid #dadada;
+  border-top: 5px solid #FE5F1E;
   border-radius: 50%;
 
   animation: spinner 4s linear infinite;

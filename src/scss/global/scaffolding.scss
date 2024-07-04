@@ -3,6 +3,8 @@
 * {
 	box-sizing: border-box;
 	scroll-behavior: smooth;
+
+	// border: 1px solid red;
 }
 
 :after,
@@ -11,7 +13,8 @@
 }
 
 html,
-body {
+body,
+#root {
 	width: 100%;
 	min-height: 100vh;
 	background: #fff1cc;
@@ -105,6 +108,8 @@ select {
 }
 
 .page-content {
+	display: flex;
+	flex-direction: column;
 	flex-grow: 1;
 }
 

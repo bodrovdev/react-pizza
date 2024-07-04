@@ -17,11 +17,11 @@ function CartPizzaBlock({ name, type, size, price, keyword, count }: CartPizzaBl
   const dispatch = useDispatch();
 
   const handlePlusCounter = (): void => {
-    dispatch(addItem({ keyword }));
+    dispatch(addItem({ keyword, count: 1 }));
   }
 
   const handleMinusCounter = (): void => {
-    dispatch(removeItem({ keyword }));
+    dispatch(removeItem({ keyword, count: 1 }));
   }
 
   const handleRemoveStack = (): void => {

@@ -1,5 +1,13 @@
 @use "../../../../scss/mixins";
 
+.root {
+  padding: 20px 0;
+
+  @include mixins.respond-to(mobileOnly) {
+    padding: 10px 0;
+  }
+}
+
 .caption {
   position: relative;
 
@@ -14,8 +22,10 @@
 
   padding: 10px 0;
 
-  @include mixins.respond-to(notDesktop) {
-    padding: 0 0 10px 0;
+  @include mixins.respond-to(mobileOnly) {
+    width: 100%;
+
+    padding: 0;
   }
 
   &:hover {
@@ -24,7 +34,7 @@
 
       color: #FE5F1E;
 
-      transition: border-bottom 0.2s ease-in-out, color 0.2s ease-in-out;
+      transition: border-bottom 0.3s linear, color 0.3s linear;
     }
   }
 }
@@ -48,7 +58,7 @@
 .captionContent {
   border-bottom: 1px dashed #FE5F1E;
 
-  transition: border-bottom 0.2s ease-in-out, color 0.2s ease-in-out;
+  transition: border-bottom 0.3s linear, color 0.3s linear;
 
   padding: 0 0 0.1rem 0;
 }
@@ -67,17 +77,21 @@
   min-width: 355px;
   border-radius: 1rem;
   background: #FFF;
-  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.09);
+  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.2);
   opacity: 0;
   pointer-events: none;
 
-  transition: opacity 0.1s ease-in-out;
+  transition: opacity 0.3s linear;
 
-  padding: 1.3rem 0;
+  padding: 10px 0;
 
   z-index: 10;
 
-  @include mixins.respond-to(notDesktop) {
+  @include mixins.respond-to(mobileOnly) {
+    top: calc(100% + 5px);
+
+    gap: 0;
+
     width: 100%;
     min-width: auto;
   }
@@ -86,7 +100,7 @@
     opacity: 100%;
     pointer-events: all;
 
-    transition: opacity 0.1s ease-in-out;
+    transition: opacity 0.3s linear;
   }
 }
 
@@ -103,34 +117,59 @@
   font-weight: 600;
   letter-spacing: 0.21px;
 
-  transition: background 0.2s ease-in-out, 0.2s ease-in-out;
+  transition: background 0.3s linear, color 0.3s linear;
 
   padding: 10px 20px;
 
-  @include mixins.respond-to(notDesktop) {
+  @include mixins.respond-to(mobileOnly) {
+    border-bottom: 1px solid #dadada;
+
     font-size: 14px;
+    font-weight: 400;
+
+    transition: background 0.1s linear, color 0.3s linear;
 
     padding: 5px 10px;
-  }
 
-  &:hover {
-    background: #FE5F1E;
+    &:last-of-type {
+      border: none;
+    }
 
-    color: #FFF;
+    &:active {
+      background: #FE5F1E;
 
-    transition: background 0.2s ease-in-out, 0.2s ease-in-out;
+      color: #FFF;
 
-    @include mixins.respond-to(desktopD) {
+      transition: background 0.1s linear, color 0.1s linear;
+
       & .sortArrow {
         color: #FFF;
 
-        transition: color 0.2s ease-in-out;
+        transition: color 0.1s linear;
+      }
+    }
+  }
+
+  @include mixins.respond-to(desktopS) {
+    &:hover {
+      background: #FE5F1E;
+
+      color: #FFF;
+
+      transition: background 0.3s linear, color 0.3s linear;
+
+      & .sortArrow {
+        color: #FFF;
+
+        transition: color 0.3s linear;
       }
     }
   }
 
   & .sortArrow {
     display: none;
+
+    transition: color 0.3s linear;
   }
 
   &_active {
@@ -149,7 +188,7 @@
 
   color: #FE5F1E;
 
-  transition: color 0.2s ease-in-out;
+  transition: color 0.3s linear;
 
   @include mixins.respond-to(notDesktop) {
     width: 10px;

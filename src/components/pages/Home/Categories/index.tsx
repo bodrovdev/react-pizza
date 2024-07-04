@@ -2,13 +2,14 @@ import '../../../../scss/style.scss';
 import styles from './Categories.module.scss';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { selectSort, setCategoryValue } from '../../../../redux/slices/sortSlice';
+import { selectFilter, setCategoryValue } from '../../../../redux/slices/filterSlice';
+
+export const pizzaCategories: string[] = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
 function Categories() {
 
-  const { categoryValue } = useSelector(selectSort);
+  const { categoryValue } = useSelector(selectFilter);
   const dispatch = useDispatch();
-  const pizzaCategories: string[] = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
   const buttonClassName = (index: number): string => {
     return categoryValue === index ? `${styles.catButton} ${styles.catButton_active}` : styles.catButton;

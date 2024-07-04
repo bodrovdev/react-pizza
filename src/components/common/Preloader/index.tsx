@@ -1,12 +1,21 @@
-import '../../../scss/style.scss';
 import styles from './Preloader.module.scss';
+import '../../../scss/style.scss';
 
-function Preloader() {
+type PreloaderProps = {
+  width: number,
+  height: number,
+}
+
+function Preloader({ width, height }: PreloaderProps) {
+
+  const preloaderSize = {
+    width: width,
+    height: height,
+  };
+
   return (
-    <div className={styles.root}>
-      <div className={styles.preloaderCircle}></div>
-    </div>
+    <div className={styles.root} style={preloaderSize}></div>
   )
 }
 
-export default Preloader
+export default Preloader;

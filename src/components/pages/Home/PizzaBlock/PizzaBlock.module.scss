@@ -9,6 +9,16 @@
 
   width: 25%;
   border-radius: 10px;
+
+  @include mixins.respond-to(mobileOnly) {
+    flex-grow: 1;
+
+    width: auto;
+  }
+
+  @include mixins.respond-to(tabletOnly) {
+    width: 33%;
+  }
 }
 
 .heading {
@@ -31,8 +41,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 20px;
+
+  width: 100%;
 }
 
 .title {
@@ -41,10 +53,14 @@
   letter-spacing: 0.2px;
   text-align: center;
 
-  @include mixins.respond-to(notDesktop) {
+  @include mixins.respond-to(mobileOnly) {
     font-size: 20px;
-    text-align: left;
+    font-weight: 400;
   }
+}
+
+.desc {
+  padding: 0 10px;
 }
 
 .descOptions {
@@ -60,7 +76,7 @@
 
   padding: 5px;
 
-  @include mixins.respond-to(notDesktop) {
+  @include mixins.respond-to(mobileOnly) {
     background: none;
 
     padding: 0;
@@ -69,29 +85,20 @@
 
 .descOptionsList {
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;
   justify-content: flex-start;
   gap: 5px;
 
   width: 100%;
-
-  &__feature {
-    @include mixins.respond-to(notDesktop) {
-      flex-direction: column;
-
-      & .descOptionsItem {
-        width: 100%;
-      }
-    }
-  }
 }
 
 .descOptionsItem {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-grow: 1;
 
-  width: 100%;
   border-radius: 10px;
   background: #dadada;
   cursor: pointer;
@@ -104,7 +111,7 @@
 
   padding: 10px;
 
-  @include mixins.respond-to(notDesktop) {
+  @include mixins.respond-to(mobileOnly) {
     height: 35px;
 
     font-size: 12px;
@@ -131,62 +138,89 @@
 
 .descInfo {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
 
   width: 100%;
 
-  @include mixins.respond-to(notDesktop) {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+  margin: auto 0 0 0;
+
+  @include mixins.respond-to(mobileOnly) {
+    text-align: center;
   }
+}
+
+.descInfoWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  min-width: 180px;
 }
 
 .descInfoPrice {
-  flex-shrink: 0;
+  display: inline-block;
 
-  font-size: 13px;
+  min-width: 70px;
+
+  font-size: 18px;
   letter-spacing: 0.33px;
-
-  & span {
-    font-size: 16px;
-    font-weight: 600;
-    color: #FE5F1E;
-  }
 }
 
 .descInfoButton {
+  position: relative;
+
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 10px;
 
+  width: 100%;
+  max-width: 200px;
+  height: 40px;
   background: #FFF;
   border: 1px solid #FE5F1E;
-  border-radius: 30px;
+  border-radius: 20px;
 
   font-family: 'Roboto', system-ui, sans-serif;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 600;
   color: #FE5F1E;
 
-  transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+  @include mixins.respond-to(mobileOnly) {
+    min-height: 37px;
 
-  padding: 10px 15px;
+    font-size: 14px;
 
-  @include mixins.respond-to(notDesktop) {
-    font-size: 12px;
+    transition: background 0.1s linear, color 0.1s linear;
 
-    padding: 10px;
+    &:active {
+      background: #FE5F1E;
+
+      color: #FFF;
+
+      transform: scale(0.9);
+      transition: background 0.1s linear, color 0.1s linear, transform 0.1s linear;
+    }
   }
 
-  &:hover {
-    background: #FE5F1E;
+  @include mixins.respond-to(desktopS) {
+    transition: background 0.2s ease-in-out, color 0.2s ease-in-out, transform 0.1s ease-in-out;
 
-    color: #FFF;
+    &:hover {
+      background: #FE5F1E;
 
-    transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+      color: #FFF;
+
+      transition: background 0.2s ease-in-out, color 0.2s ease-in-out, transform 0.1s ease-in-out;
+    }
+
+    &:active {
+      transform: scale(0.95);
+      transition: transform 0.1s ease-in-out;
+    }
   }
 }

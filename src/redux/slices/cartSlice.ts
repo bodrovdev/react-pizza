@@ -1,26 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit'
-
-type ItemType = {
-  id: number,
-  imageUrl: string,
-  name: string,
-  price: number,
-  type: string,
-  size: number,
-  keyword: string,
-  count: number,
-}
+import { RootState } from '../store'
+import { ToCartPizzaItem } from '../../components/common/Types/PizzaItem.type'
 
 type CartSliceState = {
   totalPrice: number,
   totalAmount: number,
-  itemsInCart: ItemType[],
+  itemsInCart: ToCartPizzaItem[],
+  isVisibleAlert: boolean,
 }
 
 const initialState: CartSliceState = {
   totalPrice: 0,
   totalAmount: 0,
   itemsInCart: [],
+  isVisibleAlert: false,
 }
 
 const updateInfo = (state: CartSliceState): void => {
@@ -33,7 +26,7 @@ const updateInfo = (state: CartSliceState): void => {
   }, 0);
 }
 
-const existedItem = (state: CartSliceState, payload: string): ItemType => {
+const existedItem = (state: CartSliceState, payload: string): ToCartPizzaItem => {
   return state.itemsInCart.find(obj => obj.keyword === payload)!;
 }
 
@@ -45,8 +38,14 @@ export const cartSlice = createSlice({
     addItem: (state, action) => {
       const match = existedItem(state, action.payload.keyword);
 
-      match ? match.count++ : state.itemsInCart.push({ ...action.payload, count: 1, });
-      updateInfo(state);
+      if (state.totalAmount + action.payload.count > 99) {
+        state.isVisibleAlert = true;
+        return;
+      }
+      else {
+        match ? match.count = match.count + action.payload.count : state.itemsInCart.push({ ...action.payload });
+        updateInfo(state);
+      }
     },
 
     removeItem: (state, action) => {
@@ -67,11 +66,15 @@ export const cartSlice = createSlice({
       state.itemsInCart = [];
       updateInfo(state);
     },
+
+    hideAlert: (state) => {
+      state.isVisibleAlert = false;
+    },
   },
 })
 
-export const selectCart = (state: any) => state.cart;
+export const selectCart = (state: RootState) => state.cart;
 
-export const { addItem, removeItem, removeStack, clearItems } = cartSlice.actions;
+export const { addItem, removeItem, removeStack, clearItems, hideAlert } = cartSlice.actions;
 
 export default cartSlice.reducer;

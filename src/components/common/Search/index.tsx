@@ -2,7 +2,7 @@ import debounce from 'lodash.debounce';
 import { useCallback, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { setSearchValue, setLocalSearchValue, selectSort } from '../../../redux/slices/sortSlice';
+import { setSearchValue, setLocalSearchValue, selectFilter } from '../../../redux/slices/filterSlice';
 import '../../../scss/style.scss';
 import styles from './Search.module.scss';
 
@@ -13,7 +13,7 @@ function Search() {
   const inputRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
   const location = useLocation();
-  const { localSearchValue } = useSelector(selectSort);
+  const { localSearchValue } = useSelector(selectFilter);
 
   const handleUpdateSearchValue = useCallback(
     debounce((str) => {

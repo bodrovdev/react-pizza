@@ -1,11 +1,10 @@
 @use "../../../scss/mixins";
 
 .root {
-  padding: 0 0 40px 0;
-  margin: 40px 0 0 0;
+  padding: 20px 0;
 
   @include mixins.respond-to(mobileOnly) {
-    margin: 0;
+    padding: 10px 0;
   }
 }
 
@@ -20,6 +19,19 @@
   border-radius: 20px;
 
   padding: 20px;
+
+  @include mixins.respond-to(mobileOnly) {
+    padding: 10px;
+  }
+}
+
+.preloaderWrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  width: 100%;
+  min-height: 912px;
 }
 
 .wrapper {

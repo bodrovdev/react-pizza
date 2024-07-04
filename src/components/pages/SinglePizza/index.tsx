@@ -8,14 +8,11 @@ import Preloader from "../../common/Preloader";
 type SinglePizzaState = {
   name: string,
   imageUrl: string,
-  description: string,
 };
 
 function SinglePizza() {
   const { id } = useParams();
   const [singlePizza, setSinglePizza] = useState<SinglePizzaState>();
-
-  const textBreak: string = "<br/><br/>";
 
   useEffect(() => {
     async function getSinglePizza() {
@@ -31,7 +28,7 @@ function SinglePizza() {
   }, [])
 
   if (!singlePizza) {
-    return <Preloader />
+    return <Preloader width={100} height={100} />
   }
 
   return (
@@ -39,7 +36,6 @@ function SinglePizza() {
       <div className={`${styles.singlePizzaContainer} base-container`}>
         <h2 className='section-title'>{singlePizza.name}</h2>
         <img src={singlePizza.imageUrl} alt="" />
-        <div dangerouslySetInnerHTML={{ __html: singlePizza.description.replace(/\n/g, textBreak) }}></div>
       </div>
     </div >
   )
