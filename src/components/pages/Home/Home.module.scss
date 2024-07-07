@@ -1,6 +1,9 @@
 @use "../../../scss/mixins";
 
 .root {
+  display: flex;
+  flex-grow: 1;
+
   padding: 20px 0;
 
   @include mixins.respond-to(mobileOnly) {
@@ -27,11 +30,20 @@
 
 .preloaderWrapper {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
+  flex-grow: 1;
 
   width: 100%;
-  min-height: 912px;
+
+  :global {
+    #preloader {
+      width: 100px;
+      height: 100px;
+      border: 5px solid #dadada;
+      border-top: 5px solid #FE5F1E;
+    }
+  }
 }
 
 .wrapper {

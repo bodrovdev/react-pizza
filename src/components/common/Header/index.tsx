@@ -11,6 +11,7 @@ import Logo from '../../Icons/Logo';
 import Search from '../Search';
 
 function Header() {
+
   const dispatch = useDispatch();
 
   const { totalPrice, totalAmount } = useSelector(selectCart);

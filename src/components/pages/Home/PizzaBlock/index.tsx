@@ -51,7 +51,7 @@ function PizzaBlock({ category, id, imageUrl, name, price, sizes, types }: Pizza
   const handleAddToCart = (obj: ToCartPizzaItem): void => {
     dispatch(addItem(obj));
     setPreloadVisibility(true);
-    setTimeout(() => { setPreloadVisibility(false) }, 500);
+    setTimeout(() => { setPreloadVisibility(false) }, 1000);
   };
 
   return (
@@ -85,9 +85,9 @@ function PizzaBlock({ category, id, imageUrl, name, price, sizes, types }: Pizza
               plusClick={() => { handleIncreaseAddingNumber() }}
             />
           </div>
-          <button className={styles.descInfoButton} onClick={() => { handleAddToCart(pizzaObj) }}>
+          <button className={styles.descInfoButton} onClick={() => { handleAddToCart(pizzaObj) }} disabled={isVisiblePreload ? true : false}>
 
-            {isVisiblePreload ? <Preloader width={20} height={20} /> : 'В корзину'}
+            {isVisiblePreload ? <Preloader /> : 'В корзину'}
 
           </button>
         </div>

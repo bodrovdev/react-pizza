@@ -52,11 +52,19 @@
 
   @include mixins.respond-to(desktopS) {
     &:hover {
-      background: #FE5F1E;
-
-      color: #FFF;
+      color: #FE5F1E;
 
       transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+    }
+
+    &_active {
+      &:hover {
+        background: #FE5F1E;
+
+        color: #FFF;
+
+        transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+      }
     }
   }
 

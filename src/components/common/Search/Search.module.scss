@@ -3,8 +3,24 @@
 .searchBlock {
   position: relative;
 
+  transition: color 0.2s ease-in-out;
+
+  &:focus-within {
+    color: #FE5F1E;
+
+    transition: color 0.2s ease-in-out;
+  }
+
   @include mixins.respond-to(mobileOnly) {
     width: 100%;
+  }
+
+  @include mixins.respond-to(desktopS) {
+    &:hover {
+      color: #FE5F1E;
+
+      transition: color 0.2s ease-in-out;
+    }
   }
 }
 
@@ -36,7 +52,7 @@
   font-weight: 400;
   color: #2C2C2C;
 
-  transition: box-shadow 0.1s ease-in-out;
+  transition: box-shadow 0.2s ease-in-out;
 
   padding: 10px 40px;
 
@@ -48,9 +64,9 @@
   }
 
   &:focus {
-    box-shadow: 0 0 0 3px #FE5F1E;
+    box-shadow: 0 0 0 2px #FE5F1E;
 
-    transition: box-shadow 0.1s ease-in-out;
+    transition: box-shadow 0.2s ease-in-out;
   }
 }
 

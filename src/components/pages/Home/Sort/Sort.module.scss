@@ -81,7 +81,7 @@
   opacity: 0;
   pointer-events: none;
 
-  transition: opacity 0.3s linear;
+  transition: opacity 0.2s ease-in-out;
 
   padding: 10px 0;
 
@@ -100,7 +100,7 @@
     opacity: 100%;
     pointer-events: all;
 
-    transition: opacity 0.3s linear;
+    transition: opacity 0.2s ease-in-out;
   }
 }
 
@@ -152,17 +152,9 @@
 
   @include mixins.respond-to(desktopS) {
     &:hover {
-      background: #FE5F1E;
+      color: #FE5F1E;
 
-      color: #FFF;
-
-      transition: background 0.3s linear, color 0.3s linear;
-
-      & .sortArrow {
-        color: #FFF;
-
-        transition: color 0.3s linear;
-      }
+      transition: color 0.2s ease-in-out;
     }
   }
 
@@ -188,7 +180,7 @@
 
   color: #FE5F1E;
 
-  transition: color 0.3s linear;
+  transition: color 0.1s linear;
 
   @include mixins.respond-to(notDesktop) {
     width: 10px;

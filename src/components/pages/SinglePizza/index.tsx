@@ -28,7 +28,7 @@ function SinglePizza() {
   }, [])
 
   if (!singlePizza) {
-    return <Preloader width={100} height={100} />
+    return <Preloader />
   }
 
   return (

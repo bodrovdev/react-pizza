@@ -93,7 +93,7 @@ function Home() {
           <h2 className='section-title'>{pizzaCategories[categoryValue]}</h2>
           {status === 'loading' ?
             <div className={styles.preloaderWrapper}>
-              <Preloader width={100} height={100} />
+              <Preloader />
             </div>
             :
             <div className={styles.wrapper}>
