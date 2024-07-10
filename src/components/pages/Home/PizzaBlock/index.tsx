@@ -1,12 +1,15 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useDispatch } from 'react-redux';
+import { CSSTransition } from 'react-transition-group';
+import { useOnClickOutside } from 'usehooks-ts';
 import { addItem } from '../../../../redux/slices/cartSlice';
-import { Link } from 'react-router-dom';
 import { FetchedPizzaItem, ToCartPizzaItem } from '../../../common/Types/PizzaItem.type';
-import styles from './PizzaBlock.module.scss';
-import Preloader from '../../../common/Preloader';
-import Counter from '../../../common/Counter';
+
 import '../../../../scss/style.scss';
+import Counter from '../../../common/Counter';
+import Preloader from '../../../common/Preloader';
+import styles from './PizzaBlock.module.scss';
 
 const pizzaTypes: string[] = ['Тонкая', 'Традиционная'];
 
@@ -16,11 +19,12 @@ function PizzaBlock({ category, id, imageUrl, name, price, sizes, types }: Pizza
 
   const selectedTypes = pizzaTypes.filter((_, index) => types.includes(index));
 
-  const dispatch = useDispatch();
   const [activeSize, setActiveSize] = useState(sizes[0]);
   const [activeType, setActiveType] = useState(selectedTypes[0]);
   const [currentCount, setCurrentCount] = useState<number>(1);
+  const [isVisibleModal, setModalVisibility] = useState<boolean>(false);
   const [isVisiblePreload, setPreloadVisibility] = useState<boolean>(false);
+  const dispatch = useDispatch();
 
   const pizzaObj: ToCartPizzaItem = {
     category,
@@ -56,25 +60,22 @@ function PizzaBlock({ category, id, imageUrl, name, price, sizes, types }: Pizza
 
   return (
     <div className={styles.root}>
-      <Link className={styles.heading} to={`/pizza/${id}`} >
+      <div className={styles.heading} onClick={() => setModalVisibility(true)} id='modalOpener'>
         <img className={styles.img} src={imageUrl} alt="#" />
         <h2 className={styles.title}>{name}</h2>
-      </Link>
+      </div>
       <div className={styles.desc}>
         <div className={styles.descOptions}>
-
           <ul className={`${styles.descOptionsList} ${styles.descOptionsList__feature}`}>
             {types.map((item, index) => (
               <li className={handleActiveOptions(activeType, pizzaTypes[item])} onClick={() => { setActiveType(pizzaTypes[item]) }} key={index}>{pizzaTypes[item]}</li>
             ))}
           </ul>
-
           <ul className={`${styles.descOptionsList} ${styles.descOptionsList__price}`}>
             {sizes.map((item, index) => (
               <li className={handleActiveOptions(activeSize, item)} onClick={() => { setActiveSize(item) }} key={index}>{item} см.</li>
             ))}
           </ul>
-
         </div>
         <div className={styles.descInfo}>
           <div className={styles.descInfoWrapper}>
@@ -92,8 +93,31 @@ function PizzaBlock({ category, id, imageUrl, name, price, sizes, types }: Pizza
           </button>
         </div>
       </div>
+
+      <Modal isVisibleModal={isVisibleModal} closeModal={() => { setModalVisibility(false) }} />
     </div>
   )
 }
-
 export default PizzaBlock
+
+type ModalProps = {
+  isVisibleModal: boolean;
+  closeModal: () => void;
+}
+
+function Modal({ isVisibleModal, closeModal }: ModalProps) {
+  const modalWrapperRef = useRef<HTMLDivElement>(null);
+  const modalInnerRef = useRef<HTMLDivElement>(null);
+
+  useOnClickOutside(modalInnerRef, () => {
+    closeModal();
+  })
+
+  return createPortal(
+    <CSSTransition nodeRef={modalWrapperRef} in={isVisibleModal} unmountOnExit timeout={300} classNames="modalTransition">
+      <div ref={modalWrapperRef} className={styles.modalWrapper}>
+        <div ref={modalInnerRef} className={styles.modalInner}>ааа</div>
+      </div>
+    </CSSTransition>, document.body
+  );
+}

@@ -1,5 +1,4 @@
 import { useRef, useEffect, useState } from 'react';
-import { useOnClickOutside } from 'usehooks-ts';
 import '../../../../scss/style.scss';
 import styles from './Sort.module.scss';
 
@@ -51,10 +50,6 @@ function Sort() {
     item.sortName === sortValue.sortName ? dispatch(setSortDir(!sortDir)) : dispatch(setSortDir(false));
     setVisibleSort(!isVisibleSort);
   }
-
-  // useOnClickOutside(sortRef, () => {
-  //   setVisibleSort(false);
-  // })
 
   return (
     <section className={styles.root}>
