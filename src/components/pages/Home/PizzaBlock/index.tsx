@@ -106,6 +106,13 @@ type ModalProps = {
   pizzaObj: ToCartPizzaItem;
 }
 
+function handleEscapeKey(e: KeyboardEvent, callback: () => void) {
+  if (e.key === 'Escape') {
+    callback();
+    console.log('test');
+  }
+}
+
 function Modal({ closeModal, isVisibleModal, pizzaObj }: ModalProps) {
   const modalWrapperRef = useRef<HTMLDivElement>(null);
   const modalInnerRef = useRef<HTMLDivElement>(null);
@@ -114,13 +121,6 @@ function Modal({ closeModal, isVisibleModal, pizzaObj }: ModalProps) {
     closeModal();
   })
 
-  const handleEscapeKey = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      closeModal();
-      console.log('penis');
-    }
-  }
-
   return createPortal(
     <CSSTransition
       classNames="modalTransition"
@@ -128,11 +128,13 @@ function Modal({ closeModal, isVisibleModal, pizzaObj }: ModalProps) {
       nodeRef={modalWrapperRef}
       onEnter={() => {
         document.body.style.overflow = 'hidden';
-        document.body.addEventListener('keydown', (e) => { handleEscapeKey(e) });
+        //@ts-ignore
+        document.body.addEventListener('keydown', handleEscapeKey(e, closeModal));
       }}
       onExited={() => {
         document.body.style.overflow = 'visible';
-        document.body.removeEventListener('keydown', (e) => { handleEscapeKey(e) });
+        //@ts-ignore
+        document.body.removeEventListener('keydown', handleEscapeKey(e, closeModal));
       }}
       timeout={300}
       unmountOnExit>
