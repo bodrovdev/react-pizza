@@ -1,11 +1,12 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useState } from 'react';
+import { useOnClickOutside } from 'usehooks-ts';
 import '../../../../scss/style.scss';
 import styles from './Sort.module.scss';
 
 import Arrow from '../../../Icons/Arrow';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { setSortDir, setSortValue, selectFilter } from '../../../../redux/slices/filterSlice';
+import { selectFilter, setSortDir, setSortValue } from '../../../../redux/slices/filterSlice';
 
 type SortType = {
   sortName: string,
@@ -25,17 +26,21 @@ function Sort() {
   const [isVisibleSort, setVisibleSort] = useState<boolean>(false);
   const sortRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent): void => {
-      if (sortRef.current && !e.composedPath().includes(sortRef.current)) {
-        setVisibleSort(false);
-      }
-    }
+  // useEffect(() => {
+  //   const handleClickOutside = (e: MouseEvent): void => {
+  //     if (sortRef.current && !e.composedPath().includes(sortRef.current)) {
+  //       setVisibleSort(false);
+  //     }
+  //   }
 
-    document.body.addEventListener('click', handleClickOutside);
+  //   document.body.addEventListener('click', handleClickOutside);
 
-    return () => document.body.removeEventListener('click', handleClickOutside)
-  }, [])
+  //   return () => document.body.removeEventListener('click', handleClickOutside)
+  // }, [])
+
+  useOnClickOutside(sortRef, () => {
+    setVisibleSort(false);
+  })
 
   const handleSortItemClassName = (item: SortType): string => {
     return sortValue.sortType === item.sortType ? `${styles.captionItem} ${styles.captionItem_active}` : styles.captionItem;

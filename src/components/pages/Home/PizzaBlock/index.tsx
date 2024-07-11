@@ -25,6 +25,7 @@ function PizzaBlock({ category, id, imageUrl, name, price, sizes, types }: Pizza
   const [isVisibleModal, setModalVisibility] = useState<boolean>(false);
   const [isVisiblePreload, setPreloadVisibility] = useState<boolean>(false);
   const dispatch = useDispatch();
+  const itemHeadingRef = useRef<HTMLDivElement>(null);
 
   const pizzaObj: ToCartPizzaItem = {
     category,
@@ -60,7 +61,7 @@ function PizzaBlock({ category, id, imageUrl, name, price, sizes, types }: Pizza
 
   return (
     <div className={styles.root}>
-      <div className={styles.heading} onClick={() => setModalVisibility(true)} id='modalOpener'>
+      <div className={styles.heading} onClick={() => { setModalVisibility(true) }} ref={itemHeadingRef}>
         <img className={styles.img} src={imageUrl} alt="#" />
         <h2 className={styles.title}>{name}</h2>
       </div>
@@ -93,19 +94,19 @@ function PizzaBlock({ category, id, imageUrl, name, price, sizes, types }: Pizza
           </button>
         </div>
       </div>
-
-      <Modal isVisibleModal={isVisibleModal} closeModal={() => { setModalVisibility(false) }} />
+      <Modal isVisibleModal={isVisibleModal} closeModal={() => { setModalVisibility(false) }} pizzaObj={pizzaObj} />
     </div>
   )
 }
 export default PizzaBlock
 
 type ModalProps = {
-  isVisibleModal: boolean;
   closeModal: () => void;
+  isVisibleModal: boolean;
+  pizzaObj: ToCartPizzaItem;
 }
 
-function Modal({ isVisibleModal, closeModal }: ModalProps) {
+function Modal({ closeModal, isVisibleModal, pizzaObj }: ModalProps) {
   const modalWrapperRef = useRef<HTMLDivElement>(null);
   const modalInnerRef = useRef<HTMLDivElement>(null);
 
@@ -113,10 +114,32 @@ function Modal({ isVisibleModal, closeModal }: ModalProps) {
     closeModal();
   })
 
+  const handleEscapeKey = (e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      closeModal();
+      console.log('penis');
+    }
+  }
+
   return createPortal(
-    <CSSTransition nodeRef={modalWrapperRef} in={isVisibleModal} unmountOnExit timeout={300} classNames="modalTransition">
+    <CSSTransition
+      classNames="modalTransition"
+      in={isVisibleModal}
+      nodeRef={modalWrapperRef}
+      onEnter={() => {
+        document.body.style.overflow = 'hidden';
+        document.body.addEventListener('keydown', (e) => { handleEscapeKey(e) });
+      }}
+      onExited={() => {
+        document.body.style.overflow = 'visible';
+        document.body.removeEventListener('keydown', (e) => { handleEscapeKey(e) });
+      }}
+      timeout={300}
+      unmountOnExit>
       <div ref={modalWrapperRef} className={styles.modalWrapper}>
-        <div ref={modalInnerRef} className={styles.modalInner}>ааа</div>
+        <div ref={modalInnerRef} className={styles.modalInner}>
+          <img className={styles.modalImg} src={pizzaObj.imageUrl} alt="" />
+        </div>
       </div>
     </CSSTransition>, document.body
   );
