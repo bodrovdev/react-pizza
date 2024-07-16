@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/react-pizza/static/css/main.7cbd9588.css",
-    "main.js": "/react-pizza/static/js/main.9d2d0080.js",
+    "main.css": "/react-pizza/static/css/main.37548903.css",
+    "main.js": "/react-pizza/static/js/main.ec52ce5d.js",
     "static/media/Roboto-normal-500.woff": "/react-pizza/static/media/Roboto-normal-500.b14ca2d2b289afceb0b0.woff",
     "static/media/Roboto-normal-900.woff": "/react-pizza/static/media/Roboto-normal-900.88d7f1b3ca9a9494d8e3.woff",
     "static/media/Roboto-normal-700.woff": "/react-pizza/static/media/Roboto-normal-700.3f2cbde6b72e8d05669f.woff",
@@ -15,11 +15,11 @@
     "static/media/Roboto-normal-300.woff2": "/react-pizza/static/media/Roboto-normal-300.d537674e9e217fa53a13.woff2",
     "static/media/Roboto-normal-100.woff2": "/react-pizza/static/media/Roboto-normal-100.0b33782009e32497dba2.woff2",
     "index.html": "/react-pizza/index.html",
-    "main.7cbd9588.css.map": "/react-pizza/static/css/main.7cbd9588.css.map",
-    "main.9d2d0080.js.map": "/react-pizza/static/js/main.9d2d0080.js.map"
+    "main.37548903.css.map": "/react-pizza/static/css/main.37548903.css.map",
+    "main.ec52ce5d.js.map": "/react-pizza/static/js/main.ec52ce5d.js.map"
   },
   "entrypoints": [
-    "static/css/main.7cbd9588.css",
-    "static/js/main.9d2d0080.js"
+    "static/css/main.37548903.css",
+    "static/js/main.ec52ce5d.js"
   ]
 }
