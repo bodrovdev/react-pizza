@@ -98,7 +98,7 @@ function Home() {
             :
             <div className={styles.wrapper}>
               {items.map((item: any, index: any) => (
-                <PizzaBlock category={item.category} id={item.id} imageUrl={item.imageUrl} key={index} name={item.name} price={item.price} sizes={item.sizes} types={item.types} />
+                <PizzaBlock category={item.category} id={item.id} imageUrl={item.imageUrl} key={index} name={item.name} price={item.price} sizes={item.sizes} types={item.types} rating={item.rating} />
               ))}
             </div>
           }

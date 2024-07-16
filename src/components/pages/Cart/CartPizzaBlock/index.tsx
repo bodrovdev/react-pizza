@@ -41,7 +41,7 @@ function CartPizzaBlock({ name, type, size, price, keyword, count }: CartPizzaBl
       </div>
       <div className={styles.itemResult}>
         <Counter minusClick={handleMinusCounter} count={count} plusClick={handlePlusCounter} />
-        <span className={styles.itemPrice}>{price} ₽</span>
+        <span className={styles.itemPrice}>{price * count} ₽</span>
         <button className={styles.itemDelete} type="button" onClick={handleRemoveStack}></button>
       </div>
     </div>

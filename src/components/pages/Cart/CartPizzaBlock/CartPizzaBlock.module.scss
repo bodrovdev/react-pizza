@@ -112,24 +112,6 @@
   transform: rotate(45deg);
   transition: background 0.2s ease-in-out;
 
-  &:hover {
-    background: #FE5F1E;
-
-    transition: background 0.2s ease-in-out;
-
-    &::before {
-      background: white;
-
-      transition: background 0.2s ease-in-out;
-    }
-
-    &::after {
-      background: white;
-
-      transition: background 0.2s ease-in-out;
-    }
-  }
-
   &::before {
     content: "";
     position: absolute;
@@ -170,6 +152,26 @@
     &::after {
       width: 2px;
       height: 10px;
+    }
+  }
+
+  @include mixins.respond-to(desktopS) {
+    &:hover {
+      background: #FE5F1E;
+
+      transition: background 0.2s ease-in-out;
+
+      &::before {
+        background: white;
+
+        transition: background 0.2s ease-in-out;
+      }
+
+      &::after {
+        background: white;
+
+        transition: background 0.2s ease-in-out;
+      }
     }
   }
 }

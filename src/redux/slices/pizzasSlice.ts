@@ -3,8 +3,14 @@ import axios from 'axios';
 import { FetchedPizzaItem } from '../../components/common/Types/PizzaItem.type';
 
 //@ts-ignore
+const axiosInstance = axios.create({
+  baseURL: 'https://653e4e07f52310ee6a9acea3.mockapi.io',
+  timeout: 1000,
+});
+
+//@ts-ignore
 export const fetchPizzas = createAsyncThunk('pizzas/fetch', async ({ category, sortBy, order, name }) => {
-  const { data } = await axios.get('https://653e4e07f52310ee6a9acea3.mockapi.io/items', {
+  const { data } = await axiosInstance.get('items', {
     params: {
       category,
       sortBy,
