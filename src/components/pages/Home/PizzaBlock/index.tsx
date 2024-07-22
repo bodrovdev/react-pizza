@@ -132,22 +132,12 @@ function Modal({ addToCartButton, closeModal, descOptions, isVisibleModal, pizza
   }, [])
 
   const handleTransitionEnter = (): void => {
-    if (window.innerWidth >= 1024) {
-      document.body.style.cssText = `overflow: hidden; padding-right: 17px;`;
-    }
-    else {
-      document.body.style.cssText = `overflow: hidden;`;
-    }
+    document.body.style.cssText = `overflow: hidden;`;
     document.body.addEventListener('keydown', handleEscapeKeydown);
   }
 
   const handleTransitionExit = (): void => {
-    if (window.innerWidth >= 1024) {
-      document.body.style.cssText = `overflow: visible; padding-right: 0`;
-    }
-    else {
-      document.body.style.cssText = `overflow: visible;`;
-    }
+    document.body.style.cssText = `overflow: visible;`;
     document.body.removeEventListener('keydown', handleEscapeKeydown);
   }
 

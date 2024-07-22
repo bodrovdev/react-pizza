@@ -1,19 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { RootState } from '../store'
+import { PayloadAction } from '@reduxjs/toolkit'
+
 import { ToCartPizzaItem } from '../../components/common/Types/PizzaItem.type'
+import { RootState } from '../store'
 
 type CartSliceState = {
   totalPrice: number,
   totalAmount: number,
   itemsInCart: ToCartPizzaItem[],
-  isVisibleAlert: boolean,
 }
 
 const initialState: CartSliceState = {
   totalPrice: 0,
   totalAmount: 0,
   itemsInCart: [],
-  isVisibleAlert: false,
 }
 
 const updateInfo = (state: CartSliceState): void => {
@@ -26,8 +26,8 @@ const updateInfo = (state: CartSliceState): void => {
   }, 0);
 }
 
-const existedItem = (state: CartSliceState, payload: string): ToCartPizzaItem => {
-  return state.itemsInCart.find(obj => obj.keyword === payload)!;
+const existedItem = (state: CartSliceState, payload: string): ToCartPizzaItem | undefined => {
+  return state.itemsInCart.find(obj => obj.keyword === payload);
 }
 
 export const cartSlice = createSlice({
@@ -35,30 +35,55 @@ export const cartSlice = createSlice({
   initialState: initialState,
 
   reducers: {
-    addItem: (state, action) => {
+    addItem: (state, action: PayloadAction<ToCartPizzaItem>) => {
       const match = existedItem(state, action.payload.keyword);
 
       if (state.totalAmount + action.payload.count > 99) {
-        state.isVisibleAlert = true;
         return;
       }
       else {
-        match ? match.count = match.count + action.payload.count : state.itemsInCart.push({ ...action.payload });
+        match ? match.count += action.payload.count : state.itemsInCart.push({ ...action.payload });
         updateInfo(state);
       }
     },
 
-    removeItem: (state, action) => {
+    increaseItem: (state, action: PayloadAction<{ keyword: string, count: number }>) => {
       const match = existedItem(state, action.payload.keyword);
 
-      match!.count === 1 ? state.itemsInCart.splice(state.itemsInCart.indexOf(match!), 1) : match!.count--;
-      updateInfo(state);
+      if (state.totalAmount + action.payload.count > 99) {
+        return;
+      }
+      else if (match) {
+        match.count += action.payload.count;
+        updateInfo(state);
+      }
     },
 
-    removeStack: (state, action) => {
+    removeItem: (state, action: PayloadAction<ToCartPizzaItem>) => {
       const match = existedItem(state, action.payload.keyword);
 
-      state.itemsInCart.splice(state.itemsInCart.indexOf(match!), 1);
+      if (match) {
+        match.count === 1 ? state.itemsInCart.splice(state.itemsInCart.indexOf(match), 1) : match.count--;
+        updateInfo(state);
+      }
+    },
+
+    decreaseItem: (state, action: PayloadAction<{ keyword: string, count: number }>) => {
+      const match = existedItem(state, action.payload.keyword);
+
+      if (match) {
+        match.count === 1 ? state.itemsInCart.splice(state.itemsInCart.indexOf(match), 1) : match.count--;
+        updateInfo(state);
+      }
+    },
+
+    removeStack: (state, action: PayloadAction<{ keyword: string }>) => {
+      const match = existedItem(state, action.payload.keyword);
+
+      if (!match) {
+        return;
+      }
+      state.itemsInCart.splice(state.itemsInCart.indexOf(match), 1);
       updateInfo(state);
     },
 
@@ -66,15 +91,11 @@ export const cartSlice = createSlice({
       state.itemsInCart = [];
       updateInfo(state);
     },
-
-    hideAlert: (state) => {
-      state.isVisibleAlert = false;
-    },
   },
 })
 
 export const selectCart = (state: RootState) => state.cart;
 
-export const { addItem, removeItem, removeStack, clearItems, hideAlert } = cartSlice.actions;
+export const { addItem, increaseItem, removeItem, decreaseItem, removeStack, clearItems } = cartSlice.actions;
 
 export default cartSlice.reducer;

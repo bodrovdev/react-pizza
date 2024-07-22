@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { clearItems, selectCart } from '../../../redux/slices/cartSlice';
-import '../../../scss/style.scss';
+import { ToCartPizzaItem } from '../../common/Types/PizzaItem.type';
+import { Link } from 'react-router-dom';
 import styles from './Cart.module.scss';
+import '../../../scss/style.scss';
 
 import Arrow from '../../Icons/Arrow';
 import CartPizzaBlock from './CartPizzaBlock';
@@ -11,21 +12,12 @@ function Cart() {
   const dispatch = useDispatch();
   const { itemsInCart, totalPrice, totalAmount } = useSelector(selectCart);
 
-  type CartItem = {
-    name: string,
-    type: string,
-    size: number,
-    price: number,
-    count: number,
-    keyword: string,
-  }
-
   return (
     <div className={styles.root}>
       <div className={`${styles.cartContainer} base-container`}>
         <div className={styles.cartHeading}>
           <h1 className="section-title">Корзина</h1>
-          <button className={styles.cartClear} type="button" onClick={() => { dispatch(clearItems()) }}>Очистить</button>
+          {Boolean(itemsInCart.length) && <button className={styles.cartClear} type="button" onClick={() => { dispatch(clearItems()) }}>Очистить</button>}
         </div>
 
         {Boolean(!itemsInCart.length) ?
@@ -39,8 +31,17 @@ function Cart() {
 
           <section className={styles.cartBody}>
             <div className={styles.cartPizzas}>
-              {itemsInCart.map((item: CartItem, index: number) => (
-                <CartPizzaBlock name={item.name} type={item.type} size={item.size} price={item.price} count={item.count} keyword={item.keyword} key={index} />
+              {itemsInCart.map((item: ToCartPizzaItem, index: number) => (
+                <CartPizzaBlock
+                  count={item.count}
+                  imageUrl={item.imageUrl}
+                  key={index}
+                  keyword={item.keyword}
+                  name={item.name}
+                  price={item.price}
+                  size={item.size}
+                  type={item.type}
+                />
               ))}
             </div>
 

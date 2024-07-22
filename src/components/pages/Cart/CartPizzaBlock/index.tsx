@@ -1,27 +1,21 @@
-import styles from './CartPizzaBlock.module.scss';
 import { useDispatch } from 'react-redux';
-import { addItem, removeItem, removeStack } from '../../../../redux/slices/cartSlice';
+import { increaseItem, decreaseItem, removeStack } from '../../../../redux/slices/cartSlice';
+import { ToCartPizzaItem } from '../../../common/Types/PizzaItem.type';
+import styles from './CartPizzaBlock.module.scss';
 
 import Counter from '../../../common/Counter';
 
-type CartPizzaBlockProps = {
-  name: string,
-  type: string,
-  size: number,
-  price: number,
-  keyword: string,
-  count: number,
-}
+type CartPizzaBlockProps = Omit<ToCartPizzaItem, 'id' | 'category'>;
 
-function CartPizzaBlock({ name, type, size, price, keyword, count }: CartPizzaBlockProps) {
+function CartPizzaBlock({ count, imageUrl, keyword, name, price, size, type }: CartPizzaBlockProps) {
   const dispatch = useDispatch();
 
   const handlePlusCounter = (): void => {
-    dispatch(addItem({ keyword, count: 1 }));
+    dispatch(increaseItem({ keyword, count: 1 }));
   }
 
   const handleMinusCounter = (): void => {
-    dispatch(removeItem({ keyword, count: 1 }));
+    dispatch(decreaseItem({ keyword, count: 1 }));
   }
 
   const handleRemoveStack = (): void => {
@@ -32,7 +26,7 @@ function CartPizzaBlock({ name, type, size, price, keyword, count }: CartPizzaBl
     <div className={styles.root}>
       <div className={styles.itemInfo}>
         <figure className={styles.itemImage}>
-          <img className={styles.itemImg} src="https://i.imgur.com/a9I9WHm.jpeg" />
+          <img className={styles.itemImg} src={imageUrl} />
         </figure>
         <div>
           <h2 className={styles.itemTitle}>{name}</h2>

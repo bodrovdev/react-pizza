@@ -8,15 +8,15 @@ import Arrow from '../../../Icons/Arrow';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectFilter, setSortDir, setSortValue } from '../../../../redux/slices/filterSlice';
 
-type SortType = {
-  sortName: string,
-  sortType: string,
+export type SortType = {
+  sortName: 'По цене' | 'По алфавиту' | 'По популярности',
+  sortType: 'price' | 'name' | 'rating'
 }
 
 export const sortTypes: SortType[] = [
   { sortName: 'По цене', sortType: 'price' },
-  { sortName: 'По популярности', sortType: 'rating' },
   { sortName: 'По алфавиту', sortType: 'name' },
+  { sortName: 'По популярности', sortType: 'rating' },
 ];
 
 function Sort() {
@@ -25,18 +25,6 @@ function Sort() {
 
   const [isVisibleSort, setVisibleSort] = useState<boolean>(false);
   const sortRef = useRef<HTMLDivElement>(null);
-
-  // useEffect(() => {
-  //   const handleClickOutside = (e: MouseEvent): void => {
-  //     if (sortRef.current && !e.composedPath().includes(sortRef.current)) {
-  //       setVisibleSort(false);
-  //     }
-  //   }
-
-  //   document.body.addEventListener('click', handleClickOutside);
-
-  //   return () => document.body.removeEventListener('click', handleClickOutside)
-  // }, [])
 
   useOnClickOutside(sortRef, () => {
     setVisibleSort(false);

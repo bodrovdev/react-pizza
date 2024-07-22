@@ -1,21 +1,21 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { FetchedPizzaItem } from '../../components/common/Types/PizzaItem.type';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-//@ts-ignore
+import { FetchedPizzaItem } from '../../components/common/Types/PizzaItem.type';
+import { RootState } from '../store'
+
 const axiosInstance = axios.create({
   baseURL: 'https://653e4e07f52310ee6a9acea3.mockapi.io',
   timeout: 1000,
 });
 
-//@ts-ignore
-export const fetchPizzas = createAsyncThunk('pizzas/fetch', async ({ category, sortBy, order, name }) => {
-  const { data } = await axiosInstance.get('items', {
+export const fetchPizzas = createAsyncThunk('pizzas/fetch', async ({ category, order, sortBy, name }: Record<string, string>) => {
+  const { data } = await axiosInstance.get<FetchedPizzaItem[]>('items', {
     params: {
       category,
-      sortBy,
       order,
-      name
+      sortBy,
+      name,
     }
   })
   return data;
@@ -31,10 +31,10 @@ const initialState: PizzasSliceState = {
   status: 'loading',
 }
 
-//@ts-ignore
 export const pizzasSlice = createSlice({
   name: 'pizzas',
   initialState: initialState,
+  reducers: {},
 
   extraReducers: (builder) => {
     builder
@@ -42,18 +42,18 @@ export const pizzasSlice = createSlice({
         state.status = "loading"
         state.items = []
       })
-      .addCase(fetchPizzas.fulfilled, (state, action) => {
-        state.items = action.payload
-        state.status = "success"
-      })
-      .addCase(fetchPizzas.rejected, (state) => {
-        state.status = "error"
-        state.items = []
-      })
+    builder.addCase(fetchPizzas.fulfilled, (state, action) => {
+      state.items = action.payload
+      state.status = "success"
+    })
+    builder.addCase(fetchPizzas.rejected, (state) => {
+      state.status = "error"
+      state.items = []
+    })
   }
 })
 
-//@ts-ignore
-export const selectPizzas = (state) => state.pizzas;
+
+export const selectPizzas = (state: RootState) => state.pizzas;
 
 export default pizzasSlice.reducer;
