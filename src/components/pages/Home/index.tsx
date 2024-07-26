@@ -1,14 +1,15 @@
 import qs from 'qs';
+import { FilterSliceState, selectFilter, setSorting } from '../../../redux/slices/filterSlice';
 import { fetchPizzas, selectPizzas } from '../../../redux/slices/pizzasSlice';
 import { pizzaCategories } from './Categories';
-import { selectFilter, setSorting } from '../../../redux/slices/filterSlice';
 import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import styles from './Home.module.scss';
 import '../../../scss/style.scss';
+import styles from './Home.module.scss';
 
+import { Status } from '../../../redux/slices/pizzasSlice';
 import { useAppDispatch } from '../../common/Types/Hooks.type';
 
 import Categories from './Categories';
@@ -23,16 +24,15 @@ function Home() {
   const isMounted = useRef<Boolean>(false);
   const isFiltered = useRef<Boolean>(false);
 
-  const { categoryValue, searchValue, sortDir, sortValue } = useSelector(selectFilter);
+  const { category, sort, order, search } = useSelector(selectFilter);
   const { items, status } = useSelector(selectPizzas);
 
   const getPizzas = () => {
-
     dispatch(fetchPizzas({
-      category: categoryValue ? String(categoryValue) : '',
-      sortBy: sortValue.sortType,
-      order: sortDir === false ? 'desc' : 'asc',
-      name: searchValue,
+      category: category ? String(category) : '',
+      sortBy: sort.sortBy,
+      order: order === false ? 'desc' : 'asc',
+      name: search,
     }));
   }
 
@@ -40,17 +40,17 @@ function Home() {
   useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
-      const sortStartValue = sortTypes.find(obj => obj.sortType === params.sort)
+      const sortStartValue = sortTypes.find(obj => obj.sortBy === params.sortBy);
 
-      const setSortingObj = {
-        categoryValue: params.category as string,
-        sortValue: sortStartValue as SortType,
-        sortDir: params.order === 'desc' ? false : true as boolean,
-        searchValue: params.name as string,
-        localSearchValue: params.name as string,
+      // (._.)
+      const setSortingObj: FilterSliceState = {
+        category: params.category as string,
+        sort: (sortStartValue || { name: 'По цене', sortBy: 'price' }) as SortType,
+        order: params.order === 'desc' ? false : true as boolean,
+        search: params.name as string,
+        localSearch: params.name as string,
       }
 
-      // dispatch(setSorting({ ...params, sortStartValue }));
       dispatch(setSorting(setSortingObj));
 
       isFiltered.current = true;
@@ -65,24 +65,24 @@ function Home() {
 
     isFiltered.current = false;
 
-  }, [categoryValue, sortValue, sortDir, searchValue]);
+  }, [category, sort, order, search]);
 
   // & проверка на первый рендер, записываем параметры из редакса в URL
   useEffect(() => {
     if (isMounted.current) {
       const queryString = qs.stringify({
-        category: categoryValue,
-        sort: sortValue.sortType,
-        order: sortDir === false ? 'desc' : 'asc',
-        name: searchValue,
+        category,
+        sortBy: sort.sortBy,
+        order: order === false ? 'desc' : 'asc',
+        name: search,
       })
       navigate(`?${queryString}`);
     }
     isMounted.current = true;
 
-  }, [categoryValue, sortValue, sortDir, searchValue])
+  }, [category, sort, order, search])
 
-  if (status === 'error') {
+  if (status === Status.ERROR) {
     return (
       <div className={`${styles.homeContainer} base-container`}>
         Ошибка загрузки данных 😔
@@ -102,8 +102,8 @@ function Home() {
 
       <div className={styles.root}>
         <div className={`${styles.homeContainer} base-container`}>
-          <h2 className='section-title'>{pizzaCategories[Number(categoryValue)]}</h2>
-          {status === 'loading' ?
+          <h2 className='section-title'>{pizzaCategories[Number(category)]}</h2>
+          {status === Status.LOADING ?
             <div className={styles.preloaderWrapper}>
               <Preloader />
             </div>

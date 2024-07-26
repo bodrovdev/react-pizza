@@ -63,7 +63,7 @@ export const cartSlice = createSlice({
       const match = existedItem(state, action.payload.keyword);
 
       if (match) {
-        match.count === 1 ? state.itemsInCart.splice(state.itemsInCart.indexOf(match), 1) : match.count--;
+        state.itemsInCart.splice(state.itemsInCart.indexOf(match), 1);
         updateInfo(state);
       }
     },
@@ -71,8 +71,8 @@ export const cartSlice = createSlice({
     decreaseItem: (state, action: PayloadAction<{ keyword: string, count: number }>) => {
       const match = existedItem(state, action.payload.keyword);
 
-      if (match) {
-        match.count === 1 ? state.itemsInCart.splice(state.itemsInCart.indexOf(match), 1) : match.count--;
+      if (match && match.count > 1) {
+        match.count--;
         updateInfo(state);
       }
     },

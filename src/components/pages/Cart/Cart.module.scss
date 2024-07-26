@@ -160,6 +160,14 @@
   }
 }
 
+.cartPrice {
+  @include mixins.respond-to(desktopS) {
+    display: inline-block;
+
+    min-width: 71px;
+  }
+}
+
 .cartPrice,
 .cartTotal {
   font-weight: 600;

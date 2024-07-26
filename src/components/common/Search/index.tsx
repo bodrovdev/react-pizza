@@ -2,7 +2,7 @@ import debounce from 'lodash.debounce';
 import { useCallback, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { setSearchValue, setLocalSearchValue, selectFilter } from '../../../redux/slices/filterSlice';
+import { setSearch, setLocalSearch, selectFilter } from '../../../redux/slices/filterSlice';
 import '../../../scss/style.scss';
 import styles from './Search.module.scss';
 
@@ -13,22 +13,22 @@ function Search() {
   const inputRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
   const location = useLocation();
-  const { localSearchValue } = useSelector(selectFilter);
+  const { localSearch } = useSelector(selectFilter);
 
   const handleUpdateSearchValue = useCallback(
     debounce((str) => {
-      dispatch(setSearchValue(str))
+      dispatch(setSearch(str))
     }, 500), []
   );
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    dispatch(setLocalSearchValue(e.target.value));
+    dispatch(setLocalSearch(e.target.value));
     handleUpdateSearchValue(e.target.value);
   }
 
   const handleInputClean = (): void => {
-    dispatch(setLocalSearchValue(''))
-    dispatch(setSearchValue(''));
+    dispatch(setLocalSearch(''))
+    dispatch(setSearch(''));
     inputRef.current?.focus();
   }
 
@@ -43,11 +43,11 @@ function Search() {
         className={styles.searchInput}
         type="text"
         placeholder="Поиск"
-        value={localSearchValue}
+        value={localSearch}
         onChange={(e) => { handleInputChange(e) }}
         ref={inputRef}
       />
-      {Boolean(localSearchValue) && <Clean className={styles.searchClean} onClickClean={() => { handleInputClean() }} />}
+      {Boolean(localSearch) && <Clean className={styles.searchClean} onClickClean={() => { handleInputClean() }} />}
     </div>
   )
 }

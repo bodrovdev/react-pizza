@@ -95,6 +95,12 @@
   @include mixins.respond-to(mobileOnly) {
     font-size: 16px;
   }
+
+  @include mixins.respond-to(desktopS) {
+    display: inline-block;
+
+    min-width: 71px;
+  }
 }
 
 .itemDelete {

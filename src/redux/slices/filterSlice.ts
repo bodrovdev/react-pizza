@@ -5,22 +5,22 @@ import { SortType } from '../../components/pages/Home/Sort';
 import { PayloadAction } from '@reduxjs/toolkit';
 
 export type FilterSliceState = {
-  categoryValue: string,
-  sortValue: SortType,
-  sortDir: boolean,
-  searchValue: string,
-  localSearchValue: string,
+  category: string,
+  sort: SortType,
+  order: boolean,
+  search: string,
+  localSearch: string,
 }
 
 const initialState: FilterSliceState = {
-  categoryValue: '',
-  sortValue: {
-    sortName: 'По цене',
-    sortType: 'price'
+  category: '',
+  sort: {
+    name: 'По цене',
+    sortBy: 'price'
   },
-  sortDir: false,
-  searchValue: '',
-  localSearchValue: '',
+  order: false,
+  search: '',
+  localSearch: '',
 }
 
 export const filterSlice = createSlice({
@@ -28,32 +28,32 @@ export const filterSlice = createSlice({
   initialState: initialState,
 
   reducers: {
-    setCategoryValue: (state, action: PayloadAction<string>) => {
-      state.categoryValue = action.payload === '0' ? '' : action.payload;
+    setCategory: (state, action: PayloadAction<string>) => {
+      state.category = action.payload === '0' ? '' : action.payload;
     },
 
-    setSortValue: (state, action: PayloadAction<SortType>) => {
-      state.sortValue = action.payload;
+    setSort: (state, action: PayloadAction<SortType>) => {
+      state.sort = action.payload;
     },
 
-    setSortDir: (state, action: PayloadAction<boolean>) => {
-      state.sortDir = action.payload;
+    setOrder: (state, action: PayloadAction<boolean>) => {
+      state.order = action.payload;
     },
 
-    setSearchValue: (state, action: PayloadAction<string>) => {
-      state.searchValue = action.payload;
+    setSearch: (state, action: PayloadAction<string>) => {
+      state.search = action.payload;
     },
 
-    setLocalSearchValue: (state, action: PayloadAction<string>) => {
-      state.localSearchValue = action.payload;
+    setLocalSearch: (state, action: PayloadAction<string>) => {
+      state.localSearch = action.payload;
     },
 
     setSorting: (state, action: PayloadAction<FilterSliceState>) => {
-      state.categoryValue = action.payload.categoryValue;
-      state.sortValue = action.payload.sortValue;
-      state.sortDir = action.payload.sortDir;
-      state.searchValue = action.payload.searchValue;
-      state.localSearchValue = action.payload.localSearchValue;
+      state.category = action.payload.category;
+      state.sort = action.payload.sort;
+      state.order = action.payload.order;
+      state.search = action.payload.search;
+      state.localSearch = action.payload.search;
     },
 
     resetSorting: () => initialState,
@@ -62,6 +62,6 @@ export const filterSlice = createSlice({
 
 export const selectFilter = (state: RootState) => state.filter;
 
-export const { setCategoryValue, setSortValue, setSortDir, setSearchValue, setLocalSearchValue, setSorting, resetSorting } = filterSlice.actions;
+export const { setCategory, setSort, setOrder, setSearch, setLocalSearch, setSorting, resetSorting } = filterSlice.actions;
 
 export default filterSlice.reducer;
