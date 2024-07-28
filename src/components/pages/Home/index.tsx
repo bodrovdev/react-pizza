@@ -1,20 +1,22 @@
 import qs from 'qs';
-import { FilterSliceState, selectFilter, setSorting } from '../../../redux/slices/filterSlice';
-import { fetchPizzas, selectPizzas } from '../../../redux/slices/pizzasSlice';
-import { pizzaCategories } from './Categories';
 import { useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-
+import { useNavigate } from 'react-router-dom';
 import '../../../scss/style.scss';
 import styles from './Home.module.scss';
 
-import { Status } from '../../../redux/slices/pizzasSlice';
-import { useAppDispatch } from '../../common/Types/Hooks.type';
-
+import Preloader from '../../common/Preloader';
 import Categories from './Categories';
 import PizzaBlock from './PizzaBlock';
-import Preloader from '../../common/Preloader';
+
+import { selectFilter } from '../../../redux/Filter/selectors';
+import { setSorting } from '../../../redux/Filter/slice';
+import { FilterSliceState } from '../../../redux/Filter/types';
+import { selectPizzas } from '../../../redux/Pizza/selectors';
+import { fetchPizzas } from '../../../redux/Pizza/slice';
+import { ParamsType, Status } from '../../../redux/Pizza/types';
+import { useAppDispatch } from '../../common/Types/Hooks.type';
+import { pizzaCategories } from './Categories';
 import Sort, { SortType, sortTypes } from './Sort';
 
 function Home() {
@@ -28,12 +30,15 @@ function Home() {
   const { items, status } = useSelector(selectPizzas);
 
   const getPizzas = () => {
-    dispatch(fetchPizzas({
+
+    const paramsObj: ParamsType = {
       category: category ? String(category) : '',
       sortBy: sort.sortBy,
       order: order === false ? 'desc' : 'asc',
       name: search,
-    }));
+    }
+
+    dispatch(fetchPizzas({ ...paramsObj }));
   }
 
   // & проверка на наличие параметров в URL, записываем полученные параметры в редакс
@@ -78,6 +83,7 @@ function Home() {
       })
       navigate(`?${queryString}`);
     }
+
     isMounted.current = true;
 
   }, [category, sort, order, search])
@@ -92,6 +98,7 @@ function Home() {
 
   return (
     <>
+
       <div>
 
         <Categories />

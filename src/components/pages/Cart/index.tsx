@@ -1,12 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { clearItems, selectCart } from '../../../redux/slices/cartSlice';
-import { ToCartPizzaItem } from '../../common/Types/PizzaItem.type';
 import { Link } from 'react-router-dom';
-import styles from './Cart.module.scss';
 import '../../../scss/style.scss';
+import styles from './Cart.module.scss';
 
 import Arrow from '../../Icons/Arrow';
 import CartPizzaBlock from './CartPizzaBlock';
+
+import { selectCart } from '../../../redux/Cart/selectors';
+import { clearItems } from '../../../redux/Cart/slice';
+import { ToCartPizzaItem } from '../../common/Types/PizzaItem.type';
 
 function Cart() {
   const dispatch = useDispatch();

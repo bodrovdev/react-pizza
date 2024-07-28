@@ -1,11 +1,12 @@
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { selectCart } from '../../../redux/slices/cartSlice';
 import '../../../scss/style.scss';
 import styles from './StickyMenu.module.scss';
 
 import CartIcon from '../../Icons/CartIcon';
 import HomeIcon from '../../Icons/HomeIcon';
+
+import { selectCart } from '../../../redux/Cart/selectors';
 
 function StickyMenu() {
 

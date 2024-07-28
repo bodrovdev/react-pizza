@@ -1,20 +1,29 @@
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { selectCart } from '../../../redux/slices/cartSlice';
+import { selectCart } from '../../../redux/Cart/selectors';
 import '../../../scss/style.scss';
 import styles from './Header.module.scss';
-
-import { useDispatch, useSelector } from 'react-redux';
-import { resetSorting } from '../../../redux/slices/filterSlice';
 
 import CartIcon from '../../Icons/CartIcon';
 import Logo from '../../Icons/Logo';
 import Search from '../Search';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { resetSorting } from '../../../redux/Filter/slice';
+
 function Header() {
 
   const dispatch = useDispatch();
+  const { itemsInCart, totalAmount, totalPrice } = useSelector(selectCart);
+  const isMounted = useRef<boolean>(false);
 
-  const { totalPrice, totalAmount } = useSelector(selectCart);
+  useEffect(() => {
+    if (isMounted.current) {
+      window.localStorage.setItem('cart', JSON.stringify(itemsInCart));
+    }
+
+    isMounted.current = true;
+  }, [itemsInCart])
 
   return (
     <header className={`${styles.root} page-header`}>

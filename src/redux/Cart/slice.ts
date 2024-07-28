@@ -1,19 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { PayloadAction } from '@reduxjs/toolkit'
+import { parsedLocalData, getLocalUpdatedPrice, getLocalUpdatedAmount } from '../../utils/getCartFromLocalStorage'
 
+import { CartSliceState } from './types'
 import { ToCartPizzaItem } from '../../components/common/Types/PizzaItem.type'
-import { RootState } from '../store'
-
-type CartSliceState = {
-  totalPrice: number,
-  totalAmount: number,
-  itemsInCart: ToCartPizzaItem[],
-}
 
 const initialState: CartSliceState = {
-  totalPrice: 0,
-  totalAmount: 0,
-  itemsInCart: [],
+  itemsInCart: parsedLocalData,
+  totalAmount: getLocalUpdatedAmount(),
+  totalPrice: getLocalUpdatedPrice(),
 }
 
 const updateInfo = (state: CartSliceState): void => {
@@ -93,8 +88,6 @@ export const cartSlice = createSlice({
     },
   },
 })
-
-export const selectCart = (state: RootState) => state.cart;
 
 export const { addItem, increaseItem, removeItem, decreaseItem, removeStack, clearItems } = cartSlice.actions;
 

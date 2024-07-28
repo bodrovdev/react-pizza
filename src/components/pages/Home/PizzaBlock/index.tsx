@@ -3,13 +3,14 @@ import { createPortal } from 'react-dom';
 import { useDispatch } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
 import { useOnClickOutside } from 'usehooks-ts';
-import { addItem } from '../../../../redux/slices/cartSlice';
-import { FetchedPizzaItem, ToCartPizzaItem } from '../../../common/Types/PizzaItem.type';
-
 import '../../../../scss/style.scss';
+import styles from './PizzaBlock.module.scss';
+
 import Counter from '../../../common/Counter';
 import Preloader from '../../../common/Preloader';
-import styles from './PizzaBlock.module.scss';
+
+import { addItem } from '../../../../redux/Cart/slice';
+import { FetchedPizzaItem, ToCartPizzaItem } from '../../../common/Types/PizzaItem.type';
 
 const pizzaTypes: string[] = ['Тонкая', 'Традиционная'];
 
@@ -17,6 +18,7 @@ type PizzaBlockProps = FetchedPizzaItem;
 
 function PizzaBlock({ category, id, imageUrl, name, price, sizes, types, rating }: PizzaBlockProps) {
   const dispatch = useDispatch();
+
   const itemHeadingRef = useRef<HTMLDivElement>(null);
   const selectedTypes = pizzaTypes.filter((_, index) => types.includes(index));
   const [activeSize, setActiveSize] = useState(sizes[0]);

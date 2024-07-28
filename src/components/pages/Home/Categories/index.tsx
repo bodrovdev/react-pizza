@@ -1,15 +1,16 @@
+import { useDispatch, useSelector } from 'react-redux';
 import '../../../../scss/style.scss';
 import styles from './Categories.module.scss';
 
-import { selectFilter, setCategory } from '../../../../redux/slices/filterSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import { selectFilter } from '../../../../redux/Filter/selectors';
+import { setCategory } from '../../../../redux/Filter/slice';
 
 export const pizzaCategories: string[] = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
 function Categories() {
+  const dispatch = useDispatch();
 
   const { category } = useSelector(selectFilter);
-  const dispatch = useDispatch();
 
   const handleButtonClassName = (index: number): string => {
     return Number(category) === index ? `${styles.catButton} ${styles.catButton_active}` : styles.catButton;

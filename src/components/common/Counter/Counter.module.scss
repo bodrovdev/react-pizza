@@ -16,17 +16,28 @@
   position: relative;
   flex-shrink: 0;
 
-  width: 20px;
-  height: 20px;
-  background: #dadada;
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: 2px solid #FE5F1E;
   border-radius: 50%;
   user-select: none;
 
   transition: background 0.2s ease-in-out, transform 0.1s ease-in-out;
 
   &:disabled {
-    opacity: 0.3;
+    border: 2px solid #dadada;
     pointer-events: none;
+
+    &::before {
+      background: #dadada;
+    }
+
+    &_plus {
+      &::after {
+        background: #dadada;
+      }
+    }
   }
 
   @include mixins.respond-to(desktopS) {
@@ -63,7 +74,7 @@
 
     width: 60%;
     height: 2px;
-    background: #FFF;
+    background: #FE5F1E;
     border-radius: 10px;
   }
 
@@ -77,7 +88,7 @@
 
       width: 2px;
       height: 60%;
-      background: #FFF;
+      background: #FE5F1E;
       border-radius: 10px;
     }
   }

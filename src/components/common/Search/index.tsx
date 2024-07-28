@@ -2,12 +2,14 @@ import debounce from 'lodash.debounce';
 import { useCallback, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { setSearch, setLocalSearch, selectFilter } from '../../../redux/slices/filterSlice';
 import '../../../scss/style.scss';
 import styles from './Search.module.scss';
 
 import Clean from '../../Icons/Clean';
 import SearchIcon from '../../Icons/SearchIcon';
+
+import { selectFilter } from '../../../redux/Filter/selectors';
+import { setLocalSearch, setSearch } from '../../../redux/Filter/slice';
 
 function Search() {
   const inputRef = useRef<HTMLInputElement>(null);

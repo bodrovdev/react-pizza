@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { increaseItem, decreaseItem, removeStack } from '../../../../redux/slices/cartSlice';
+import { decreaseItem, increaseItem, removeStack } from '../../../../redux/Cart/slice';
 import { ToCartPizzaItem } from '../../../common/Types/PizzaItem.type';
 import styles from './CartPizzaBlock.module.scss';
 

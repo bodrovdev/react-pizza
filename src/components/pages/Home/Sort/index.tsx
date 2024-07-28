@@ -1,12 +1,13 @@
 import { useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useOnClickOutside } from 'usehooks-ts';
 import '../../../../scss/style.scss';
 import styles from './Sort.module.scss';
 
 import Arrow from '../../../Icons/Arrow';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { selectFilter, setOrder, setSort } from '../../../../redux/slices/filterSlice';
+import { selectFilter } from '../../../../redux/Filter/selectors';
+import { setOrder, setSort } from '../../../../redux/Filter/slice';
 
 export type SortType = {
   name: 'По цене' | 'По алфавиту' | 'По популярности',
@@ -21,8 +22,8 @@ export const sortTypes: SortType[] = [
 
 function Sort() {
   const dispatch = useDispatch();
-  const { sort, order } = useSelector(selectFilter);
 
+  const { sort, order } = useSelector(selectFilter);
   const [isVisibleSort, setVisibleSort] = useState<boolean>(false);
   const sortRef = useRef<HTMLDivElement>(null);
 
