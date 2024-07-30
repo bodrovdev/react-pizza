@@ -9,6 +9,7 @@ import CartPizzaBlock from './CartPizzaBlock';
 import { selectCart } from '../../../redux/Cart/selectors';
 import { clearItems } from '../../../redux/Cart/slice';
 import { ToCartPizzaItem } from '../../common/Types/PizzaItem.type';
+import Preloader from '../../common/Preloader';
 
 function Cart() {
   const dispatch = useDispatch();

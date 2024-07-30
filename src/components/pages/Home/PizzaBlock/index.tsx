@@ -1,13 +1,12 @@
-import { useCallback, useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
+import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { CSSTransition } from 'react-transition-group';
-import { useOnClickOutside } from 'usehooks-ts';
+
 import '../../../../scss/style.scss';
 import styles from './PizzaBlock.module.scss';
 
 import Counter from '../../../common/Counter';
 import Preloader from '../../../common/Preloader';
+import Modal from '../Modal';
 
 import { addItem } from '../../../../redux/Cart/slice';
 import { FetchedPizzaItem, ToCartPizzaItem } from '../../../common/Types/PizzaItem.type';
@@ -54,9 +53,14 @@ function PizzaBlock({ category, id, imageUrl, name, price, sizes, types, rating 
   }
 
   const handleAddToCart = (obj: ToCartPizzaItem): void => {
-    dispatch(addItem(obj));
     setPreloadVisibility(true);
-    setTimeout(() => { setPreloadVisibility(false); setModalVisibility(false); }, 2000);
+
+    setTimeout(() => {
+      setPreloadVisibility(false);
+      setModalVisibility(false);
+
+      dispatch(addItem(obj));
+    }, 2000);
   };
 
   const descOptions = <div className={styles.descOptions}>
@@ -83,9 +87,7 @@ function PizzaBlock({ category, id, imageUrl, name, price, sizes, types, rating 
         <h2 className={styles.title}>{name}</h2>
       </div>
       <div className={styles.desc}>
-
         {descOptions}
-
         <div className={styles.descInfo}>
           <div className={styles.descInfoWrapper}>
             <span className={styles.descInfoPrice}>{price * pizzaObj.count} ₽</span>
@@ -95,9 +97,7 @@ function PizzaBlock({ category, id, imageUrl, name, price, sizes, types, rating 
               plusClick={() => { handleIncreaseAddingNumber() }}
             />
           </div>
-
           {addToCartButton}
-
         </div>
       </div>
       <Modal
@@ -112,82 +112,3 @@ function PizzaBlock({ category, id, imageUrl, name, price, sizes, types, rating 
   )
 }
 export default PizzaBlock
-
-type ModalProps = {
-  addToCartButton: JSX.Element;
-  closeModal: () => void;
-  descOptions: JSX.Element;
-  isVisibleModal: boolean;
-  pizzaObj: ToCartPizzaItem;
-  rating: number;
-}
-
-function Modal({ addToCartButton, closeModal, descOptions, isVisibleModal, pizzaObj, rating }: ModalProps) {
-  const modalWrapperRef = useRef<HTMLDivElement>(null);
-  const modalInnerRef = useRef<HTMLDivElement>(null);
-
-  const handleEscapeKeydown = useCallback((e: KeyboardEvent): void => {
-    if (e.key === 'Escape') {
-      closeModal();
-      console.log('test');
-    }
-  }, [])
-
-  const handleTransitionEnter = (): void => {
-    document.body.style.cssText = `overflow: hidden;`;
-    document.body.addEventListener('keydown', handleEscapeKeydown);
-  }
-
-  const handleTransitionExit = (): void => {
-    document.body.style.cssText = `overflow: visible;`;
-    document.body.removeEventListener('keydown', handleEscapeKeydown);
-  }
-
-  useOnClickOutside(modalInnerRef, () => {
-    closeModal();
-  })
-
-  const ratingArray: any[] = Array.apply(null, Array(rating));
-
-  return createPortal(
-    <CSSTransition
-      classNames="modalTransition"
-      in={isVisibleModal}
-      nodeRef={modalWrapperRef}
-      onEnter={() => { handleTransitionEnter() }}
-      onExited={() => { handleTransitionExit() }}
-      timeout={300}
-      unmountOnExit>
-      <div ref={modalWrapperRef} className={styles.modalWrapper}>
-        <div ref={modalInnerRef} className={styles.modalInner}>
-          <div className={styles.modalCloseContainer}>
-            <button className={styles.modalClose} type="button" onClick={closeModal}></button>
-          </div>
-          <div className={`${styles.modalColumn} ${styles.modalColumn__left}`}>
-            <img className={styles.modalImg} src={pizzaObj.imageUrl} alt="" />
-            <div className={styles.modalRating}>
-              Рейтинг:
-              {ratingArray.map((_, index) => (
-                <span key={index}>⭐</span>
-              ))}
-            </div>
-          </div>
-          <div className={`${styles.modalColumn} ${styles.modalColumn__right}`}>
-            <h3 className='section-title'>{pizzaObj.name}</h3>
-            <p className={styles.modalDescription}>
-              Пицца — это популярное блюдо, представляющее собой круглый корж из теста
-              с разнообразными начинками. Начинка может включать томаты, сыр, мясные продукты,
-              овощи, грибы и другие ингредиенты. После выпечки в духовке пицца становится
-              ароматной и хрустящей, а расплавленный сыр создаёт неповторимую текстуру.
-            </p>
-
-            {descOptions}
-
-            {addToCartButton}
-
-          </div>
-        </div>
-      </div>
-    </CSSTransition>, document.body
-  );
-}

@@ -1,9 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { PayloadAction } from '@reduxjs/toolkit'
-import { parsedLocalData, getLocalUpdatedPrice, getLocalUpdatedAmount } from '../../utils/getCartFromLocalStorage'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { getLocalUpdatedAmount, getLocalUpdatedPrice, parsedLocalData } from '../../utils/getFromLS'
 
-import { CartSliceState } from './types'
 import { ToCartPizzaItem } from '../../components/common/Types/PizzaItem.type'
+import { CartSliceState } from './types'
 
 const initialState: CartSliceState = {
   itemsInCart: parsedLocalData,

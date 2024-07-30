@@ -1,15 +1,20 @@
 import { Route, Routes } from "react-router-dom";
+import { Suspense, lazy } from "react";
 
-import Cart from "./components/pages/Cart";
 import Home from "./components/pages/Home";
-// import SinglePizza from "./components/pages/SinglePizza";
+import Preloader from "./components/common/Preloader";
+
+const Cart = lazy(() => import("./components/pages/Cart"));
 
 function routes() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      {/* <Route path="/pizza/:id" element={<SinglePizza />} /> */}
-      <Route path="/cart" element={<Cart />} />
+      <Route path="/cart" element={
+        <Suspense fallback={<div className="base-container cartPreloaderWrapper"><Preloader /></div>}>
+          <Cart />
+        </Suspense>
+      } />
     </Routes>
   )
 }

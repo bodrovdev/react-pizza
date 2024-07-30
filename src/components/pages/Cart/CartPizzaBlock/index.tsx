@@ -8,7 +8,6 @@ import Counter from '../../../common/Counter';
 type CartPizzaBlockProps = Omit<ToCartPizzaItem, 'id' | 'category'>;
 
 function CartPizzaBlock({ count, imageUrl, keyword, name, price, size, type }: CartPizzaBlockProps) {
-
   const dispatch = useDispatch();
 
   const handlePlusCounter = (): void => {
